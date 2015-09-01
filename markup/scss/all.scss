@@ -1,0 +1,48 @@
+// devices viewport width starts at:
+$breakpoints: (
+  xs-phone: 480px,
+  phone: 768px,
+  tablet: 992px,
+  desktop: 1024px,
+  widescreen: 1250px
+);
+ 
+// keywords
+$media-expressions: (
+  'screen': 'screen',
+  'print': 'print',
+  'handheld': 'handheld',
+  'landscape': '(orientation: landscape)',
+  'portrait': '(orientation: portrait)',
+  'retina2x': '(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)',
+  'retina3x': '(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi)'
+);
+
+// ligatured operators ≥ ≤
+
+@import "vendors/media";
+
+@import "bootstrap-custom";
+
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+@import "utils/markup-mixins";
+
+@import "base/fonts-ico";
+@import "base/base";
+
+@import "layout/header";
+@import "layout/content";
+@import "layout/footer";
+
+@import "components/search-form";
+@import "components/custom-form";
+
+// hide tel links on desktop
+@media only screen and (min-width:1025px) {
+	a[href^=tel], a[href^=skype], a[href^=sms] {
+		cursor:default;
+		pointer-events:none;
+	}
+}

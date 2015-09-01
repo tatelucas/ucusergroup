@@ -1,0 +1,137 @@
+body {
+	min-width: $base-min-width;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: none;
+}
+
+a {
+	transition: background 0.3s, opacity 0.3s, color 0.3s ease;
+	outline: none;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+h1 {
+	margin: 0 0 27px;
+}
+
+h2 {
+	margin: 0 0 32px;
+}
+
+p {
+	margin: 0 0 35px;
+
+	@include media('<phone') {
+		margin-bottom: 29px;
+	}
+}
+
+#wrapper {
+	overflow: hidden;
+	position: relative;
+}
+
+.container-fluid {
+	max-width: $base-max-width;
+}
+
+.form-control {
+	line-height: 20px;
+	padding: 2px 34px;
+	border: 0;
+	box-shadow: none;
+
+	@include placeholder {
+		color: $gray;
+	}
+
+	&:focus {
+		box-shadow: none;
+	}
+
+	@include media('<tablet') {
+		padding: 2px 15px;
+	}
+}
+
+.btn {
+	border: 0;
+	padding: 18px 50px 18px 46px;
+	font-size: 18px;
+	line-height: 22px;
+	transition: background 0.3s, opacity 0.3s, color 0.3s ease;
+	outline: none !important;
+
+	[class^="icon-"] {
+		font-size: 15px;
+		margin-right: 19px;
+	}
+}
+
+.form-hold {
+	@include media('<phone') {
+		margin-bottom: 27px;
+	}
+}
+
+.btn-group {
+	@extend %clearfix;
+
+	@include media('<phone') {
+		padding-bottom: 20px;
+	}
+
+	.btn {
+		font-size: 13px;
+		line-height: 16px;
+		padding: 16px 16px 16px 24px;
+
+		@include media('<widescreen') {
+			padding: 16px 10px;
+		}
+
+		@include media('<phone') {
+			width: 50%;
+		}
+
+		.location-section & {
+			@include media('<phone') {
+				width: 100px;
+			}
+		}
+
+		+ .btn {
+			border-left: 1px solid $white;
+			z-index: 3;
+			padding: 16px 24px 16px 16px;
+
+			@include media('<widescreen') {
+				padding: 16px 10px;
+			}
+		}
+
+		&.btn-primary {
+			&:first-child {
+				background: $dark-blue;
+
+				&:hover {
+					background: darken($dark-blue,10);
+				}
+			}
+		}
+	}
+}
+
+.bg-stretch {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: -1;
+	overflow: hidden;
+}

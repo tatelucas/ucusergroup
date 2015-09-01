@@ -1,0 +1,89 @@
+.search-form {
+	display: inline-block;
+	vertical-align: middle;
+	width: 160px;
+	background: $green;
+	border-radius: 22px;
+	position: relative;
+	padding: 10px 0 10px 36px;
+
+	@include media('<widescreen') {
+		width: 120px;
+		padding-left: 11px;
+	}
+
+	@include media('<phone') {
+		display: block;
+		margin: 0 auto 20px;
+		width: 100%;
+	}
+
+	.location-section & {
+		@include media('<phone') {
+			display: inline-block;
+			vertical-align: top;
+			margin: 0 5px 0 0;
+			width: 160px;
+			padding-left: 37px;
+		}
+	}
+
+	.form-control {
+		line-height: 22px;
+		height: 28px;
+		background: transparent;
+		color: $white;
+		padding: 2px 18px 2px 10px;
+		font-weight: 700;
+
+		@include media('<widescreen') {
+			padding-right: 6px;
+		}
+
+		@include media('<phone') {
+			padding-left: 35px;
+		}
+
+		.location-section & {
+			@include media('<phone') {
+				padding-left: 10px;
+			}
+		}
+
+		@include placeholder {
+			color: $white;
+		}
+	}
+
+	.btn {
+		position: absolute;
+		left: 25px;
+		top: 50%;
+		font-size: 14px;
+		transform: translateY(-50%);
+		background: transparent;
+		padding: 0;
+		border: 0;
+		color: $white;
+		transition: color 0.3s ease;
+		
+		@include media('<widescreen') {
+			left: 5px;
+			font-size: 12px;
+		}
+
+		@include media('<phone') {
+			left: 25px;
+		}
+
+		.location-section & {
+			@include media('<phone') {
+				left: 25px;
+			}
+		}
+
+		&:hover {
+			color: lighten($green,50);
+		}
+	}
+}

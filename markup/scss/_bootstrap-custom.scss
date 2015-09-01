@@ -1,0 +1,45 @@
+// custom variables and override bootstrap variables
+$white: #fff;
+$dark-blue: #3b6db2;
+$navy-blue: #00aff0;
+$blue: #2e3b4e;
+$azure: #2a5b9d;
+$light-blue: #788ea6;
+$green: #7fba00;
+$gray: #8b8c8d;
+$light-gray: #b4c2c7;
+$black: #000;
+
+$body-bg: $dark-blue;
+
+$base-min-width: 320px;
+$base-max-width: 1170px;
+
+$font-family-base: 'Lato', 'Arial', 'Helvetica', sans-serif;
+$font-size-base: 14px;
+$line-height-base: 1.857;
+$text-color: $blue;
+
+$link-color: $navy-blue;
+$link-hover-decoration: none;
+$link-hover-color: $green;
+
+$navbar-default-bg: $white;
+$navbar-default-toggle-icon-bar-bg: $white;
+$navbar-default-toggle-hover-bg: transparent;
+
+$input-height-base: 58px;
+$input-color: $black;
+$input-bg: $white;
+$input-border-radius: 27px;
+
+$btn-border-radius-base: 27px;
+$btn-primary-bg: $azure;
+$btn-success-bg: $green;
+$btn-info-bg: #0c7daf;
+
+$headings-font-weight: 300;
+$font-size-h1: 35px;
+$font-size-h2: 30px;
+
+$carousel-indicator-border-color: #7d868b;
