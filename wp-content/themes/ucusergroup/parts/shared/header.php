@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="navbar-brand">
-        <a href="#"><img src="<? echo get_template_directory_uri() ?>/images/logo.jpg" width="248" height="51" alt="Skype for Business Users Group"></a>
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<? echo get_template_directory_uri() ?>/images/logo.jpg" width="248" height="51" alt="Skype for Business Users Group"></a>
       </div>
       <div class="visible-xs phone-hold">
         <div class="pull-left img-hold">
