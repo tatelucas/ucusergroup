@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<!--[if IEMobile 7 ]><html class="no-js iem7" manifest="default.appcache?v=1"><![endif]--> 
-<!--[if lt IE 7 ]><html class="no-js ie6" lang="en"><![endif]--> 
-<!--[if IE 7 ]><html class="no-js ie7" lang="en"><![endif]--> 
-<!--[if IE 8 ]><html class="no-js ie8" lang="en"><![endif]--> 
+<!--[if IEMobile 7 ]><html class="no-js iem7" manifest="default.appcache?v=1"><![endif]-->
+<!--[if lt IE 7 ]><html class="no-js ie6" lang="en"><![endif]-->
+<!--[if IE 7 ]><html class="no-js ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8" lang="en"><![endif]-->
 <!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 	<head>
 		<title><?php bloginfo( 'name' ); ?><?php wp_title( '|' ); ?></title>
@@ -11,16 +11,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon.ico"/>
-		
+
 		<!-- STYLESHEETS -->
-		<link href="<? echo get_template_directory_uri() ?>/stylesheets/screen.css" rel="stylesheet" media="all" />
+		<link href="<? echo get_template_directory_uri() ?>/css/bootstrap.css" rel="stylesheet" media="all" />
+		<link href="<? echo get_template_directory_uri() ?>/css/all.css" rel="stylesheet" media="all" />
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
 		<!-- END STYLESHEETS -->
-		
+
 		<!-- JS -->
-		
+
 		<!-- END JS -->
-		
-		
+
+
 		<?php wp_head(); ?>
 	</head>
 	<body <?php body_class(); ?>>
