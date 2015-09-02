@@ -24,13 +24,13 @@
             </button>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <?php $mainNavItems = wp_get_nav_menu_items('Main Nav'); ?>
             <nav class="nav-bar">
               <ul id="nav">
-                <li><a href="#"><span class="style-color">About</span>Who we are</a></li>
-                <li><a href="#"><span class="style-color">Sponsors</span>Supporters</a></li>
-                <li><a href="#"><span class="style-color">Meetups</span>Find a Meetup</a></li>
-                <li><a href="#"><span class="style-color">News</span>&amp; Updates</a></li>
-                <li><a href="#"><span class="style-color">Contact</span>Get in touch</a></li>
+                <?php foreach($mainNavItems as $mainNavItem): ?>
+                <li><a href="#"><span class="style-color"><?php echo $mainNavItem->title; ?></span><?php echo $mainNavItem->description; ?></a></li>
+                <?php endforeach; ?>
               </ul>
             </nav>
             <form action="#" class="search-form" role="search">
