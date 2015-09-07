@@ -18,6 +18,7 @@
         </div>
       </div>
     </div>
+
     <div class="location-section">
       <div class="container-fluid">
         <div class="row">
@@ -36,13 +37,7 @@
             <h1>Upcoming Meetups Near You</h1>
             <div class="select-form">
               <span class="text-hold">location<i class="icon-mapmarker"></i></span>
-              <select>
-                <option>Chicago</option>
-                <option>Texas</option>
-                <option>California</option>
-                <option>Washington</option>
-                <option>Montana</option>
-              </select>
+              <?php uc_city_select(); ?>
             </div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
           </div>
