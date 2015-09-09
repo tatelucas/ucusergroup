@@ -39,68 +39,85 @@
               <span class="text-hold">location<i class="icon-mapmarker"></i></span>
               <?php uc_city_select(); ?>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
+
+            <?php the_field('upcoming_meetups_text'); ?>
+
           </div>
         </div>
+
         <div class="gray-box">
-          <div class="col-sm-4 col-xs-12 location-col">
-            <a href="#">
-              <time class="time-hold" datetime="2015-07-23"><span>23</span>july</time>
-              <span class="name-hold">Chicago Users Group</span>
-              <span class="text-hold">Chicago, IL, USA</span>
-            </a>
-          </div>
-          <div class="col-sm-4 col-xs-12 location-col">
-            <a href="#">
-              <time class="time-hold" datetime="2015-07-26"><span>26</span>july</time>
-              <span class="name-hold">Boise Users Group</span>
-              <span class="text-hold">Boise, ID, USA</span>
-            </a>
-          </div>
-          <div class="col-sm-4 col-xs-12 location-col">
-            <a href="#">
-              <time class="time-hold" datetime="2015-07-28"><span>28</span>july</time>
-              <span class="name-hold">Nashville Users Group</span>
-              <span class="text-hold">Nashville, TN, USA</span>
-            </a>
-          </div>
+          <?php
+            $attsNextThreeEvents = array(
+              'title' => NULL,
+              'limit' => 3,
+              'css_class' => NULL,
+              'show_expired' => FALSE,
+              'month' => NULL,
+              'category_slug' => NULL,
+              'order_by' => 'start_date',
+              'sort' => 'ASC'
+            );
+            global $wp_query;
+            $wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
+            if (have_posts()) : while (have_posts()) : the_post();
+          ?>
+            <div class="col-sm-4 col-xs-12 location-col">
+              <a href="<?php the_permalink(); ?>">
+                <time class="time-hold" datetime="2015-07-23"><span><?php espresso_event_date('j', ' '); ?></span><?php espresso_event_date('F', ' '); ?></time>
+                <span class="name-hold"><?php the_title(); ?></span>
+                <span class="text-hold"><?php uc_location(); ?></span>
+              </a>
+            </div>
+          <?php
+            endwhile;
+            endif;
+            wp_reset_query();
+            wp_reset_postdata();
+          ?>
         </div>
+
         <div class="row">
           <div class="col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
             <h2>Other meetups upcoming soon</h2>
             <ul class="location-list">
-              <li><a href="#">July TBA - Cincinnati, OH</a></li>
-              <li><a href="#">July TBA - Nashville, TN</a></li>
-              <li><a href="#">July TBA - Silicon Valley, CA</a></li>
-              <li><a href="#">July TBA - Detroit, MI</a></li>
-              <li><a href="#">July TBA - Atlanta, GA</a></li>
-              <li><a href="#">July TBA - Charlotte, NC</a></li>
-              <li><a href="#">July TBA - Milwaukee, WI</a></li>
-              <li><a href="#">July TBA - Baltimore, MD</a></li>
-              <li><a href="#">July TBA - Kansas City, MO</a></li>
-              <li><a href="#">July TBA - San Francisco, CA</a></li>
-              <li><a href="#">July TBA- Philadelphia, PA</a></li>
-              <li><a href="#">August 3rd - New York, NY</a></li>
-              <li><a href="#">August TBA - Seattle, WA</a></li>
-              <li><a href="#">August TBA - Portland, OR</a></li>
+              <?php
+                $attsUpcomingEvents = array(
+                  'title' => NULL,
+                  'limit' => 16,
+                  'css_class' => NULL,
+                  'show_expired' => FALSE,
+                  'month' => NULL,
+                  'category_slug' => NULL,
+                  'order_by' => 'start_date',
+                  'sort' => 'ASC',
+                  'offset' => 3
+                );
+                global $wp_query;
+                $wp_query = new EE_Event_List_Query( $attsUpcomingEvents );
+                if (have_posts()) : while (have_posts()) : the_post();
+              ?>
+                <li><a href="<?php the_permalink(); ?>"><?php espresso_event_date('F j', ' '); ?> &ndash; <?php uc_location(); ?></a></li>
+              <?php
+                endwhile;
+                endif;
+                wp_reset_query();
+                wp_reset_postdata();
+              ?>
             </ul>
             <button type="button" class="btn btn-success"><i class="icon-search"></i>View all meetups</button>
           </div>
         </div>
       </div>
     </div>
+
     <div class="info-section">
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-6">
-            <h1>Skype for Business</h1>
-            <p>Skype for Business Users Group continues to grow in 2015 with new sponsors! We would like to formally announce IR as a national sponsor of the Skype for Business Users Group!</p>
-            <p>IR is a leading global provider of experience management software &amp; solutions for Universal Communications ecosystems. More than 1000 organizations in over 60 </p>
+            <?php the_field('information_column_1'); ?>
           </div>
           <div class="col-sm-6">
-            <h1>Unified User Groups</h1>
-            <p>Skype for Business Users Group continues to grow in 2015 with new sponsors! We would like to formally announce IR as a national sponsor of the Skype for Business Users Group! IR is a leading global provider of experience management software &amp; solutions for Universal Communications ecosystems. </p>
-            <p>More than 1000 organizations in over 60 countries—including some of the world’s </p>
+            <?php the_field('information_column_2'); ?>
           </div>
         </div>
         <div class="row">
@@ -113,12 +130,13 @@
         <img src="<? echo get_template_directory_uri() ?>/images/img-2.png" height="394" width="704" alt="image description">
       </div>
     </div>
+
+
     <div class="subscribe-section">
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2">
-            <h1>Join Skype for Business in a matter of seconds!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
+            <?php the_field('join_skype_for_business_text'); ?>
           </div>
         </div>
         <div class="row">
@@ -148,6 +166,8 @@
         </div>
       </div>
     </div>
+
+
     <div class="sponsor-section">
       <div class="container-fluid">
         <div class="col-sm-12">
@@ -200,6 +220,8 @@
         </div>
       </div>
     </div>
+
+
     <div class="news-section">
       <div class="container-fluid">
         <h1>Latest Users Group News</h1>
