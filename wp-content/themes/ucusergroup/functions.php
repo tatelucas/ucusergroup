@@ -6,25 +6,64 @@
 
   function uc_city_select(){
 
-    $venues = get_posts(
-      array(
-        'post_type' => 'espresso_venues',
-        'suppress_filters' => false,
-        'order' => 'ASC',
-        'orderby' => 'VNU_city'
-      )
+    $ucUserGroupCities = get_terms(
+      array('city')
     );
 
-    $venueSelect  = '<select>';
-    $venueSelect .= '<option class="hidden">Select</option>';
-    foreach($venues as $venue){
-      $venueSelect .= '<option>' . $venue->VNU_city. '</option>';
+    $ucUserGroupCitiesSelect  = '<select>';
+    $ucUserGroupCitiesSelect .= '<option class="hidden">Select</option>';
+    foreach($ucUserGroupCities as $ucUserGroupCity){
+      $ucUserGroupCitiesSelect .= '<option value="' .  get_term_link($ucUserGroupCity->name, 'city') . '">' . $ucUserGroupCity->name. '</option>';
     }
-    $venueSelect .= '</select>';
+    $ucUserGroupCitiesSelect .= '</select>';
 
-    echo $venueSelect;
+    echo $ucUserGroupCitiesSelect;
 
   }
+
+  function uc_location($VNU_ID = 0, $echo = TRUE ) {
+    EE_Registry::instance()->load_helper( 'Venue_View' );
+    $venue = EEH_Venue_View::get_venue( $VNU_ID );
+    $venueCountry = $venue->country() == 'US' ? 'USA' : $venue->country();
+    if ( $echo ) {
+      echo  $venue->city() . ', ' . $venue->state() . ', ' . $venueCountry;
+      return '';
+    }
+    return EEH_Venue_View::venue_address( $type, $VNU_ID );
+  }
+
+
+  // ----------------------------------------------------------
+  // custom taxonomies
+  // ----------------------------------------------------------
+
+  function cities_init() {
+    register_taxonomy(
+      'city',
+      'espresso_events',
+      array(
+        'label' => __( 'User Group City' ),
+        'rewrite' => array( 'slug' => 'city' ),
+        'hierarchical' => true
+      )
+    );
+  }
+  add_action( 'init', 'cities_init' );
+
+  function test_cat_init() {
+    register_taxonomy(
+      'tests',
+      'post',
+      array(
+        'label' => __( 'Tests' ),
+        'rewrite' => array( 'slug' => 'test' ),
+        'hierarchical' => true
+      )
+    );
+  }
+  add_action( 'init', 'test_cat_init' );
+
+
 
 
 
