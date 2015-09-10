@@ -5,6 +5,11 @@ jQuery(function(){
 	initSameHeight();
 	initScalingNavigation();
 	jQuery('input, textarea').placeholder();
+
+	$('[data-location-select]').on('change', function(){
+		window.location = $(this).val();
+	});
+
 });
 
 // initialize custom form elements
@@ -107,7 +112,7 @@ ResponsiveHelper = (function($){
 			mediaQueryString += '(min-width: ' + r1 + 'px)';
 		}
 		if(r2 < Infinity) {
-			mediaQueryString += (mediaQueryString ? ' and ' : '') + '(max-width: ' + r2 + 'px)';	
+			mediaQueryString += (mediaQueryString ? ' and ' : '') + '(max-width: ' + r2 + 'px)';
 		}
 		return matchQuery(mediaQueryString, r1, r2);
 	}
