@@ -24,12 +24,28 @@
   function uc_location($VNU_ID = 0, $echo = TRUE ) {
     EE_Registry::instance()->load_helper( 'Venue_View' );
     $venue = EEH_Venue_View::get_venue( $VNU_ID );
-    $venueCountry = $venue->country() == 'US' ? 'USA' : $venue->country();
-    if ( $echo ) {
-      echo  $venue->city() . ', ' . $venue->state() . ', ' . $venueCountry;
+
+    if($venue) {
+      $venueCity = $venue->city();
+      $venueState = $venue->state();
+      $venueCountry = $venue->country() == 'US' ? 'USA' : $venue->country();
+    }
+
+    if ( $echo && $venue ) {
+      if($venueCity)
+        echo  $venueCity;
+      if($venueCity && ($venueState || $venueCountry))
+        echo ', ';
+      if($venueState)
+        echo $venueState;
+      if($venueState && $venueCountry)
+        echo', ';
+      if($venueCountry)
+        echo $venueCountry;
       return '';
     }
-    return EEH_Venue_View::venue_address( $type, $VNU_ID );
+    if(isset($type))
+      return EEH_Venue_View::venue_address( $type, $VNU_ID );
   }
 
 
