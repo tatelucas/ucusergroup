@@ -108,7 +108,7 @@
                 wp_reset_postdata();
               ?>
             </ul>
-            <button type="button" class="btn btn-success"><i class="icon-search"></i>View all meetups</button>
+            <a href="<?php echo get_post_type_archive_link('espresso_events'); ?>" type="button" class="btn btn-success"><i class="icon-search"></i>View all meetups</a>
 
           </div>
         </div>
