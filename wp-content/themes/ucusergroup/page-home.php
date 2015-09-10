@@ -230,29 +230,26 @@
     <div class="news-section">
       <div class="container-fluid">
         <h1>Latest Users Group News</h1>
-        <button type="button" class="btn btn-success"><i class="icon-bookmark"></i>View all news</button>
+        <a href="<?php echo get_permalink(18); ?>" type="button" class="btn btn-success"><i class="icon-bookmark"></i>View all news</a>
         <ul class="news-list row">
+          <?php
+            $posts = get_posts(
+              array(
+                'posts_per_page' => 3
+              )
+            );
+          ?>
+          <?php foreach($posts as $post): ?>
           <li class="col-sm-4">
-            <a href="#"><img src="<? echo get_template_directory_uri() ?>/images/img-3.jpg" height="230" width="358" alt="image description"></a>
+            <a href="<?php echo get_permalink($post->ID); ?>">
+              <?php echo get_the_post_thumbnail($post->ID, 'homepage-blog-size') ?>
+            </a>
             <div class="text-block">
-              <h2><a href="#">Winter 2015 Events and Ignite Conference Trip Giveaway!</a></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....</p>
+              <h2><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h2>
+              <p><?php echo $post->post_excerpt; ?></p>
             </div>
           </li>
-          <li class="col-sm-4">
-            <a href="#"><img src="<? echo get_template_directory_uri() ?>/images/img-4.jpg" alt="image description" width="358" height="230"></a>
-            <div class="text-block">
-              <h2><a href="#">Welcome Sennheiser as a National Sponsor!</a></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....</p>
-            </div>
-          </li>
-          <li class="col-sm-4">
-            <img src="<? echo get_template_directory_uri() ?>/images/img-5.jpg" height="230" width="358" alt="image description">
-            <div class="text-block">
-              <h2><a href="#">Welcome ComputerTalk as a National Sponsor!</a></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....</p>
-            </div>
-          </li>
+          <?php endforeach; ?>
         </ul>
       </div>
     </div>
