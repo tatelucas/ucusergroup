@@ -37,7 +37,7 @@
             <h1>Upcoming Meetups Near You</h1>
             <div class="select-form">
               <span class="text-hold">location<i class="icon-mapmarker"></i></span>
-              <?php uc_city_select(); ?>
+              <?php ug_city_select(); ?>
             </div>
 
             <?php the_field('upcoming_meetups_text'); ?>
@@ -67,7 +67,7 @@
               <a href="<?php the_permalink(); ?>">
                 <time class="time-hold" datetime="2015-07-23"><span><?php espresso_event_date('j', ' '); ?></span><?php espresso_event_date('F', ' '); ?></time>
                 <span class="name-hold"><?php if($userGroupLocation) echo $userGroupLocation->name . ' User Group'; ?></span>
-                <span class="text-hold"><?php uc_location(); ?></span>
+                <span class="text-hold"><?php ug_venue_location(); ?></span>
               </a>
             </div>
           <?php
@@ -100,7 +100,7 @@
                   $userGroupLocations = wp_get_post_terms($post->ID, 'city');
                   $userGroupLocation = $userGroupLocations ? $userGroupLocations[0] : null;
               ?>
-                <li><a href="<?php the_permalink(); ?>"><?php espresso_event_date('F j', ' '); ?><?php if($userGroupLocation) echo ' &ndash; ' . $userGroupLocation->name; ?></a></li>
+                <li><a href="<?php the_permalink(); ?>"><?php espresso_event_date('F j', ' '); ?> &ndash; <?php ug_venue_location(); ?></a></li>
               <?php
                 endwhile;
                 endif;
