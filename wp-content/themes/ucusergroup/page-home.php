@@ -172,54 +172,38 @@
       </div>
     </div>
 
-
     <div class="sponsor-section">
       <div class="container-fluid">
         <div class="col-sm-12">
           <h1>Our National Sponsors</h1>
           <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
+
               <div class="item active">
                 <ul class="sponsor-list">
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-1.jpg" height="83" width="193" alt="actiance"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-2.jpg" height="83" width="175" alt="aruba networks"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-3.jpg" height="83" width="301" alt="audio codes"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-4.jpg" height="83" width="194" alt="talk computer"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-5.jpg" height="83" width="250" alt="enghouse interactive"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-6.jpg" height="82" width="108" alt="grandstream"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-7.jpg" height="83" width="47" alt="il"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-8.jpg" height="83" width="306" alt="plantronics"></a></li>
+                  <?php $sponsors = get_posts(array('post_type' => 'sponsor', 'posts_per_page' => -1)); ?>
+                  <?php foreach($sponsors as $i => $sponsor): ?>
+                  <?php if($i % 8 == 0 && $i > 0): ?>
                 </ul>
               </div>
               <div class="item">
                 <ul class="sponsor-list">
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-1.jpg" height="83" width="193" alt="actiance"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-2.jpg" height="83" width="175" alt="aruba networks"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-3.jpg" height="83" width="301" alt="audio codes"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-4.jpg" height="83" width="194" alt="talk computer"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-5.jpg" height="83" width="250" alt="enghouse interactive"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-6.jpg" height="82" width="108" alt="grandstream"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-7.jpg" height="83" width="47" alt="il"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-8.jpg" height="83" width="306" alt="plantronics"></a></li>
+                  <?php endif; ?>
+                  <li>
+                    <a href="<?php the_field('sponsor_url', $sponsor->ID); ?>">
+                      <?php echo get_the_post_thumbnail($sponsor->ID, 'full'); ?>
+                    </a>
+                  </li>
+                  <?php endforeach; ?>
                 </ul>
               </div>
-              <div class="item">
-                <ul class="sponsor-list">
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-1.jpg" height="83" width="193" alt="actiance"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-2.jpg" height="83" width="175" alt="aruba networks"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-3.jpg" height="83" width="301" alt="audio codes"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-4.jpg" height="83" width="194" alt="talk computer"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-5.jpg" height="83" width="250" alt="enghouse interactive"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-6.jpg" height="82" width="108" alt="grandstream"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-7.jpg" height="83" width="47" alt="il"></a></li>
-                  <li><a href="#"><img src="<? echo get_template_directory_uri() ?>/images/sponsor-8.jpg" height="83" width="306" alt="plantronics"></a></li>
-                </ul>
-              </div>
+
             </div>
             <ol class="carousel-indicators">
-              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+              <?php $sponsorsSlideCount = ceil(count($sponsors) / 8); ?>
+              <?php for ($i=0; $i < $sponsorsSlideCount; $i++): ?>
+                <li data-target="#carousel-example-generic" data-slide-to="<?php echo $i; ?>" class="<?php if($i == 0) echo 'active'; ?>"></li>
+              <?php endfor; ?>
             </ol>
           </div>
         </div>

@@ -71,14 +71,40 @@
   }
   add_action( 'init', 'cities_init' );
 
+  // ----------------------------------------------------------
+  // custom post types
+  // ----------------------------------------------------------
 
-// ==========================================================
-// ==========================================================
+  add_action( 'init', 'create_sponsor_posttype' );
+  function create_sponsor_posttype() {
+    register_post_type( 'sponsor',
+      array(
+        'labels' => array(
+          'name' => __( 'Sponsors' ),
+          'singular_name' => __( 'Sponsor' ),
+          'menu_name' => __('Sponsors'),
+          'add_new_item'       => __( 'Add New Sponsor' ),
+          'new_item'           => __( 'New Sponsor' ),
+          'edit_item'          => __( 'Edit Sponsor' ),
+          'view_item'          => __( 'View Sponsor' ),
+          'all_items'          => __( 'All Sponsors' )
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'sponsors'),
+        'supports' => array('title', 'thumbnail')
+      )
+    );
+  }
 
 
-// ----------------------------------------------------------
-// starkers functions
-// ----------------------------------------------------------
+  // ==========================================================
+  // ==========================================================
+
+
+  // ----------------------------------------------------------
+  // starkers functions
+  // ----------------------------------------------------------
 
   require_once( 'external/starkers-utilities.php' );
 
