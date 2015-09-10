@@ -60,11 +60,13 @@
             global $wp_query;
             $wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
             if (have_posts()) : while (have_posts()) : the_post();
+              $userGroupLocations = wp_get_post_terms($post->ID, 'city');
+              $userGroupLocation = $userGroupLocations ? $userGroupLocations[0] : '';
           ?>
             <div class="col-sm-4 col-xs-12 location-col">
               <a href="<?php the_permalink(); ?>">
                 <time class="time-hold" datetime="2015-07-23"><span><?php espresso_event_date('j', ' '); ?></span><?php espresso_event_date('F', ' '); ?></time>
-                <span class="name-hold"><?php the_title(); ?></span>
+                <span class="name-hold"><?php if($userGroupLocation) echo $userGroupLocation->name . ' User Group'; ?></span>
                 <span class="text-hold"><?php uc_location(); ?></span>
               </a>
             </div>
@@ -95,8 +97,10 @@
                 global $wp_query;
                 $wp_query = new EE_Event_List_Query( $attsUpcomingEvents );
                 if (have_posts()) : while (have_posts()) : the_post();
+                  $userGroupLocations = wp_get_post_terms($post->ID, 'city');
+                  $userGroupLocation = $userGroupLocations ? $userGroupLocations[0] : null;
               ?>
-                <li><a href="<?php the_permalink(); ?>"><?php espresso_event_date('F j', ' '); ?> &ndash; <?php uc_location(); ?></a></li>
+                <li><a href="<?php the_permalink(); ?>"><?php espresso_event_date('F j', ' '); ?><?php if($userGroupLocation) echo ' &ndash; ' . $userGroupLocation->name; ?></a></li>
               <?php
                 endwhile;
                 endif;
@@ -105,6 +109,7 @@
               ?>
             </ul>
             <button type="button" class="btn btn-success"><i class="icon-search"></i>View all meetups</button>
+
           </div>
         </div>
       </div>
