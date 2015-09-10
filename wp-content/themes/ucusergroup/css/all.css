@@ -427,19 +427,21 @@ p {
 	-webkit-column-gap: 0;
 	text-align: left;
 	margin: 0 0 63px;
+	overflow: hidden;
 }
 
 .location-list li {
 	display: inline-block;
-	vertical-align: top;
 	width: 100%;
+	float: left;
+	vertical-align: top;
 	padding: 0 10px 0 0;
 	margin: 0 0 5px;
+	position: relative;
 }
 
 .location-list a {
 	padding: 0 0 0 22px;
-	position: relative;
 }
 
 .location-list a:before {
@@ -447,7 +449,7 @@ p {
 	content: "\e604";
 	font-family: "icomoon";
 	left: 0;
-	top: -3px;
+	top: 0;
 }
 
 .info-section {
@@ -1332,4 +1334,4 @@ body > .jcf-select-drop.jcf-drop-flipped {
 		left: 25px;
 	}
 }
-
+
