@@ -25,10 +25,10 @@
             <?php endforeach; ?>
           </ul>
         </nav>
-        <form action="#" class="search-form" role="search">
+        <form action="<?php echo home_url( '/' ); ?>" class="search-form" role="search" method="get">
           <fieldset>
             <button type="submit" class="btn icon-search"></button>
-            <input type="search" class="form-control" placeholder="Find a Meetup">
+            <input type="search" class="form-control" placeholder="Find a Meetup" name="s">
           </fieldset>
         </form>
         <div class="btn-group">
