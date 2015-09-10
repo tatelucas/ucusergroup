@@ -1,10 +1,10 @@
 <?php
 
   // ----------------------------------------------------------
-  // locations select
+  // user group city select
   // ----------------------------------------------------------
 
-  function uc_city_select(){
+  function ug_city_select(){
 
     $ucUserGroupCities = get_terms(
       array('city')
@@ -21,27 +21,26 @@
 
   }
 
-  function uc_location($VNU_ID = 0, $echo = TRUE ) {
+  // ----------------------------------------------------------
+  // venue location
+  // ----------------------------------------------------------
+
+  function ug_venue_location($VNU_ID = 0, $echo = TRUE ) {
     EE_Registry::instance()->load_helper( 'Venue_View' );
     $venue = EEH_Venue_View::get_venue( $VNU_ID );
 
     if($venue) {
       $venueCity = $venue->city();
       $venueState = $venue->state();
-      $venueCountry = $venue->country() == 'US' ? 'USA' : $venue->country();
     }
 
     if ( $echo && $venue ) {
       if($venueCity)
         echo  $venueCity;
-      if($venueCity && ($venueState || $venueCountry))
+      if($venueCity && $venueState)
         echo ', ';
       if($venueState)
         echo $venueState;
-      if($venueState && $venueCountry)
-        echo', ';
-      if($venueCountry)
-        echo $venueCountry;
       return '';
     }
     if(isset($type))
