@@ -47,6 +47,12 @@
       return EEH_Venue_View::venue_address( $type, $VNU_ID );
   }
 
+  // ----------------------------------------------------------
+  // image sizes
+  // ----------------------------------------------------------
+
+  add_image_size( 'homepage-blog-size', 358, 230, true ); // 220 pixels wide by 180 pixels tall, hard crop mode
+
 
   // ----------------------------------------------------------
   // custom taxonomies
@@ -65,27 +71,9 @@
   }
   add_action( 'init', 'cities_init' );
 
-  function test_cat_init() {
-    register_taxonomy(
-      'tests',
-      'post',
-      array(
-        'label' => __( 'Tests' ),
-        'rewrite' => array( 'slug' => 'test' ),
-        'hierarchical' => true
-      )
-    );
-  }
-  add_action( 'init', 'test_cat_init' );
 
-
-
-
-
-
-
-
-
+// ==========================================================
+// ==========================================================
 
 
 // ----------------------------------------------------------
