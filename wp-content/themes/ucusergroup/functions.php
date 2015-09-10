@@ -63,8 +63,8 @@
       'city',
       'espresso_events',
       array(
-        'label' => __( 'User Group City' ),
-        'rewrite' => array( 'slug' => 'city' ),
+        'label' => __( 'User Group' ),
+        'rewrite' => array( 'slug' => 'user-group' ),
         'hierarchical' => true
       )
     );
