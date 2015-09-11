@@ -7,12 +7,12 @@
 
     <div class="banner">
       <div class="bg-stretch">
-        <img src="<? echo get_template_directory_uri() ?>/images/img-1.jpg" width="1170" height="505" alt="image description">
+        <img src="<?php the_field('banner_image'); ?>" width="1170" height="505" alt="image description">
       </div>
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-5">
-            <h1><span>Welcome to Skype for Business Users Group</span>The definitive meetup for UC Professionals</h1>
+            <h1><span><?php the_field('banner_text_top'); ?></span> <?php the_field('banner_text'); ?></h1>
             <button type="button" class="btn btn-success hidden-xs"><i class="icon-search"></i>Find a Meetup near you</button>
           </div>
         </div>
