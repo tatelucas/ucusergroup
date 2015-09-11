@@ -13,7 +13,7 @@
     $ucUserGroupCitiesSelect  = '<select data-location-select>';
     $ucUserGroupCitiesSelect .= '<option class="hidden">Select</option>';
     foreach($ucUserGroupCities as $ucUserGroupCity){
-      $ucUserGroupCitiesSelect .= '<option value="' .  get_term_link($ucUserGroupCity->name, 'city') . '">' . $ucUserGroupCity->name. '</option>';
+      $ucUserGroupCitiesSelect .= '<option value="' .  get_term_link($ucUserGroupCity->name, 'city') . '">' . str_replace("User Group", "", $ucUserGroupCity->name) . '</option>';
     }
     $ucUserGroupCitiesSelect .= '</select>';
 
