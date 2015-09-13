@@ -71,6 +71,28 @@
   }
   add_action( 'init', 'cities_init' );
 
+  // function user_state_init() {
+  //   register_taxonomy(
+  //     'user_state',
+  //     'user',
+  //     array(
+  //       'label' => __( 'User State' ),
+  //       'rewrite' => array( 'slug' => 'user-state' )
+  //     )
+  //   );
+  // }
+  // add_action( 'init', 'user_state_init' );
+
+  // ----------------------------------------------------------
+  // user state on register
+  // ----------------------------------------------------------
+
+  add_action('user_register', 'register_extra_fields');
+  function register_extra_fields ( $user_id, $password = "", $meta = array() ){
+    update_user_meta( $user_id, 'user_state', $_POST['user_state'] );
+  }
+
+
   // ----------------------------------------------------------
   // custom post types
   // ----------------------------------------------------------
@@ -95,6 +117,18 @@
         'supports' => array('title', 'thumbnail')
       )
     );
+  }
+
+  // ----------------------------------------------------------
+  // hide admin bar if user is not admin
+  // ----------------------------------------------------------
+
+  add_action('after_setup_theme', 'remove_admin_bar');
+
+  function remove_admin_bar() {
+    if (!current_user_can('administrator') && !is_admin()) {
+      show_admin_bar(false);
+    }
   }
 
 

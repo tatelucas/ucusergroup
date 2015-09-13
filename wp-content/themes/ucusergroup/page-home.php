@@ -146,27 +146,7 @@
         </div>
         <div class="row">
           <div class="col-sm-12">
-            <form action="#" class="subscribe-form">
-              <fieldset>
-                <div class="form-group">
-                  <input class="form-control" type="text" placeholder="Name">
-                </div>
-                <div class="form-group">
-                  <input class="form-control" type="email" placeholder="Email">
-                </div>
-                <div class="form-group">
-                  <select>
-                    <option class="hidden">Select State</option>
-                    <option>Chicago</option>
-                    <option>Texas</option>
-                    <option>California</option>
-                    <option>Washington</option>
-                    <option>Montana</option>
-                  </select>
-                </div>
-                <button type="button" class="btn btn-success"><i class="icon-circle-check"></i>Join Today</button>
-              </fieldset>
-            </form>
+            <?php get_template_parts( array( 'parts/shared/registration-form' ) ); ?>
           </div>
         </div>
       </div>
