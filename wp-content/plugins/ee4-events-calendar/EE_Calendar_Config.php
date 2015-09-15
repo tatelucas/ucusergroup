@@ -365,9 +365,9 @@ if ( ! class_exists( 'EE_Calendar_Config' )) {
 			$this->enable_calendar_thumbs = false;
 			$this->enable_calendar_filters = false;
 			$this->enable_category_legend = false;
-			$this->use_pickers = false;
-			$this->event_background = '#EEEEEE';
-			$this->event_text_color = '';
+			$this->use_pickers = true;
+			$this->event_background = '#f7f7f7';
+			$this->event_text_color = '#000000';
 			$this->enable_cat_classes = false;
 			$this->disable_categories = false;
 			$this->show_attendee_limit = false;
