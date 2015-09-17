@@ -1,6 +1,7 @@
 #header {
 	padding: 18px 15px 23px;
-	
+	@extend %clearfix;
+
 	@include media('<phone') {
 		padding-top: 19px;
 	}
@@ -21,7 +22,6 @@
 
 	@include media('<phone') {
 		padding-bottom: 0;
-		@extend %clearfix;
 	}
 }
 
@@ -140,9 +140,11 @@
 }
 
 .phone-hold {
+	@extend %clearfix;
+
 	@include media('<phone') {
 		background: $dark-blue;
-		@extend %clearfix;
+
 		margin: 0 -15px;
 		padding: 10px 31px 17px 26px;
 	}

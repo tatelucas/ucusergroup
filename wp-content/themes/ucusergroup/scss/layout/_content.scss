@@ -426,15 +426,27 @@
 		display: inline-block;
 		vertical-align: middle;
 		letter-spacing: 0;
-		margin: 0 40px 20px;
+		//margin: 0 40px 20px;
+		width: 25%;
 
 		@include media('<phone') {
-			margin: 0 20px 10px;
+			//margin: 0 20px 10px;
+			width: 50%;
 		}
 	}
 
 	img {
 		max-width: 100%;
+
+		/* IE4-8 and 9 (deprecated). */
+		filter: Gray();
+		/* SVG version for IE10, Chrome 17, FF3.5,
+		Safari 5.2 and Opera 11.6 */
+		filter: url('#grayscale');
+		/* CSS3 filter, at the moment Webkit only. Prefix it for
+		future implementations */
+		-webkit-filter: grayscale(100%);
+		filter: grayscale(100%); /* future-proof */
 
 		@include media('<phone') {
 			width: 100%;
