@@ -402,12 +402,16 @@ p {
   right: auto;
   left: 50%;
   transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
 }
 @media (max-width: 767px) {
   .banner .bg-stretch {
     position: static;
     height: 242px;
     transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
     margin-bottom: 23px;
   }
 }
@@ -541,6 +545,8 @@ p {
   bottom: 0;
   height: 1px;
   transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
   background: #e4eef2;
 }
 .location-col .time-hold span {
@@ -628,6 +634,8 @@ p {
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
   max-width: 704px;
   width: 100%;
   z-index: -1;
@@ -876,7 +884,7 @@ p {
   width: 100%;
 }
 
-#content {
+.middle {
   background: white;
 }
 

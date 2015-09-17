@@ -29,11 +29,15 @@
 		right: auto;
 		left: 50%;
 		transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		-ms-transform: translateX(-50%);
 
 		@include media('<phone') {
 			position: static;
 			height: 242px;
 			transform: translateX(0);
+			-webkit-transform: translateX(0);
+			-ms-transform: translateX(0);
 			margin-bottom: 23px;
 		}
 
@@ -176,6 +180,8 @@
 			bottom: 0;
 			height: 1px;
 			transform: translateX(-50%);
+			-webkit-transform: translateX(-50%);
+			-ms-transform: translateX(-50%);
 			background: #e4eef2;
 		}
 
@@ -267,6 +273,8 @@
 		left: 50%;
 		bottom: 0;
 		transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		-ms-transform: translateX(-50%);
 		max-width: 704px;
 		width: 100%;
 		z-index: -1;
@@ -534,6 +542,6 @@
 	}
 }
 
-#content {
+.middle {
 	background: white;
 }
