@@ -804,6 +804,10 @@ p {
   filter: grayscale(100%);
   /* future-proof */
 }
+.sponsor-list img:hover {
+  filter: none;
+  -webkit-filter: none;
+}
 @media (max-width: 767px) {
   .sponsor-list img {
     width: 100%;

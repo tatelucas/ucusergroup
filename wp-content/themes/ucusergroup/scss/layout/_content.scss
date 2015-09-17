@@ -456,6 +456,11 @@
 		-webkit-filter: grayscale(100%);
 		filter: grayscale(100%); /* future-proof */
 
+		&:hover {
+			filter: none;
+			-webkit-filter: none;
+		}
+
 		@include media('<phone') {
 			width: 100%;
 		}
