@@ -41,7 +41,7 @@
 			max-width: none;
 		}
 	}
-	
+
 	h1 {
 		font-size: 45px;
 		line-height: 52px;
@@ -416,10 +416,10 @@
 .sponsor-list {
 	@extend %listreset;
 	letter-spacing: -4px;
-	margin: 0 -40px;
+	//margin: 0 -40px;
 
 	@include media('<phone') {
-		margin: 0 -20px;
+		//margin: 0 -20px;
 	}
 
 	li {
@@ -490,7 +490,7 @@
 			padding: 20px 15px;
 		}
 	}
-	
+
 	h2 {
 		font-size: 23px;
 		line-height: 30px;
@@ -503,7 +503,7 @@
 
 		a {
 			color: #60718a;
-			
+
 			&:hover {
 				color: $green;
 			}
@@ -520,4 +520,8 @@
 		max-width: none;
 		width: 100%;
 	}
+}
+
+#content {
+	background: white;
 }

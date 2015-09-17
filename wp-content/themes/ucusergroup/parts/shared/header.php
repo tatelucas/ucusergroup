@@ -21,7 +21,7 @@
         <nav class="nav-bar">
           <ul id="nav">
             <?php foreach($mainNavItems as $mainNavItem): ?>
-            <li><a href="#"><span class="style-color"><?php echo $mainNavItem->title; ?></span><?php echo $mainNavItem->description; ?></a></li>
+            <li><a href="<?php echo $mainNavItem->url; ?>"><span class="style-color"><?php echo $mainNavItem->title; ?></span><?php echo $mainNavItem->description; ?></a></li>
             <?php endforeach; ?>
           </ul>
         </nav>

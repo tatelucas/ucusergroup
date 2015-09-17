@@ -576,7 +576,7 @@ p {
 
 .sponsor-list {
 	letter-spacing: -4px;
-	margin: 0 -40px;
+	/*margin: 0 -40px; Tate - removed */
 }
 
 .sponsor-list li {
@@ -1257,11 +1257,11 @@ body > .jcf-select-drop.jcf-drop-flipped {
 	}
 
 	.sponsor-list {
-		margin: 0 -20px;
+		/* margin: 0 -20px; TATE - removed */
 	}
 
 	.sponsor-list li {
-		margin: 0 20px 10px;
+		/* margin: 0 20px 10px; TATE - removed */
 	}
 
 	.sponsor-list img {
@@ -1338,4 +1338,3 @@ body > .jcf-select-drop.jcf-drop-flipped {
 		left: 25px;
 	}
 }
-
