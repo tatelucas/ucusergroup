@@ -445,6 +445,7 @@
 
 	img {
 		max-width: 100%;
+		opacity: .8;
 
 		/* IE4-8 and 9 (deprecated). */
 		filter: Gray();
@@ -459,6 +460,7 @@
 		&:hover {
 			filter: none;
 			-webkit-filter: none;
+			opacity: 1;
 		}
 
 		@include media('<phone') {
