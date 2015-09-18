@@ -797,7 +797,7 @@ p {
   }
 }
 .sponsor-list img {
-  max-width: 100%;
+  max-width: 90%;
   opacity: .8;
   transition: all 0.2s ease-in-out;
   /* IE4-8 and 9 (deprecated). */
