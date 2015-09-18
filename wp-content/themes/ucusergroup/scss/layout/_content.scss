@@ -446,6 +446,7 @@
 	img {
 		max-width: 100%;
 		opacity: .8;
+		transition:	all 0.2s ease-in-out;
 
 		/* IE4-8 and 9 (deprecated). */
 		filter: Gray();
@@ -550,5 +551,93 @@
 }
 
 .middle {
-	background: white;
+	background: #fff;
+}
+
+.page-title {
+	background: #149EEB;
+	color: #fff;
+	padding: $line-height-computed 0;
+	margin-bottom: $line-height-computed;
+	border-bottom: 10px solid #21468B;
+
+	h2 {
+		margin: 0 0 $line-height-computed/3;
+		padding: 0;
+		font-size: 40px;
+	}
+
+	@include media('>tablet') {
+		padding: $line-height-computed*2.5 0;
+	}
+
+	.subtitle {
+		margin-bottom: 0px;
+		text-transform: uppercase;
+		font-size: 11px;
+		letter-spacing: 1px;
+	}
+}
+
+
+// About carousel-indicators
+.lib-panel {
+    margin-bottom: 20Px;
+}
+.lib-panel img {
+    width: 100%;
+    background-color: transparent;
+}
+
+.lib-panel > {
+	.box-shadow {
+		@extend %box-shadow;
+		@extend %clearfix;
+	}
+}
+
+.lib-panel .row,
+.lib-panel .col-sm-6,
+.lib-panel .col-sm-9,
+.lib-panel .col-sm-3 {
+    padding: 0;
+    background-color: #FFFFFF;
+}
+
+.lib-panel .lib-row {
+    padding: 0 20px 0 20px;
+}
+
+.lib-panel .lib-row.lib-header {
+    background-color: #FFFFFF;
+    font-size: 20px;
+    padding: 10px 20px 0 20px;
+
+		p {
+			margin-bottom: $line-height-computed/2;
+		}
+}
+
+.lib-panel .lib-row.lib-header .lib-header-seperator {
+    height: 2px;
+    width: 26px;
+    background-color: #d9d9d9;
+    margin: 7px 0 7px 0;
+}
+
+.lib-panel .lib-row.lib-desc {
+    position: relative;
+    height: 100%;
+    display: block;
+    font-size: 13px;
+}
+.lib-panel .lib-row.lib-desc a{
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+    left: 20px;
+}
+
+.row-margin-bottom {
+    margin-bottom: 20px;
 }
