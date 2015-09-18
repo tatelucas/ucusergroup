@@ -39,10 +39,14 @@
 
     <div class="content container-fluid">
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-9">
           <?php the_content(); ?>
           <?php comments_template( '', true ); ?>
         </div>
+
+        <div class="sidebar col-sm-3">
+          <?php get_sidebar(); ?>
+        </div><!--/col-sm-4-->
       </div>
     </div><!-- /content -->
   <?php endwhile; ?>

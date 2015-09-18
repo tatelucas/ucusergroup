@@ -6,7 +6,7 @@ $breakpoints: (
   desktop: 1024px,
   widescreen: 1250px
 );
- 
+
 // keywords
 $media-expressions: (
   'screen': 'screen',
@@ -34,7 +34,9 @@ $media-expressions: (
 
 @import "layout/header";
 @import "layout/content";
+@import "layout/sidebar";
 @import "layout/footer";
+
 
 @import "components/search-form";
 @import "components/custom-form";

@@ -582,11 +582,21 @@
 
 // About carousel-indicators
 .lib-panel {
-    margin-bottom: 20Px;
+    margin-bottom: 20px;
 }
-.lib-panel img {
-    width: 100%;
-    background-color: transparent;
+
+.card-img {
+	text-align: center;
+
+	img {
+	  width: 90%;
+		height: auto;
+	  background-color: transparent;
+		border-radius: 50%;
+		-webkit-border-radius: 50%;
+		margin: 5% auto 0;
+		border: 5px solid #EAEAEA;
+	}
 }
 
 .lib-panel > {
