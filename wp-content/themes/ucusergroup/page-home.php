@@ -65,6 +65,7 @@
           ?>
             <div class="col-sm-4 col-xs-12 location-col">
               <a href="<?php the_permalink(); ?>">
+                <?php echo $i; ?>
                 <time class="time-hold" datetime="2015-07-23"><span><?php espresso_event_date('j', ' '); ?></span><?php espresso_event_date('F', ' '); ?></time>
                 <span class="name-hold"><?php if($userGroupLocation) echo $userGroupLocation->name; ?></span>
                 <span class="text-hold"><?php ug_venue_location(); ?></span>
@@ -85,7 +86,7 @@
               <?php
                 $attsUpcomingEvents = array(
                   'title' => NULL,
-                  'limit' => 16,
+                  'limit' => 19,
                   'css_class' => NULL,
                   'show_expired' => FALSE,
                   'month' => NULL,
@@ -96,12 +97,16 @@
                 );
                 global $wp_query;
                 $wp_query = new EE_Event_List_Query( $attsUpcomingEvents );
+                $i = 1;
                 if (have_posts()) : while (have_posts()) : the_post();
                   $userGroupLocations = wp_get_post_terms($post->ID, 'city');
                   $userGroupLocation = $userGroupLocations ? $userGroupLocations[0] : null;
+                  if($i > 3):
               ?>
                 <li><a href="<?php the_permalink(); ?>"><?php espresso_event_date('F j', ' '); ?> &ndash; <?php ug_venue_location(); ?></a></li>
               <?php
+                  endif;
+                  $i++;
                 endwhile;
                 endif;
                 wp_reset_query();
