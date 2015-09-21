@@ -132,7 +132,7 @@
         </div>
         <div class="row">
           <div class="col-sm-12">
-            <button type="button" class="btn btn-info"><i class="icon-circle-plus"></i>Find out more</button>
+            <a href="<?php echo get_permalink(21); ?>" type="button" class="btn btn-info"><i class="icon-circle-plus"></i>Find out more</a>
           </div>
         </div>
       </div>
