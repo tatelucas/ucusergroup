@@ -285,12 +285,12 @@
 	}
 
 	p {
-		margin-bottom: 26px;
+		// margin-bottom: 26px;
 	}
 
 	.btn {
 		padding: 18px 35px 18px 26px;
-
+		margin-top: 30px;
 		[class^="icon-"] {
 			font-size: 24px;
 			margin-right: 10px;
@@ -650,4 +650,19 @@
 
 .row-margin-bottom {
     margin-bottom: 20px;
+}
+
+@include media('>tablet'){
+	.home-about {
+		column-count: 2;
+		column-gap: 50px;
+		-moz-column-count: 2;
+		-moz-column-gap: 50px;
+		-webkit-column-count: 2;
+		-webkit-column-gap: 50px;
+		h1 {
+			column-span: all;
+			-webkit-column-span: all
+		}
+	}
 }

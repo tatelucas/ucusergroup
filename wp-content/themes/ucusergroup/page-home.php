@@ -123,11 +123,8 @@
     <div class="info-section">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-sm-6">
-            <?php the_field('information_column_1'); ?>
-          </div>
-          <div class="col-sm-6">
-            <?php the_field('information_column_2'); ?>
+          <div class="col-sm-12">
+            <div class="home-about"><?php the_field('information_column_1'); ?></div>
           </div>
         </div>
         <div class="row">

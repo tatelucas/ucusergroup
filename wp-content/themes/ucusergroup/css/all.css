@@ -765,13 +765,10 @@ p {
     display: none;
   }
 }
-/* line 287, ../scss/layout/_content.scss */
-.info-section p {
-  margin-bottom: 26px;
-}
 /* line 291, ../scss/layout/_content.scss */
 .info-section .btn {
   padding: 18px 35px 18px 26px;
+  margin-top: 30px;
 }
 /* line 294, ../scss/layout/_content.scss */
 .info-section .btn [class^="icon-"] {
@@ -1164,6 +1161,22 @@ p {
   margin-bottom: 20px;
 }
 
+@media (min-width: 993px) {
+  /* line 656, ../scss/layout/_content.scss */
+  .home-about {
+    column-count: 2;
+    column-gap: 50px;
+    -moz-column-count: 2;
+    -moz-column-gap: 50px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 50px;
+  }
+  /* line 663, ../scss/layout/_content.scss */
+  .home-about h1 {
+    column-span: all;
+    -webkit-column-span: all;
+  }
+}
 /* line 1, ../scss/layout/_sidebar.scss */
 #sidebar {
   text-align: right;
