@@ -227,6 +227,7 @@ p {
 }
 #header .btn-group .btn {
   font-weight: 700;
+  width: 100%;
 }
 @media (max-width: 767px) {
   #header {
@@ -321,7 +322,7 @@ p {
   }
 }
 #nav li.active a {
-  color: #90d400;
+  color: #90d300;
 }
 #nav li.active a span {
   color: #7fba00;
@@ -330,7 +331,7 @@ p {
   color: #788ea6;
 }
 #nav a:hover {
-  color: #90d400;
+  color: #90d300;
 }
 #nav a:hover span {
   color: #7fba00;
