@@ -10,6 +10,15 @@ jQuery(function(){
 		window.location = $(this).val();
 	});
 
+	$('[data-button-scroll').on('click', function(e){
+		e.preventDefault();
+		var scrollTarget = $(this).attr('href');
+		var scrollTargetOffset = $(scrollTarget).offset().top
+		$('html,body').animate({
+			scrollTop: scrollTargetOffset
+		}, 300, "swing");
+	});
+
 });
 
 // initialize custom form elements

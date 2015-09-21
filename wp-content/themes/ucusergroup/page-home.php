@@ -13,13 +13,13 @@
         <div class="row">
           <div class="col-md-5">
             <h1><span><?php the_field('banner_text_top'); ?></span> <?php the_field('banner_text'); ?></h1>
-            <button type="button" class="btn btn-success hidden-xs"><i class="icon-search"></i>Find a Meetup near you</button>
+            <a href="#upcoming-meetups" type="button" data-button-scroll class="btn btn-success hidden-xs"><i class="icon-search"></i>Find a Meetup near you</a>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="location-section">
+    <div id="upcoming-meetups" class="location-section">
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
