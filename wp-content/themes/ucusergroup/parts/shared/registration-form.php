@@ -8,7 +8,7 @@
     </div>
     <div class="form-group">
       <select name="user_state">
-        <option class="hidden">Select State</option>
+        <option class="hidden">Select Location</option>
         <option>Chicago</option>
         <option>Texas</option>
         <option>California</option>
