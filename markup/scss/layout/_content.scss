@@ -41,7 +41,7 @@
 			max-width: none;
 		}
 	}
-	
+
 	h1 {
 		font-size: 45px;
 		line-height: 52px;
@@ -402,13 +402,13 @@
 		width: 11px !important;
 		height: 11px !important;
 		border-radius: 50%;
-		background: #7d868b;
+		background: transparent;
 		border-width: 2px;
 		transition: background 0.3s ease;
 
 		&:hover,
 		&.active {
-			background: transparent;
+			background: #7d868b;
 		}
 	}
 }
@@ -490,7 +490,7 @@
 			padding: 20px 15px;
 		}
 	}
-	
+
 	h2 {
 		font-size: 23px;
 		line-height: 30px;
@@ -503,7 +503,7 @@
 
 		a {
 			color: #60718a;
-			
+
 			&:hover {
 				color: $green;
 			}
