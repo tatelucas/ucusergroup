@@ -55,6 +55,10 @@
     .ee-event-datetimes-li {
       height: 1.5em;
       overflow-y: hidden;
+
+      .dashicons-calendar {
+        display: none;
+      }
     }
   }
 }

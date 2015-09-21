@@ -1238,6 +1238,10 @@ p {
   height: 1.5em;
   overflow-y: hidden;
 }
+/* line 59, ../scss/layout/_sidebar.scss */
+.widget_ee-upcoming-events-widget .ee-upcoming-events-widget-li .ee-event-datetimes-li .dashicons-calendar {
+  display: none;
+}
 
 /* line 1, ../scss/layout/_footer.scss */
 #footer {
