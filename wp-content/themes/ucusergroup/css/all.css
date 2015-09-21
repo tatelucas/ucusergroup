@@ -14,8 +14,8 @@
 
 /* line 111, ../scss/utils/_markup-mixins.scss */
 .lib-panel > .box-shadow {
-  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
 }
 
 @font-face {
@@ -1103,7 +1103,7 @@ p {
   background-color: transparent;
   border-radius: 50%;
   -webkit-border-radius: 50%;
-  margin: 5% auto 0;
+  margin: 5% auto;
   border: 5px solid #EAEAEA;
 }
 
