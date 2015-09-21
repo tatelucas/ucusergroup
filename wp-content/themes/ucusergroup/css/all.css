@@ -385,7 +385,7 @@ p {
 }
 /* line 111, ../scss/layout/_header.scss */
 #nav li.active a {
-  color: #90d300;
+  color: #90d400;
 }
 /* line 114, ../scss/layout/_header.scss */
 #nav li.active a span {
@@ -397,7 +397,7 @@ p {
 }
 /* line 124, ../scss/layout/_header.scss */
 #nav a:hover {
-  color: #90d300;
+  color: #90d400;
 }
 /* line 127, ../scss/layout/_header.scss */
 #nav a:hover span {
@@ -1177,23 +1177,66 @@ p {
     -webkit-column-span: all;
   }
 }
-/* line 1, ../scss/layout/_sidebar.scss */
-#sidebar {
-  text-align: right;
-}
-@media (max-width: 767px) {
+@media (min-width: 1025px) {
   /* line 1, ../scss/layout/_sidebar.scss */
-  #sidebar {
-    text-align: left;
+  .sidebar-container {
+    padding-right: 0;
   }
 }
-/* line 8, ../scss/layout/_sidebar.scss */
+
+/* line 7, ../scss/layout/_sidebar.scss */
+#sidebar {
+  text-align: left;
+}
+/* line 10, ../scss/layout/_sidebar.scss */
 #sidebar ul {
   padding-left: 0;
 }
-/* line 11, ../scss/layout/_sidebar.scss */
+/* line 13, ../scss/layout/_sidebar.scss */
 #sidebar ul li {
   list-style: none;
+}
+
+/* line 19, ../scss/layout/_sidebar.scss */
+.widget {
+  margin-bottom: 25px;
+}
+/* line 22, ../scss/layout/_sidebar.scss */
+.widget h2.widgettitle {
+  margin: 0 0 12.5px;
+  padding: 0 0 12.5px;
+  border-bottom: 1px solid #E3E7E8;
+}
+/* line 27, ../scss/layout/_sidebar.scss */
+.widget h2.widgettitle a {
+  color: #2e3b4e;
+}
+/* line 32, ../scss/layout/_sidebar.scss */
+.widget h5 {
+  margin: 0;
+  padding: 0 0 2px;
+  font-size: 1.1em;
+}
+
+/* EE Recent Events Widget */
+/* line 42, ../scss/layout/_sidebar.scss */
+.widget_ee-upcoming-events-widget .download-iCal-frm {
+  display: none;
+}
+/* line 46, ../scss/layout/_sidebar.scss */
+.widget_ee-upcoming-events-widget .ee-upcoming-events-widget-li {
+  padding-bottom: 12.5px;
+  font-weight: 100;
+}
+/* line 50, ../scss/layout/_sidebar.scss */
+.widget_ee-upcoming-events-widget .ee-upcoming-events-widget-li .ee-event-datetimes-ul {
+  padding: 0;
+  margin: 0;
+}
+/* line 55, ../scss/layout/_sidebar.scss */
+.widget_ee-upcoming-events-widget .ee-upcoming-events-widget-li .ee-event-datetimes-li {
+  height: 1.5em;
+  overflow-y: hidden;
 }
 
 /* line 1, ../scss/layout/_footer.scss */

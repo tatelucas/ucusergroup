@@ -44,7 +44,7 @@
           <?php comments_template( '', true ); ?>
         </div>
 
-        <div class="sidebar col-sm-3">
+        <div class="sidebar-container col-sm-3">
           <?php get_sidebar(); ?>
         </div><!--/col-sm-4-->
       </div>
