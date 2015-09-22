@@ -135,3 +135,16 @@ p {
 	z-index: -1;
 	overflow: hidden;
 }
+
+.btn {
+	&.btn-outlined {
+		background: transparent;
+		border: 1px solid white;
+		color: white;
+
+		&:hover {
+			background: white;
+			color: $dark-blue;
+		}
+	}
+}

@@ -123,6 +123,18 @@ p {
 				}
 			}
 		}
+
+		&.btn-outlined {
+			background: transparent;
+			border: 1px solid white;
+			color: white;
+
+			&:hover {
+				background: white;
+				color: $dark-blue;
+			}
+		}
+
 	}
 }
 
