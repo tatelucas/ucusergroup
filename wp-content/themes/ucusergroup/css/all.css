@@ -273,6 +273,9 @@ p {
 /* line 18, ../scss/layout/_header.scss */
 #header .btn-group .btn {
   font-weight: 700;
+}
+/* line 20, ../scss/layout/_header.scss */
+.logged-in #header .btn-group .btn {
   width: 100%;
 }
 @media (max-width: 767px) {
@@ -282,14 +285,14 @@ p {
   }
 }
 
-/* line 29, ../scss/layout/_header.scss */
+/* line 31, ../scss/layout/_header.scss */
 .navbar-brand {
   padding: 0;
   height: auto;
   width: 248px;
 }
 @media (max-width: 991px) {
-  /* line 29, ../scss/layout/_header.scss */
+  /* line 31, ../scss/layout/_header.scss */
   .navbar-brand {
     float: none;
     width: 100%;
@@ -298,32 +301,32 @@ p {
   }
 }
 @media (max-width: 767px) {
-  /* line 29, ../scss/layout/_header.scss */
+  /* line 31, ../scss/layout/_header.scss */
   .navbar-brand {
     margin-bottom: 24px;
   }
 }
 
-/* line 46, ../scss/layout/_header.scss */
+/* line 48, ../scss/layout/_header.scss */
 .navbar-collapse {
   padding-left: 316px;
   letter-spacing: -3px;
   text-align: right;
 }
 @media (max-width: 1249px) {
-  /* line 46, ../scss/layout/_header.scss */
+  /* line 48, ../scss/layout/_header.scss */
   .navbar-collapse {
     padding-left: 260px;
   }
 }
 @media (max-width: 991px) {
-  /* line 46, ../scss/layout/_header.scss */
+  /* line 48, ../scss/layout/_header.scss */
   .navbar-collapse {
     padding-left: 0;
   }
 }
 @media (max-width: 767px) {
-  /* line 46, ../scss/layout/_header.scss */
+  /* line 48, ../scss/layout/_header.scss */
   .navbar-collapse {
     padding-right: 0;
     background: #f8f6f6;
@@ -331,12 +334,12 @@ p {
     padding: 0 15px;
   }
 }
-/* line 67, ../scss/layout/_header.scss */
+/* line 69, ../scss/layout/_header.scss */
 .navbar-collapse * {
   letter-spacing: 0;
 }
 
-/* line 72, ../scss/layout/_header.scss */
+/* line 74, ../scss/layout/_header.scss */
 .nav-bar {
   display: inline-block;
   vertical-align: middle;
@@ -344,13 +347,13 @@ p {
   text-align: left;
 }
 @media (max-width: 991px) {
-  /* line 72, ../scss/layout/_header.scss */
+  /* line 74, ../scss/layout/_header.scss */
   .nav-bar {
     width: 65%;
   }
 }
 @media (max-width: 767px) {
-  /* line 72, ../scss/layout/_header.scss */
+  /* line 74, ../scss/layout/_header.scss */
   .nav-bar {
     width: 100%;
     text-align: center;
@@ -359,23 +362,23 @@ p {
   }
 }
 
-/* line 90, ../scss/layout/_header.scss */
+/* line 92, ../scss/layout/_header.scss */
 #nav {
   font-size: 13px;
   line-height: 16px;
 }
 @media (max-width: 767px) {
-  /* line 90, ../scss/layout/_header.scss */
+  /* line 92, ../scss/layout/_header.scss */
   #nav {
     margin: 0 -15px;
   }
 }
-/* line 100, ../scss/layout/_header.scss */
+/* line 102, ../scss/layout/_header.scss */
 #nav li {
   float: left;
 }
 @media (max-width: 767px) {
-  /* line 100, ../scss/layout/_header.scss */
+  /* line 102, ../scss/layout/_header.scss */
   #nav li {
     width: 100% !important;
     padding: 0 15px 10px;
@@ -383,27 +386,27 @@ p {
     border-bottom: 1px solid #00aff0;
   }
 }
-/* line 111, ../scss/layout/_header.scss */
+/* line 113, ../scss/layout/_header.scss */
 #nav li.active a {
-  color: #90d400;
+  color: #90d300;
 }
-/* line 114, ../scss/layout/_header.scss */
+/* line 116, ../scss/layout/_header.scss */
 #nav li.active a span {
   color: #7fba00;
 }
-/* line 121, ../scss/layout/_header.scss */
+/* line 123, ../scss/layout/_header.scss */
 #nav a {
   color: #788ea6;
 }
-/* line 124, ../scss/layout/_header.scss */
+/* line 126, ../scss/layout/_header.scss */
 #nav a:hover {
-  color: #90d400;
+  color: #90d300;
 }
-/* line 127, ../scss/layout/_header.scss */
+/* line 129, ../scss/layout/_header.scss */
 #nav a:hover span {
   color: #7fba00;
 }
-/* line 133, ../scss/layout/_header.scss */
+/* line 135, ../scss/layout/_header.scss */
 #nav .style-color {
   display: block;
   font-size: 15px;
@@ -414,7 +417,7 @@ p {
 }
 
 @media (max-width: 767px) {
-  /* line 143, ../scss/layout/_header.scss */
+  /* line 145, ../scss/layout/_header.scss */
   .phone-hold {
     background: #3b6db2;
     margin: 0 -15px;
@@ -423,14 +426,14 @@ p {
 }
 
 @media (max-width: 767px) {
-  /* line 154, ../scss/layout/_header.scss */
+  /* line 156, ../scss/layout/_header.scss */
   .img-hold {
     max-width: 38px;
   }
 }
 
 @media (max-width: 767px) {
-  /* line 160, ../scss/layout/_header.scss */
+  /* line 162, ../scss/layout/_header.scss */
   .navbar-toggle {
     padding: 0;
     border: 0;
@@ -440,7 +443,7 @@ p {
   }
 }
 @media (max-width: 767px) {
-  /* line 169, ../scss/layout/_header.scss */
+  /* line 171, ../scss/layout/_header.scss */
   .navbar-toggle .icon-bar {
     height: 5px;
     width: 26px;

@@ -17,7 +17,9 @@
 
 		.btn {
 			font-weight: 700;
-			width: 100%;
+			.logged-in & {
+				width: 100%;
+			}
 		}
 	}
 
