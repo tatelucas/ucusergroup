@@ -7,14 +7,15 @@
       <input class="form-control" type="email" name="user_email" placeholder="E-Mail" id="user_email" placeholder="Email">
     </div>
     <div class="form-group">
-      <select name="user_state">
+      <?php ug_city_select(false); ?>
+      <!-- <select name="user_state">
         <option class="hidden">Select Location</option>
         <option>Chicago</option>
         <option>Texas</option>
         <option>California</option>
         <option>Washington</option>
         <option>Montana</option>
-      </select>
+      </select> -->
     </div>
     <input class="btn btn-success" type="submit" value="Join Today" id="register" />
   </fieldset>

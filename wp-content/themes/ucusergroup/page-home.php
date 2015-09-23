@@ -60,14 +60,21 @@
             global $wp_query;
             $wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
             if (have_posts()) : while (have_posts()) : the_post();
-              $userGroupLocations = wp_get_post_terms($post->ID, 'city');
-              $userGroupLocation = $userGroupLocations ? $userGroupLocations[0] : '';
+              $userGroupNames = wp_get_post_terms($post->ID, 'ug-name');
+              $userGroupName = $userGroupNames ? $userGroupNames[0] : '';
           ?>
             <div class="col-sm-4 col-xs-12 location-col">
               <a href="<?php the_permalink(); ?>">
-                <?php echo $i; ?>
                 <time class="time-hold" datetime="2015-07-23"><span><?php espresso_event_date('j', ' '); ?></span><?php espresso_event_date('F', ' '); ?></time>
-                <span class="name-hold"><?php if($userGroupLocation) echo $userGroupLocation->name; ?></span>
+                <span class="name-hold">
+                  <?php
+                    if($userGroupName){
+                      echo str_replace('--', ', ', $userGroupName->name);
+                    } else {
+                      ug_venue_location();
+                    }
+                  ?>
+                </span>
                 <span class="text-hold"><?php ug_venue_location(); ?></span>
               </a>
             </div>

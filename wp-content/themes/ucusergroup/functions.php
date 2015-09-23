@@ -17,16 +17,24 @@
   // user group city select
   // ----------------------------------------------------------
 
-  function ug_city_select(){
+  function ug_city_select($updateLocOnChange = true){
 
     $ucUserGroupCities = get_terms(
       array('city')
     );
 
-    $ucUserGroupCitiesSelect  = '<select data-location-select>';
+    if($updateLocOnChange){
+      $ucUserGroupCitiesSelect  = '<select data-location-select>';
+    } else {
+      $ucUserGroupCitiesSelect  = '<select>';
+    }
     $ucUserGroupCitiesSelect .= '<option class="hidden">Select</option>';
     foreach($ucUserGroupCities as $ucUserGroupCity){
-      $ucUserGroupCitiesSelect .= '<option value="' .  get_term_link($ucUserGroupCity->name, 'city') . '">' . str_replace("User Group", "", $ucUserGroupCity->name) . '</option>';
+      if($updateLocOnChange){
+        $ucUserGroupCitiesSelect .= '<option value="' . get_term_link($ucUserGroupCity->name, 'city') . '">' . $ucUserGroupCity->name . '</option>';
+      } else {
+        $ucUserGroupCitiesSelect .= '<option value="' . $ucUserGroupCity->name . '">' . $ucUserGroupCity->name . '</option>';
+      }
     }
     $ucUserGroupCitiesSelect .= '</select>';
 
@@ -76,25 +84,56 @@
       'city',
       'espresso_events',
       array(
-        'label' => __( 'User Group' ),
-        'rewrite' => array( 'slug' => 'user-group' ),
+        'label' => __( 'User Group Location' ),
+        'rewrite' => array( 'slug' => 'user-group-location' ),
         'hierarchical' => true
       )
     );
   }
   add_action( 'init', 'cities_init' );
 
-  // function user_state_init() {
-  //   register_taxonomy(
-  //     'user_state',
-  //     'user',
-  //     array(
-  //       'label' => __( 'User State' ),
-  //       'rewrite' => array( 'slug' => 'user-state' )
-  //     )
-  //   );
-  // }
-  // add_action( 'init', 'user_state_init' );
+  function ug_name_init() {
+    register_taxonomy(
+      'ug-name',
+      'espresso_events',
+      array(
+        'label' => __( 'User Group Name' ),
+        'rewrite' => array( 'slug' => 'user-group-name' ),
+        'hierarchical' => true
+      )
+    );
+  }
+  add_action( 'init', 'ug_name_init' );
+
+
+  // filter for tags (as a taxonomy) with comma
+//  replace '--' with ', ' in the output - allow tags with comma this way
+
+if(!is_admin()){ // make sure the filters are only called in the frontend
+
+  $custom_taxonomy_type = 'city'; // here goes your taxonomy type
+
+  function comma_taxonomy_filter($tag_arr){
+    global $custom_taxonomy_type;
+    $tag_arr_new = $tag_arr;
+    if($tag_arr->taxonomy == $custom_taxonomy_type && strpos($tag_arr->name, '--')){
+      $tag_arr_new->name = str_replace('--',', ',$tag_arr->name);
+    }
+    return $tag_arr_new;
+  }
+  add_filter('get_'.$custom_taxonomy_type, comma_taxonomy_filter);
+
+  function comma_taxonomies_filter($tags_arr){
+    $tags_arr_new = array();
+    foreach($tags_arr as $tag_arr){
+      $tags_arr_new[] = comma_taxonomy_filter($tag_arr);
+    }
+    return $tags_arr_new;
+  }
+  add_filter('get_the_taxonomies',  comma_taxonomies_filter);
+  add_filter('get_terms',       comma_taxonomies_filter);
+  add_filter('get_the_terms',     comma_taxonomies_filter);
+}
 
   // ----------------------------------------------------------
   // user state on register
