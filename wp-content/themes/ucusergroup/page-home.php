@@ -282,13 +282,16 @@
 							dd.selectedIndex = i;
 							dd.options[i].selected = true;
 							//alert(dd.selectedIndex);
+							
+							document.getElementsByClassName("jcf-option-hidden")[0].innerHTML = obj.name;
+							
 							break;
 						}
-					}
+					}				
 					
 					
 					//$("ug_closest_location").val(obj.name);
-					alert ("The closest user group to you is " + obj.name);
+					//alert ("The closest user group to you is " + obj.name);
 				} else {
 					//alert ("There are no user groups near you.  Perhaps you should start one!");
 				}

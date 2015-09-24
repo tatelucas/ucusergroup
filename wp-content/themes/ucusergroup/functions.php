@@ -24,7 +24,7 @@
     );
 
     if($updateLocOnChange){
-      $ucUserGroupCitiesSelect  = '<select id="ug_closest_location" data-location-select>';
+      $ucUserGroupCitiesSelect  = '<select data-location-select id="ug_closest_location">';
     } else {
       $ucUserGroupCitiesSelect  = '<select id="ug_closest_location">';
     }
