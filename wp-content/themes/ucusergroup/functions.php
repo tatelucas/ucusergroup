@@ -330,3 +330,21 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
    <?php
    }
   add_action( 'wp_footer', 'ee_default_ticket_selector_one_all_events' );
+
+global $query;
+
+add_action('parse_query', 'wpse32932_parse_query');
+function wpse32932_parse_query( $wp ){
+  if (is_archive()) {
+    if($wp->query_vars['post_type'] == 'sponsor') {
+      $wp->query_vars['posts_per_page'] = 30;
+    }
+  }
+  /*
+  var_dump($wp->query['post_type']);
+    if( $wp->is_post_type_archive ):
+        $wp->query_vars['posts_per_page'] = 30;
+    endif;
+    return $wp;
+  */
+}
