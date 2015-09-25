@@ -1860,38 +1860,39 @@ body > .jcf-select-drop.jcf-drop-flipped {
 }
 
 /* line 82, ../scss/components/_events.scss */
+#espresso-thank-you-page-overview-dv .ee-button.ee-roundish.indented-text.big-text,
 .spco-steps-big-hdr,
 #spco-steps-display-dv {
   display: none;
 }
 
-/* line 92, ../scss/components/_events.scss */
+/* line 93, ../scss/components/_events.scss */
 .spco-ticket-info-dv.small-text thead th:nth-of-type(3n+4), .spco-ticket-info-dv.small-text thead th:nth-of-type(3n+3) {
   display: none;
 }
-/* line 99, ../scss/components/_events.scss */
+/* line 100, ../scss/components/_events.scss */
 .spco-ticket-info-dv.small-text .item .item_r,
 .spco-ticket-info-dv.small-text .item .item_c {
   display: none;
 }
 
-/* line 107, ../scss/components/_events.scss */
+/* line 108, ../scss/components/_events.scss */
 .content .spco-whats-next-buttons {
   padding-top: 0;
 }
-/* line 111, ../scss/components/_events.scss */
+/* line 112, ../scss/components/_events.scss */
 .content .small-text {
   font-weight: 100;
   font-size: 0.95em;
 }
-/* line 116, ../scss/components/_events.scss */
+/* line 117, ../scss/components/_events.scss */
 .content .ee-attention {
   background: #d9edf7;
   border: 1px solid #bce8f1;
   text-align: left;
   color: #31708f;
 }
-/* line 123, ../scss/components/_events.scss */
+/* line 124, ../scss/components/_events.scss */
 .content #espresso-social-buttons-dv {
   margin: 50px 0;
 }
@@ -1904,27 +1905,38 @@ body > .jcf-select-drop.jcf-drop-flipped {
 .content #espresso-social-buttons-dv:after {
   clear: both;
 }
-/* line 128, ../scss/components/_events.scss */
+/* line 129, ../scss/components/_events.scss */
 .content .tiny-text {
   font-size: .9em;
   font-weight: 100;
 }
-/* line 133, ../scss/components/_events.scss */
+/* line 134, ../scss/components/_events.scss */
 .content .ee-icon-only-lnk {
   margin: 0 10px 25px 0;
 }
-/* line 137, ../scss/components/_events.scss */
+/* line 138, ../scss/components/_events.scss */
 .content .ee-button, .content .ee-button:active, .content .ee-button:visited {
   line-height: 1.5;
 }
 
-/* line 143, ../scss/components/_events.scss */
+/* line 144, ../scss/components/_events.scss */
 .ee-reg-form-attendee-dv input {
   padding: 10px;
 }
-/* line 147, ../scss/components/_events.scss */
+/* line 148, ../scss/components/_events.scss */
 .ee-reg-form-attendee-dv .ee-reg-qstn {
   margin-bottom: 12.5px;
+}
+
+/* line 153, ../scss/components/_events.scss */
+#espresso-social-buttons-dv-g-plusone {
+  margin-left: 10px;
+}
+
+/* line 158, ../scss/components/_events.scss */
+.ee_participant_widget img {
+  border-radius: 50%;
+  margin-right: 5px;
 }
 
 @media only screen and (min-width: 1025px) {

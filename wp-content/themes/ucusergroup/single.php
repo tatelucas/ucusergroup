@@ -64,7 +64,22 @@
 			</div><!--/col-sm-9-->
 
 				<div class="sidebar-container col-sm-3">
-					<?php get_sidebar(); ?>
+					<?php
+					if($post->post_type == 'espresso_events') {
+					?>
+					<div id="sidebar" role="complementary">
+						<ul>
+							<li class="widget ee_participant_widget">
+								<h2 class="widgettitle">Who's Going?</h2>
+								<?php echo do_shortcode('[ESPRESSO_EVENT_ATTENDEES show_gravatar=true]'); ?>
+							</li>
+						</ul>
+					</div>
+					<?php
+					} else {
+						get_sidebar();
+					}
+					?>
 				</div><!--/col-sm-3-->
 			</div><!--/row-->
 	</div><!-- /content -->

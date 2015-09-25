@@ -79,6 +79,7 @@
   display: none;
 }
 
+#espresso-thank-you-page-overview-dv .ee-button.ee-roundish.indented-text.big-text,
 .spco-steps-big-hdr,
 #spco-steps-display-dv {
   display: none;
@@ -146,5 +147,16 @@
 
   .ee-reg-qstn {
     margin-bottom: $line-height-computed/2;
+  }
+}
+
+#espresso-social-buttons-dv-g-plusone {
+  margin-left: 10px;
+}
+
+.ee_participant_widget {
+  img {
+    border-radius: 50%;
+    margin-right: 5px;
   }
 }
