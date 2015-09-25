@@ -789,6 +789,7 @@
 	}
 }
 
+.wpcf7-form-control.wpcf7-submit,
 .page-numbers {
 	display: inline-block;
 	font-weight: normal;
@@ -812,5 +813,27 @@
 	&:hover {
 		background: #f7fafb;
 		color: darken($dark-blue, 10%);
+	}
+}
+
+.wpcf7-form-control.wpcf7-submit {
+	background: $green;
+	color: white;
+	border: none;
+
+	&:hover {
+		background: darken($green, 10%);
+		color: white;
+	}
+}
+
+// Contact form
+.wpcf7-form-control-wrap {
+	input,
+	textarea {
+		width: 90%;
+		margin-top: 5px;
+		padding: 10px;
+		border: 1px solid #e1e1e1;
 	}
 }

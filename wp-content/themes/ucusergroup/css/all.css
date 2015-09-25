@@ -1347,6 +1347,7 @@ p {
 }
 
 /* line 792, ../scss/layout/_content.scss */
+.wpcf7-form-control.wpcf7-submit,
 .page-numbers {
   display: inline-block;
   font-weight: normal;
@@ -1366,10 +1367,33 @@ p {
   margin: 0 0 0 1.4%;
   padding: 10px 20px;
 }
-/* line 811, ../scss/layout/_content.scss */
-.page-numbers.current, .page-numbers:hover {
+/* line 812, ../scss/layout/_content.scss */
+.wpcf7-form-control.wpcf7-submit.current, .wpcf7-form-control.wpcf7-submit:hover,
+.page-numbers.current,
+.page-numbers:hover {
   background: #f7fafb;
   color: #2e568c;
+}
+
+/* line 819, ../scss/layout/_content.scss */
+.wpcf7-form-control.wpcf7-submit {
+  background: #7fba00;
+  color: white;
+  border: none;
+}
+/* line 824, ../scss/layout/_content.scss */
+.wpcf7-form-control.wpcf7-submit:hover {
+  background: #5c8700;
+  color: white;
+}
+
+/* line 832, ../scss/layout/_content.scss */
+.wpcf7-form-control-wrap input,
+.wpcf7-form-control-wrap textarea {
+  width: 90%;
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #e1e1e1;
 }
 
 @media (min-width: 1025px) {
