@@ -1396,6 +1396,17 @@ p {
   border: 1px solid #e1e1e1;
 }
 
+/* line 842, ../scss/layout/_content.scss */
+.archive-list li {
+  border-bottom: 1px solid #e1e1e1;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+}
+/* line 847, ../scss/layout/_content.scss */
+.archive-list li h2 {
+  margin: 0;
+}
+
 @media (min-width: 1025px) {
   /* line 1, ../scss/layout/_sidebar.scss */
   .sidebar-container {

@@ -1,7 +1,7 @@
 <?php
 /**
  * Search results page
- * 
+ *
  * Please see /external/starkers-utilities.php for info on get_template_parts()
  *
  * @package 	WordPress
@@ -11,21 +11,63 @@
 ?>
 <?php get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 
-<?php if ( have_posts() ): ?>
-<h2>Search Results for '<?php echo get_search_query(); ?>'</h2>	
-<ol>
-<?php while ( have_posts() ) : the_post(); ?>
-	<li>
-		<article>
-			<h2><a href="<?php esc_url( the_permalink() ); ?>" title="Permalink to <?php the_title(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-			<time datetime="<?php the_time( 'Y-m-d' ); ?>" pubdate><?php the_date(); ?> <?php the_time(); ?></time> <?php comments_popup_link('Leave a Comment', '1 Comment', '% Comments'); ?>
-			<?php the_content(); ?>
-		</article>
-	</li>
-<?php endwhile; ?>
-</ol>
-<?php else: ?>
-<h2>No results found for '<?php echo get_search_query(); ?>'</h2>
-<?php endif; ?>
+<div class="middle">
 
+<?php if ( have_posts() ): ?>
+	<div class="page-title">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12">
+					<h2>Search Results for '<?php echo get_search_query(); ?>'</h2>
+				</div><!--/col-sm-12-->
+			</div><!--/row-->
+		</div><!--/container-fluid -->
+	</div>
+
+	<div class="content container-fluid">
+		<div class="row">
+			<div class="col-sm-9">
+				<ul class="list-unstyled archive-list">
+				<?php while ( have_posts() ) : the_post(); ?>
+					<li>
+						<article>
+							<h2><a href="<?php esc_url( the_permalink() ); ?>" title="Permalink to <?php the_title(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+							<?php
+							if($post->post_type == 'espresso_events') {
+							?>
+							<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <time class="time-hold" datetime="<?php espresso_event_date(); ?>"><span><?php espresso_event_date('l, F j, Y', NULL, $post->ID); ?></span></time>
+							<?php
+							} else {
+							?>
+							<time datetime="<?php the_time( 'Y-m-d' ); ?>" pubdate><?php the_date(); ?> <?php the_time(); ?></time>
+							<?php
+							}
+							?>
+							<?php the_excerpt(); ?>
+						</article>
+					</li>
+				<?php endwhile; ?>
+				</ul>
+
+				<div class="post-pagination">
+					<?php
+					// Previous/next page navigation.
+					echo paginate_links();
+					?>
+				</div>
+
+				<?php else: ?>
+				<h2>No results found for '<?php echo get_search_query(); ?>'</h2>
+				<?php endif; ?>
+				</div>
+
+				<div class="sidebar-container col-sm-3">
+					<?php
+						get_sidebar();
+					?>
+				</div><!--/col-sm-3-->
+
+		</div>
+	</div><!-- /content -->
+</div><!--/middle-->
 <?php get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>

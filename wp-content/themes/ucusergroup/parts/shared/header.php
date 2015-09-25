@@ -28,7 +28,7 @@
         <form action="<?php echo home_url( '/' ); ?>" class="search-form" role="search" method="get">
           <fieldset>
             <button type="submit" class="btn icon-search"></button>
-            <input type="search" class="form-control" placeholder="Find a Meetup" name="s">
+            <input type="search" class="form-control" placeholder="Search" name="s">
           </fieldset>
         </form>
         <div class="btn-group">

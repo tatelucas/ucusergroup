@@ -837,3 +837,15 @@
 		border: 1px solid #e1e1e1;
 	}
 }
+
+.archive-list {
+		li {
+			border-bottom: 1px solid #e1e1e1;
+			padding-bottom: $line-height-computed;
+			margin-bottom: $line-height-computed;
+
+			h2 {
+				margin: 0;
+			}
+		}
+}
