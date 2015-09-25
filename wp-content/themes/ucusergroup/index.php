@@ -38,26 +38,24 @@
 
 	<div class="content container-fluid">
 		<div class="row">
-			<div class="col-sm-9">
-<ol>
-<?php while ( have_posts() ) : the_post(); ?>
-	<li>
-		<article>
-			<h2><a href="<?php esc_url( the_permalink() ); ?>" title="Permalink to <?php the_title(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-			<time datetime="<?php the_time( 'Y-m-d' ); ?>" pubdate><?php the_date(); ?> <?php the_time(); ?></time> <?php comments_popup_link('Leave a Comment', '1 Comment', '% Comments'); ?>
-			<?php the_content(); ?>
-		</article>
-	</li>
-<?php endwhile; ?>
-</ol>
+			<div class="col-sm-12">
+				<ul class="news-list row">
+			<?php while ( have_posts() ) : the_post(); ?>
+					<li class="col-sm-4">
+						<a href="<?php echo get_permalink($post->ID); ?>">
+							<?php echo get_the_post_thumbnail($post->ID, 'homepage-blog-size') ?>
+						</a>
+						<div class="text-block">
+							<h2><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h2>
+							<p><?php echo $post->post_excerpt; ?></p>
+						</div>
+					</li>
+			<?php endwhile; ?>
+			</ul>
 <?php else: ?>
 <h2>No posts to display</h2>
 <?php endif; ?>
 </div>
-
-<div class="sidebar-container col-sm-3">
-	<?php get_sidebar(); ?>
-</div><!--/col-sm-4-->
 </div>
 </div><!-- /content -->
 </div><!--/middle-->

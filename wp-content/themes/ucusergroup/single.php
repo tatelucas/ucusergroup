@@ -26,7 +26,7 @@
 									?>
 									<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <time class="time-hold" datetime="<?php espresso_event_date(); ?>"><span><?php espresso_event_date('l, F j, Y'); ?></span></time>
 									<?php
-									} else if ($post->post_type == 'single') {
+									} else if ($post->post_type == 'post') {
 									?>
 									<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <time  datetime="<?php the_time( 'Y-m-d' ); ?>" pubdate><?php the_date(); ?></time>
 									<?php
@@ -43,7 +43,7 @@
 									?>
 									<a href="#" class="btn btn-outlined btn-header btn-join-event"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp; Sign Up</a>
 									<?php
-								} else if ($post->post_type == 'single') {
+								} else if ($post->post_type == 'post') {
 									comments_popup_link('Leave a Comment', '1 Comment', '% Comments', 'btn btn-outlined btn-header');
 								}
 								?>
