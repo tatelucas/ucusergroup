@@ -26,7 +26,7 @@ function initCustomForms() {
 	jcf.setOptions('Select', {
 		wrapNative: false
 	});
-	jcf.replace(".customselect");
+	jcf.replace(".ug_closest_location");
 }
 
 // stretch background to fill blocks
