@@ -126,40 +126,64 @@ p {
 }
 
 /* line 42, ../scss/base/_base.scss */
-.form-control {
+.form-control, .register-page #user_login,
+.register-page #user_pass,
+.login-page #user_login,
+.login-page #user_pass {
   line-height: 20px;
   padding: 2px 34px;
   border: 0;
   box-shadow: none;
 }
 /* line 25, ../scss/utils/_markup-mixins.scss */
-.form-control::-webkit-input-placeholder {
+.form-control::-webkit-input-placeholder, .register-page #user_login::-webkit-input-placeholder,
+.register-page #user_pass::-webkit-input-placeholder,
+.login-page #user_login::-webkit-input-placeholder,
+.login-page #user_pass::-webkit-input-placeholder {
   color: #8b8c8d;
 }
 /* line 26, ../scss/utils/_markup-mixins.scss */
-.form-control::-moz-placeholder {
+.form-control::-moz-placeholder, .register-page #user_login::-moz-placeholder,
+.register-page #user_pass::-moz-placeholder,
+.login-page #user_login::-moz-placeholder,
+.login-page #user_pass::-moz-placeholder {
   opacity: 1;
   color: #8b8c8d;
 }
 /* line 27, ../scss/utils/_markup-mixins.scss */
-.form-control:-moz-placeholder {
+.form-control:-moz-placeholder, .register-page #user_login:-moz-placeholder,
+.register-page #user_pass:-moz-placeholder,
+.login-page #user_login:-moz-placeholder,
+.login-page #user_pass:-moz-placeholder {
   color: #8b8c8d;
 }
 /* line 28, ../scss/utils/_markup-mixins.scss */
-.form-control:-ms-input-placeholder {
+.form-control:-ms-input-placeholder, .register-page #user_login:-ms-input-placeholder,
+.register-page #user_pass:-ms-input-placeholder,
+.login-page #user_login:-ms-input-placeholder,
+.login-page #user_pass:-ms-input-placeholder {
   color: #8b8c8d;
 }
 /* line 29, ../scss/utils/_markup-mixins.scss */
-.form-control.placeholder {
+.form-control.placeholder, .register-page .placeholder#user_login,
+.register-page .placeholder#user_pass,
+.login-page .placeholder#user_login,
+.login-page .placeholder#user_pass {
   color: #8b8c8d;
 }
 /* line 52, ../scss/base/_base.scss */
-.form-control:focus {
+.form-control:focus, .register-page #user_login:focus,
+.register-page #user_pass:focus,
+.login-page #user_login:focus,
+.login-page #user_pass:focus {
   box-shadow: none;
 }
 @media (max-width: 991px) {
   /* line 42, ../scss/base/_base.scss */
-  .form-control {
+  .form-control, .register-page #user_login,
+  .register-page #user_pass,
+  .login-page #user_login,
+  .login-page #user_pass {
     padding: 2px 15px;
   }
 }
@@ -1224,6 +1248,91 @@ p {
     -webkit-column-span: all;
   }
 }
+/* line 692, ../scss/layout/_content.scss */
+.register-page h2,
+.login-page h2 {
+  margin-bottom: 50px;
+}
+/* line 696, ../scss/layout/_content.scss */
+.register-page .subscribe-form,
+.login-page .subscribe-form {
+  padding-left: 0;
+  padding-bottom: 100px;
+}
+/* line 706, ../scss/layout/_content.scss */
+.register-page #user_login,
+.register-page #user_pass,
+.login-page #user_login,
+.login-page #user_pass {
+  display: block;
+  width: 100%;
+  height: 58px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.857;
+  color: #000;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 27px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+/* line 727, ../scss/layout/_content.scss */
+.register-page p,
+.login-page p {
+  margin-bottom: 5px;
+}
+/* line 731, ../scss/layout/_content.scss */
+.register-page .login-remember,
+.login-page .login-remember {
+  padding: 10px;
+  float: left;
+  width: 50%;
+}
+/* line 737, ../scss/layout/_content.scss */
+.register-page .login-submit,
+.login-page .login-submit {
+  float: right;
+  padding-top: 10px;
+}
+/* line 743, ../scss/layout/_content.scss */
+.register-page .login-username label,
+.login-page .login-username label {
+  display: none;
+}
+/* line 748, ../scss/layout/_content.scss */
+.register-page #wp-submit,
+.login-page #wp-submit {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  white-space: nowrap;
+  border-radius: 27px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  background-color: #7fba00;
+  border: 0;
+  padding: 18px 50px 18px 46px;
+  font-size: 18px;
+  line-height: 22px;
+  transition: background 0.3s, opacity 0.3s, color 0.3s ease;
+  outline: none !important;
+  margin: 0 0 0 1.4%;
+  padding: 18px 28px 17px 31px;
+}
+
 @media (min-width: 1025px) {
   /* line 1, ../scss/layout/_sidebar.scss */
   .sidebar-container {
@@ -1444,7 +1553,13 @@ p {
   }
 }
 /* line 31, ../scss/components/_search-form.scss */
-.search-form .form-control {
+.search-form .form-control, .search-form .register-page #user_login, .register-page .search-form #user_login,
+.search-form .register-page #user_pass,
+.register-page .search-form #user_pass,
+.search-form .login-page #user_login,
+.login-page .search-form #user_login,
+.search-form .login-page #user_pass,
+.login-page .search-form #user_pass {
   line-height: 22px;
   height: 28px;
   background: transparent;
@@ -1454,41 +1569,89 @@ p {
 }
 @media (max-width: 1249px) {
   /* line 31, ../scss/components/_search-form.scss */
-  .search-form .form-control {
+  .search-form .form-control, .search-form .register-page #user_login, .register-page .search-form #user_login,
+  .search-form .register-page #user_pass,
+  .register-page .search-form #user_pass,
+  .search-form .login-page #user_login,
+  .login-page .search-form #user_login,
+  .search-form .login-page #user_pass,
+  .login-page .search-form #user_pass {
     padding-right: 6px;
   }
 }
 @media (max-width: 767px) {
   /* line 31, ../scss/components/_search-form.scss */
-  .search-form .form-control {
+  .search-form .form-control, .search-form .register-page #user_login, .register-page .search-form #user_login,
+  .search-form .register-page #user_pass,
+  .register-page .search-form #user_pass,
+  .search-form .login-page #user_login,
+  .login-page .search-form #user_login,
+  .search-form .login-page #user_pass,
+  .login-page .search-form #user_pass {
     padding-left: 35px;
   }
 }
 @media (max-width: 767px) {
   /* line 47, ../scss/components/_search-form.scss */
-  .location-section .search-form .form-control {
+  .location-section .search-form .form-control, .location-section .search-form .register-page #user_login, .register-page .location-section .search-form #user_login,
+  .location-section .search-form .register-page #user_pass,
+  .register-page .location-section .search-form #user_pass,
+  .location-section .search-form .login-page #user_login,
+  .login-page .location-section .search-form #user_login,
+  .location-section .search-form .login-page #user_pass,
+  .login-page .location-section .search-form #user_pass {
     padding-left: 10px;
   }
 }
 /* line 25, ../scss/utils/_markup-mixins.scss */
-.search-form .form-control::-webkit-input-placeholder {
+.search-form .form-control::-webkit-input-placeholder, .search-form .register-page #user_login::-webkit-input-placeholder, .register-page .search-form #user_login::-webkit-input-placeholder,
+.search-form .register-page #user_pass::-webkit-input-placeholder,
+.register-page .search-form #user_pass::-webkit-input-placeholder,
+.search-form .login-page #user_login::-webkit-input-placeholder,
+.login-page .search-form #user_login::-webkit-input-placeholder,
+.search-form .login-page #user_pass::-webkit-input-placeholder,
+.login-page .search-form #user_pass::-webkit-input-placeholder {
   color: #fff;
 }
 /* line 26, ../scss/utils/_markup-mixins.scss */
-.search-form .form-control::-moz-placeholder {
+.search-form .form-control::-moz-placeholder, .search-form .register-page #user_login::-moz-placeholder, .register-page .search-form #user_login::-moz-placeholder,
+.search-form .register-page #user_pass::-moz-placeholder,
+.register-page .search-form #user_pass::-moz-placeholder,
+.search-form .login-page #user_login::-moz-placeholder,
+.login-page .search-form #user_login::-moz-placeholder,
+.search-form .login-page #user_pass::-moz-placeholder,
+.login-page .search-form #user_pass::-moz-placeholder {
   opacity: 1;
   color: #fff;
 }
 /* line 27, ../scss/utils/_markup-mixins.scss */
-.search-form .form-control:-moz-placeholder {
+.search-form .form-control:-moz-placeholder, .search-form .register-page #user_login:-moz-placeholder, .register-page .search-form #user_login:-moz-placeholder,
+.search-form .register-page #user_pass:-moz-placeholder,
+.register-page .search-form #user_pass:-moz-placeholder,
+.search-form .login-page #user_login:-moz-placeholder,
+.login-page .search-form #user_login:-moz-placeholder,
+.search-form .login-page #user_pass:-moz-placeholder,
+.login-page .search-form #user_pass:-moz-placeholder {
   color: #fff;
 }
 /* line 28, ../scss/utils/_markup-mixins.scss */
-.search-form .form-control:-ms-input-placeholder {
+.search-form .form-control:-ms-input-placeholder, .search-form .register-page #user_login:-ms-input-placeholder, .register-page .search-form #user_login:-ms-input-placeholder,
+.search-form .register-page #user_pass:-ms-input-placeholder,
+.register-page .search-form #user_pass:-ms-input-placeholder,
+.search-form .login-page #user_login:-ms-input-placeholder,
+.login-page .search-form #user_login:-ms-input-placeholder,
+.search-form .login-page #user_pass:-ms-input-placeholder,
+.login-page .search-form #user_pass:-ms-input-placeholder {
   color: #fff;
 }
 /* line 29, ../scss/utils/_markup-mixins.scss */
-.search-form .form-control.placeholder {
+.search-form .form-control.placeholder, .search-form .register-page .placeholder#user_login, .register-page .search-form .placeholder#user_login,
+.search-form .register-page .placeholder#user_pass,
+.register-page .search-form .placeholder#user_pass,
+.search-form .login-page .placeholder#user_login,
+.login-page .search-form .placeholder#user_login,
+.search-form .login-page .placeholder#user_pass,
+.login-page .search-form .placeholder#user_pass {
   color: #fff;
 }
 /* line 58, ../scss/components/_search-form.scss */
@@ -1933,8 +2096,12 @@ body > .jcf-select-drop.jcf-drop-flipped {
   margin-left: 10px;
 }
 
-/* line 158, ../scss/components/_events.scss */
-.ee_participant_widget img {
+/* line 160, ../scss/components/_events.scss */
+.ee_participant_widget .event-attendees-list li {
+  margin-bottom: 12.5px;
+}
+/* line 164, ../scss/components/_events.scss */
+.ee_participant_widget .event-attendees-list img {
   border-radius: 50%;
   margin-right: 5px;
 }

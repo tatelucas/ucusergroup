@@ -145,7 +145,9 @@
       </div>
     </div>
 
-
+    <?php
+    if (!is_user_logged_in()) {
+    ?>
     <div class="subscribe-section">
       <div class="container-fluid">
         <div class="row">
@@ -160,7 +162,10 @@
         </div>
       </div>
     </div>
-
+    <?php
+    }
+    ?>
+    
     <div class="sponsor-section">
       <div class="container-fluid">
         <div class="col-sm-12">
