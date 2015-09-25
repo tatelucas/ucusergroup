@@ -48,7 +48,7 @@
 							if ($thumb) {
 								echo $thumb;
 							} else {
-								echo '<img src="http://ucusergroup.wpengine.com/wp-content/uploads/2015/09/logo_final_square.png" alt="' . $post->post_title . '" />';
+								echo '<img src="http://ucusergroup.wpengine.com/wp-content/uploads/2015/09/logo_final_square2.png" alt="' . $post->post_title . '" />';
 							}
 							?>
 						</a>
