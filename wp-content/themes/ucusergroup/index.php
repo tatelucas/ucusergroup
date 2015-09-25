@@ -52,6 +52,13 @@
 					</li>
 			<?php endwhile; ?>
 			</ul>
+
+			<div class="post-pagination">
+				<?php
+				// Previous/next page navigation.
+				echo paginate_links();
+				?>
+			</div>
 <?php else: ?>
 <h2>No posts to display</h2>
 <?php endif; ?>
