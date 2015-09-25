@@ -37,7 +37,7 @@
             <h1>Upcoming Meetups Near You</h1>
             <div class="select-form">
               <span class="text-hold">location<i class="icon-mapmarker"></i></span>
-              <?php ug_city_select(); ?>
+              <?php // ug_city_select(); // todo - add this back later -dwl ?>
             </div>
 
             <?php the_field('upcoming_meetups_text'); ?>
@@ -229,175 +229,10 @@
 	
 	
 <script>
-	//var x=document.getElementById("demo");
-	var geocoder = new google.maps.Geocoder;
-	  var infowindow = new google.maps.InfoWindow;
-	  
-	  
 	jQuery(document).ready(function($) {
 		getLocation();
-	});	  
-	  
-	function getLocation()
-	  {
-	  if (navigator.geolocation)
-		{
-		navigator.geolocation.getCurrentPosition(showPosition,showError);
-		}
-	  else{//x.innerHTML="Geolocation is not supported by this browser.";
-	  }
-	  }
-
-	  
-	function getClosestCity (lat, lng) {
-			// We'll pass this variable to the PHP function uc_ajax_request_city
-		
-		// This does the ajax request
-		var ajaxurl = '<?php echo admin_url("admin-ajax.php"); ?>';
-		//alert (ajaxurl);
-		
-		$.ajax({
-			type: "POST",
-			dataType: "json",
-			url: ajaxurl,
-			data: {
-				'action':'uc_ajax_request_city',
-				"lat": lat,
-				"lng": lng
-			},
-			success:function(data) {
-				// This outputs the result of the ajax request
-				console.log(data);
-				//alert("Form submitted successfully.\nReturned json: " + data["json"]);
-				
-				cityInfo = data["json"];
-				obj = JSON.parse(cityInfo);
-				//term_id, term_city
-				
-				if (obj.distance < 200) {
-					var textToFind = obj.name;
-					var dd = document.getElementById('ug_closest_location');
-					for (var i = 0; i < dd.options.length; i++) {
-						if (dd.options[i].text === textToFind) {
-							dd.selectedIndex = i;
-							dd.options[i].selected = true;
-							//alert(dd.selectedIndex);
-							
-							document.getElementsByClassName("jcf-option-hidden")[0].innerHTML = obj.name;
-							
-							break;
-						}
-					}				
-					
-					
-					//$("ug_closest_location").val(obj.name);
-					//alert ("The closest user group to you is " + obj.name);
-				} else {
-					//alert ("There are no user groups near you.  Perhaps you should start one!");
-				}
-				
-			},
-			error: function(errorThrown){
-				console.log(errorThrown);
-			}
-		});
-		
-	}
-
-	function showPosition(position)
-	  {
-	  lat=position.coords.latitude;
-	  lng=position.coords.longitude;
-	  latlng=new google.maps.LatLng(lat, lng)
-	  //mapholder=document.getElementById('mapholder')
-	  //mapholder.style.height='250px';
-	  //mapholder.style.width='100%';
-
-
-			getClosestCity(lat, lng);
-  
-	  /*
-	  //alert(lat);
-	  $('#uclat').text(lat);
-	  $('#uclng').text(lng);
-
-	  var myOptions={
-	  center:latlng,zoom:14,
-	  mapTypeId:google.maps.MapTypeId.ROADMAP,
-	  mapTypeControl:false,
-	  navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
-	  };
-	  var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
-	  var marker=new google.maps.Marker({position:latlng,map:map,title:"You are here!"});
-	  
-	  codeLatLng(lat, lng);
-	  */
-	  }
-
-	function showError(error)
-	  {
-		  /*
-	  switch(error.code) 
-		{
-		case error.PERMISSION_DENIED:
-		  x.innerHTML="User denied the request for Geolocation."
-		  break;
-		case error.POSITION_UNAVAILABLE:
-		  x.innerHTML="Location information is unavailable."
-		  break;
-		case error.TIMEOUT:
-		  x.innerHTML="The request to get user location timed out."
-		  break;
-		case error.UNKNOWN_ERROR:
-		  x.innerHTML="An unknown error occurred."
-		  break;
-		}
-		*/
-	  }
-	  
-	  
-	  function codeLatLng(lat, lng) {
-		  /*
-
-		var latlng = new google.maps.LatLng(lat, lng);
-		geocoder.geocode({'location': latlng}, function(results, status) {
-		  if (status == google.maps.GeocoderStatus.OK) {
-		  console.log(results)
-			if (results[1]) {
-			 //formatted address
-			 //alert(results[0].formatted_address)
-			 var fulladdy = results[0].formatted_address;
-			 $('#uclocation').text(fulladdy);
-			//find country name
-				 for (var i=0; i<results[0].address_components.length; i++) {
-				for (var b=0;b<results[0].address_components[i].types.length;b++) {
-
-				//there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
-					if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
-						//this is the object you are looking for
-						city= results[0].address_components[i];
-						break;
-					}
-				}
-			}
-			//city data
-			//alert(city.short_name + " " + city.long_name) //this is showing the state right now
-			var cityaddy = city.short_name + " " + city.long_name;
-			
-
-
-			} else {
-			  alert("No results found");
-			}
-		  } else {
-			alert("Geocoder failed due to: " + status);
-		  }
-		});
-		
-		*/
-	  } 
-	  
-</script>	
+	});	 
+</script>
 
 
 <?php get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>

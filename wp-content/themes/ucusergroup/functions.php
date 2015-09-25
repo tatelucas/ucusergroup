@@ -24,16 +24,16 @@
     );
 
     if($updateLocOnChange){
-      $ucUserGroupCitiesSelect  = '<select data-location-select id="ug_closest_location">';
+      $ucUserGroupCitiesSelect  = '<select data-location-select id="ug_closest_location" class="ug_closest_location">';
     } else {
-      $ucUserGroupCitiesSelect  = '<select id="ug_closest_location">';
+      $ucUserGroupCitiesSelect  = '<select id="ug_closest_location" class="ug_closest_location">';
     }
     $ucUserGroupCitiesSelect .= '<option class="hidden">Select</option>';
     foreach($ucUserGroupCities as $ucUserGroupCity){
       if($updateLocOnChange){
-        $ucUserGroupCitiesSelect .= '<option value="' . get_term_link($ucUserGroupCity->name, 'city') . '">' . $ucUserGroupCity->name . '</option>';
+        $ucUserGroupCitiesSelect .= '<option id="'. $ucUserGroupCity->term_id .'" value="' . get_term_link($ucUserGroupCity->name, 'city') . '">' . $ucUserGroupCity->name . '</option>';
       } else {
-        $ucUserGroupCitiesSelect .= '<option value="' . $ucUserGroupCity->name . '">' . $ucUserGroupCity->name . '</option>';
+        $ucUserGroupCitiesSelect .= '<option id="'. $ucUserGroupCity->term_id .' value="' . $ucUserGroupCity->name . '">' . $ucUserGroupCity->name . '</option>';
       }
     }
     $ucUserGroupCitiesSelect .= '</select>';
@@ -195,7 +195,13 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
 	
 	//wp_register_script('googlemaps', 'http://maps.googleapis.com/maps/api/js?' . $locale . '&key=' . GOOGLE_MAPS_V3_API_KEY . '&sensor=false', false, '3');
 	wp_register_script('googlemaps', 'http://maps.googleapis.com/maps/api/js?sensor=false', false, '3');
+	
+	wp_register_script( 'ug_do_geolocate', get_template_directory_uri() . '/js/ug_geolocate.js' );
+	
 	wp_enqueue_script('googlemaps');	  
+	wp_enqueue_script('ug_do_geolocate');	
+	
+	  wp_localize_script( 'ug_do_geolocate', 'ug_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
 	}
 
