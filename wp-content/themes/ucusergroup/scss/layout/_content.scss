@@ -470,6 +470,14 @@
 	}
 }
 
+.archive {
+	.sponsor-list {
+		li {
+			margin-bottom: $line-height-computed/2;
+		}
+	}
+}
+
 .news-section {
 	background: $white;
 	padding: 58px 0 83px;
