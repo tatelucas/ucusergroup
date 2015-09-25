@@ -37,7 +37,7 @@
             <h1>Upcoming Meetups Near You</h1>
             <div class="select-form">
               <span class="text-hold">location<i class="icon-mapmarker"></i></span>
-              <?php // ug_city_select(); // todo - add this back later -dwl ?>
+              <?php ug_city_select(); ?>
             </div>
 
             <?php the_field('upcoming_meetups_text'); ?>
