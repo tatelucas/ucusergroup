@@ -165,7 +165,7 @@ p {
 }
 
 /* line 61, ../scss/base/_base.scss */
-.btn {
+.btn, #comments #submit {
   border: 0;
   padding: 18px 50px 18px 46px;
   font-size: 18px;
@@ -174,7 +174,7 @@ p {
   outline: none !important;
 }
 /* line 69, ../scss/base/_base.scss */
-.btn [class^="icon-"] {
+.btn [class^="icon-"], #comments #submit [class^="icon-"] {
   font-size: 15px;
   margin-right: 19px;
 }
@@ -193,57 +193,57 @@ p {
   }
 }
 /* line 88, ../scss/base/_base.scss */
-.btn-group .btn {
+.btn-group .btn, .btn-group #comments #submit, #comments .btn-group #submit {
   font-size: 13px;
   line-height: 16px;
   padding: 16px 16px 16px 24px;
 }
 @media (max-width: 1249px) {
   /* line 88, ../scss/base/_base.scss */
-  .btn-group .btn {
+  .btn-group .btn, .btn-group #comments #submit, #comments .btn-group #submit {
     padding: 16px 10px;
   }
 }
 @media (max-width: 767px) {
   /* line 88, ../scss/base/_base.scss */
-  .btn-group .btn {
+  .btn-group .btn, .btn-group #comments #submit, #comments .btn-group #submit {
     width: 50%;
   }
 }
 @media (max-width: 767px) {
   /* line 101, ../scss/base/_base.scss */
-  .location-section .btn-group .btn {
+  .location-section .btn-group .btn, .location-section .btn-group #comments #submit, #comments .location-section .btn-group #submit {
     width: 100px;
   }
 }
 /* line 107, ../scss/base/_base.scss */
-.btn-group .btn + .btn {
+.btn-group .btn + .btn, .btn-group #comments #submit + .btn, #comments .btn-group #submit + .btn, .btn-group #comments .btn + #submit, #comments .btn-group .btn + #submit, .btn-group #comments #submit + #submit, #comments .btn-group #submit + #submit {
   border-left: 1px solid #fff;
   z-index: 3;
   padding: 16px 24px 16px 16px;
 }
 @media (max-width: 1249px) {
   /* line 107, ../scss/base/_base.scss */
-  .btn-group .btn + .btn {
+  .btn-group .btn + .btn, .btn-group #comments #submit + .btn, #comments .btn-group #submit + .btn, .btn-group #comments .btn + #submit, #comments .btn-group .btn + #submit, .btn-group #comments #submit + #submit, #comments .btn-group #submit + #submit {
     padding: 16px 10px;
   }
 }
 /* line 118, ../scss/base/_base.scss */
-.btn-group .btn.btn-primary:first-child {
+.btn-group .btn.btn-primary:first-child, .btn-group #comments .btn-primary#submit:first-child, #comments .btn-group .btn-primary#submit:first-child {
   background: #3b6db2;
 }
 /* line 121, ../scss/base/_base.scss */
-.btn-group .btn.btn-primary:first-child:hover {
+.btn-group .btn.btn-primary:first-child:hover, .btn-group #comments .btn-primary#submit:first-child:hover, #comments .btn-group .btn-primary#submit:first-child:hover {
   background: #2e568c;
 }
 /* line 127, ../scss/base/_base.scss */
-.btn-group .btn.btn-outlined {
+.btn-group .btn.btn-outlined, .btn-group #comments .btn-outlined#submit, #comments .btn-group .btn-outlined#submit {
   background: transparent;
   border: 1px solid white;
   color: white;
 }
 /* line 132, ../scss/base/_base.scss */
-.btn-group .btn.btn-outlined:hover {
+.btn-group .btn.btn-outlined:hover, .btn-group #comments .btn-outlined#submit:hover, #comments .btn-group .btn-outlined#submit:hover {
   background: white;
   color: #3b6db2;
 }
@@ -257,6 +257,17 @@ p {
   bottom: 0;
   z-index: -1;
   overflow: hidden;
+}
+
+/* line 151, ../scss/base/_base.scss */
+.btn-form, #comments #submit {
+  background: #3b6db2;
+  border-radius: 27px;
+  color: #fff;
+}
+/* line 156, ../scss/base/_base.scss */
+.btn-form:hover, #comments #submit:hover {
+  background: #2e568c;
 }
 
 /* line 1, ../scss/layout/_header.scss */
@@ -282,11 +293,11 @@ p {
   }
 }
 /* line 18, ../scss/layout/_header.scss */
-#header .btn-group .btn {
+#header .btn-group .btn, #header .btn-group #comments #submit, #comments #header .btn-group #submit {
   font-weight: 700;
 }
 /* line 20, ../scss/layout/_header.scss */
-.logged-in #header .btn-group .btn {
+.logged-in #header .btn-group .btn, .logged-in #header .btn-group #comments #submit, #comments .logged-in #header .btn-group #submit {
   width: 100%;
 }
 @media (max-width: 767px) {
@@ -780,12 +791,12 @@ p {
   }
 }
 /* line 291, ../scss/layout/_content.scss */
-.info-section .btn {
+.info-section .btn, .info-section #comments #submit, #comments .info-section #submit {
   padding: 18px 35px 18px 26px;
   margin-top: 30px;
 }
 /* line 294, ../scss/layout/_content.scss */
-.info-section .btn [class^="icon-"] {
+.info-section .btn [class^="icon-"], .info-section #comments #submit [class^="icon-"], #comments .info-section #submit [class^="icon-"] {
   font-size: 24px;
   margin-right: 10px;
   margin-top: -5px;
@@ -854,26 +865,26 @@ p {
   }
 }
 /* line 352, ../scss/layout/_content.scss */
-.subscribe-form .btn {
+.subscribe-form .btn, .subscribe-form #comments #submit, #comments .subscribe-form #submit {
   margin: 0 0 0 1.4%;
   padding: 18px 28px 17px 31px;
 }
 @media (max-width: 991px) {
   /* line 352, ../scss/layout/_content.scss */
-  .subscribe-form .btn {
+  .subscribe-form .btn, .subscribe-form #comments #submit, #comments .subscribe-form #submit {
     padding: 17px 10px;
     width: 26%;
   }
 }
 @media (max-width: 767px) {
   /* line 352, ../scss/layout/_content.scss */
-  .subscribe-form .btn {
+  .subscribe-form .btn, .subscribe-form #comments #submit, #comments .subscribe-form #submit {
     width: 100%;
     margin: 0;
   }
 }
 /* line 366, ../scss/layout/_content.scss */
-.subscribe-form .btn [class^="icon-"] {
+.subscribe-form .btn [class^="icon-"], .subscribe-form #comments #submit [class^="icon-"], #comments .subscribe-form #submit [class^="icon-"] {
   font-size: 24px;
   margin-right: 10px;
   display: inline-block;
@@ -996,18 +1007,18 @@ p {
   margin-bottom: 29px;
 }
 /* line 487, ../scss/layout/_content.scss */
-.news-section .btn {
+.news-section .btn, .news-section #comments #submit, #comments .news-section #submit {
   margin: 0 0 60px;
   padding: 18px 44px 18px 43px;
 }
 @media (max-width: 767px) {
   /* line 487, ../scss/layout/_content.scss */
-  .news-section .btn {
+  .news-section .btn, .news-section #comments #submit, #comments .news-section #submit {
     margin-bottom: 35px;
   }
 }
 /* line 495, ../scss/layout/_content.scss */
-.news-section .btn [class^="icon-"] {
+.news-section .btn [class^="icon-"], .news-section #comments #submit [class^="icon-"], #comments .news-section #submit [class^="icon-"] {
   margin-right: 15px;
 }
 
@@ -1087,38 +1098,52 @@ p {
   padding: 0;
   font-size: 40px;
 }
+/* line 570, ../scss/layout/_content.scss */
+.page-title .btn-header {
+  float: left;
+  margin-top: 25px;
+  display: none;
+}
+@media (min-width: 993px) {
+  /* line 570, ../scss/layout/_content.scss */
+  .page-title .btn-header {
+    float: right;
+    margin-top: 0;
+    display: block;
+  }
+}
 @media (min-width: 993px) {
   /* line 557, ../scss/layout/_content.scss */
   .page-title {
     padding: 62.5px 0;
   }
 }
-/* line 574, ../scss/layout/_content.scss */
+/* line 586, ../scss/layout/_content.scss */
 .page-title .subtitle {
   margin-bottom: 0px;
   text-transform: uppercase;
   font-size: 11px;
   letter-spacing: 1px;
 }
-/* line 580, ../scss/layout/_content.scss */
+/* line 592, ../scss/layout/_content.scss */
 .page-title .subtitle a {
   color: #fff;
 }
-/* line 583, ../scss/layout/_content.scss */
+/* line 595, ../scss/layout/_content.scss */
 .page-title .subtitle a:hover {
   text-decoration: underline;
 }
 
-/* line 592, ../scss/layout/_content.scss */
+/* line 604, ../scss/layout/_content.scss */
 .lib-panel {
   margin-bottom: 20px;
 }
 
-/* line 596, ../scss/layout/_content.scss */
+/* line 608, ../scss/layout/_content.scss */
 .card-img {
   text-align: center;
 }
-/* line 599, ../scss/layout/_content.scss */
+/* line 611, ../scss/layout/_content.scss */
 .card-img img {
   width: 90%;
   height: auto;
@@ -1129,7 +1154,7 @@ p {
   border: 5px solid #EAEAEA;
 }
 
-/* line 617, ../scss/layout/_content.scss */
+/* line 629, ../scss/layout/_content.scss */
 .lib-panel .row,
 .lib-panel .col-sm-6,
 .lib-panel .col-sm-9,
@@ -1138,23 +1163,23 @@ p {
   background-color: #FFFFFF;
 }
 
-/* line 625, ../scss/layout/_content.scss */
+/* line 637, ../scss/layout/_content.scss */
 .lib-panel .lib-row {
   padding: 0 20px 0 20px;
 }
 
-/* line 629, ../scss/layout/_content.scss */
+/* line 641, ../scss/layout/_content.scss */
 .lib-panel .lib-row.lib-header {
   background-color: #FFFFFF;
   font-size: 20px;
   padding: 10px 20px 0 20px;
 }
-/* line 634, ../scss/layout/_content.scss */
+/* line 646, ../scss/layout/_content.scss */
 .lib-panel .lib-row.lib-header p {
   margin-bottom: 12.5px;
 }
 
-/* line 639, ../scss/layout/_content.scss */
+/* line 651, ../scss/layout/_content.scss */
 .lib-panel .lib-row.lib-header .lib-header-seperator {
   height: 2px;
   width: 26px;
@@ -1162,7 +1187,7 @@ p {
   margin: 7px 0 7px 0;
 }
 
-/* line 646, ../scss/layout/_content.scss */
+/* line 658, ../scss/layout/_content.scss */
 .lib-panel .lib-row.lib-desc {
   position: relative;
   height: 100%;
@@ -1170,7 +1195,7 @@ p {
   font-size: 13px;
 }
 
-/* line 652, ../scss/layout/_content.scss */
+/* line 664, ../scss/layout/_content.scss */
 .lib-panel .lib-row.lib-desc a {
   position: absolute;
   width: 100%;
@@ -1178,13 +1203,13 @@ p {
   left: 20px;
 }
 
-/* line 659, ../scss/layout/_content.scss */
+/* line 671, ../scss/layout/_content.scss */
 .row-margin-bottom {
   margin-bottom: 20px;
 }
 
 @media (min-width: 993px) {
-  /* line 664, ../scss/layout/_content.scss */
+  /* line 676, ../scss/layout/_content.scss */
   .home-about {
     column-count: 2;
     column-gap: 50px;
@@ -1193,7 +1218,7 @@ p {
     -webkit-column-count: 2;
     -webkit-column-gap: 50px;
   }
-  /* line 671, ../scss/layout/_content.scss */
+  /* line 683, ../scss/layout/_content.scss */
   .home-about h1 {
     column-span: all;
     -webkit-column-span: all;
@@ -1467,7 +1492,7 @@ p {
   color: #fff;
 }
 /* line 58, ../scss/components/_search-form.scss */
-.search-form .btn {
+.search-form .btn, .search-form #comments #submit, #comments .search-form #submit {
   position: absolute;
   left: 25px;
   top: 50%;
@@ -1481,25 +1506,25 @@ p {
 }
 @media (max-width: 1249px) {
   /* line 58, ../scss/components/_search-form.scss */
-  .search-form .btn {
+  .search-form .btn, .search-form #comments #submit, #comments .search-form #submit {
     left: 5px;
     font-size: 12px;
   }
 }
 @media (max-width: 767px) {
   /* line 58, ../scss/components/_search-form.scss */
-  .search-form .btn {
+  .search-form .btn, .search-form #comments #submit, #comments .search-form #submit {
     left: 25px;
   }
 }
 @media (max-width: 767px) {
   /* line 79, ../scss/components/_search-form.scss */
-  .location-section .search-form .btn {
+  .location-section .search-form .btn, .location-section .search-form #comments #submit, #comments .location-section .search-form #submit {
     left: 25px;
   }
 }
 /* line 85, ../scss/components/_search-form.scss */
-.search-form .btn:hover {
+.search-form .btn:hover, .search-form #comments #submit:hover, #comments .search-form #submit:hover {
   color: #e9ffba;
 }
 
@@ -1721,8 +1746,95 @@ body > .jcf-select-drop.jcf-drop-flipped {
   border-color: #00aff0 !important;
 }
 
+/* line 1, ../scss/components/_comments.scss */
+#comments {
+  border-top: 1px solid #E3E7E8;
+}
+/* line 4, ../scss/components/_comments.scss */
+#comments #submit {
+  font-size: 1em;
+  padding: 10px 20px;
+}
+/* line 11, ../scss/components/_comments.scss */
+#comments label {
+  display: block;
+  margin: 0;
+}
+/* line 16, ../scss/components/_comments.scss */
+#comments textarea {
+  width: 100%;
+  border: 1px solid #E3E7E8;
+}
+
+/* line 3, ../scss/components/_events.scss */
+.tkt-slctr-tbl {
+  width: 100%;
+  background: #f7fafb;
+  border: 1px solid #e4eef2;
+  border-collapse: initial;
+}
+/* line 9, ../scss/components/_events.scss */
+.tkt-slctr-tbl th,
+.tkt-slctr-tbl td {
+  padding: 5px 20px !important;
+}
+/* line 15, ../scss/components/_events.scss */
+.tkt-slctr-tbl .ee-ticket-selector-ticket-price-th,
+.tkt-slctr-tbl .tckt-slctr-tbl-td-price {
+  display: none;
+}
+/* line 20, ../scss/components/_events.scss */
+.tkt-slctr-tbl .display-tckt-slctr-tkt-details.display-the-hidden {
+  display: none;
+}
+/* line 24, ../scss/components/_events.scss */
+.tkt-slctr-tbl .ee-ticket-selector-ticket-qty-th,
+.tkt-slctr-tbl .tckt-slctr-tbl-td-qty {
+  text-align: right;
+}
+
+/* line 31, ../scss/components/_events.scss */
+.event-content .ee-event-datetimes-ul {
+  list-style: none;
+  padding: 0 0 12.5px;
+  border-bottom: 1px solid #e4eef2;
+}
+
+/* line 38, ../scss/components/_events.scss */
+.ticket-selector-submit-btn {
+  border-radius: 30px;
+  border: none;
+  background: #7fba00;
+  padding: 10px 20px;
+  color: #fff;
+  text-transform: uppercase;
+  transition: background 0.3s, opacity 0.3s, color 0.3s ease;
+}
+/* line 47, ../scss/components/_events.scss */
+.ticket-selector-submit-btn:hover {
+  background: #5c8700;
+}
+
+/* line 53, ../scss/components/_events.scss */
+.tckt-slctr-tbl-td-name b {
+  font-weight: 100;
+}
+
+/* line 58, ../scss/components/_events.scss */
+.espresso-venue-dv {
+  border-top: 1px solid #e4eef2;
+}
+/* line 60, ../scss/components/_events.scss */
+.espresso-venue-dv h4 {
+  margin: 0;
+}
+/* line 64, ../scss/components/_events.scss */
+.espresso-venue-dv p {
+  margin: 0;
+}
+
 @media only screen and (min-width: 1025px) {
-  /* line 46, ../scss/all.scss */
+  /* line 48, ../scss/all.scss */
   a[href^=tel], a[href^=skype], a[href^=sms] {
     cursor: default;
     pointer-events: none;

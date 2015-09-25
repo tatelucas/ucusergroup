@@ -40,6 +40,8 @@ $media-expressions: (
 
 @import "components/search-form";
 @import "components/custom-form";
+@import "components/comments";
+@import "components/events";
 
 // hide tel links on desktop
 @media only screen and (min-width:1025px) {

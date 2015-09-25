@@ -65,7 +65,7 @@
           ?>
             <div class="col-sm-4 col-xs-12 location-col">
               <a href="<?php the_permalink(); ?>">
-                <time class="time-hold" datetime="2015-07-23"><span><?php espresso_event_date('j', ' '); ?></span><?php espresso_event_date('F', ' '); ?></time>
+                <time class="time-hold" datetime="<?php espresso_event_date('j', ' '); ?>"><span><?php espresso_event_date('j', ' '); ?></span><?php espresso_event_date('F', ' '); ?></time>
                 <span class="name-hold">
                   <?php
                     if($userGroupName){
@@ -226,12 +226,12 @@
         </ul>
       </div>
     </div>
-	
-	
+
+
 <script>
 	jQuery(document).ready(function($) {
 		getLocation();
-	});	 
+	});
 </script>
 
 

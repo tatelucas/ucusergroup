@@ -32,7 +32,7 @@
 
 	<h2><?php comments_number(); ?></h2>
 
-	<ol>
+	<ol class="comment-list">
 		<?php wp_list_comments( array( 'callback' => 'starkers_comment' ) ); ?>
 	</ol>
 
@@ -42,11 +42,11 @@
 		 */
 		elseif ( ! comments_open() && ! is_page() && post_type_supports( get_post_type(), 'comments' ) ) :
 	?>
-	
+
 	<p>Comments are closed</p>
-	
+
 	<?php endif; ?>
 
-	<?php comment_form(); ?>
+	<?php comment_form(array("title_reply" => "Have your say")); ?>
 
 </div><!-- #comments -->

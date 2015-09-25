@@ -567,6 +567,18 @@
 		font-size: 40px;
 	}
 
+	.btn-header {
+		float: left;
+		margin-top: $line-height-computed;
+		display: none;
+
+		@include media('>tablet') {
+			float: right;
+			margin-top: 0;
+			display: block;
+		}
+	}
+
 	@include media('>tablet') {
 		padding: $line-height-computed*2.5 0;
 	}

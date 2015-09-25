@@ -1,0 +1,67 @@
+//@import "bootstrap";
+
+.tkt-slctr-tbl {
+  width: 100%;
+  background: #f7fafb;
+  border: 1px solid #e4eef2;
+  border-collapse: initial;
+
+  th,
+  td {
+    padding: 5px 20px !important;
+  }
+
+  // Hiding the price columns since everything is free
+  .ee-ticket-selector-ticket-price-th,
+  .tckt-slctr-tbl-td-price {
+    display: none;
+  }
+
+  .display-tckt-slctr-tkt-details.display-the-hidden {
+    display: none;
+  }
+
+  .ee-ticket-selector-ticket-qty-th,
+  .tckt-slctr-tbl-td-qty {
+    text-align: right;
+  }
+}
+
+.event-content {
+  .ee-event-datetimes-ul {
+    list-style: none;
+    padding: 0 0 $line-height-computed/2;
+    border-bottom: 1px solid #e4eef2;
+  }
+}
+
+.ticket-selector-submit-btn {
+  border-radius: 30px;
+  border: none;
+  background: $green;
+  padding: 10px 20px;
+  color: #fff;
+  text-transform: uppercase;
+  transition: background 0.3s, opacity 0.3s, color 0.3s ease;
+
+  &:hover {
+    background: darken($green,10);
+  }
+}
+
+.tckt-slctr-tbl-td-name {
+  b {
+    font-weight: 100;
+  }
+}
+
+.espresso-venue-dv {
+  border-top: 1px solid #e4eef2;
+  h4 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+}

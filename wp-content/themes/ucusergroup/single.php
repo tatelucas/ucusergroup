@@ -12,9 +12,7 @@
 <?php get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 
 <div class="middle">
-	<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
-
-
+	<?php if ( have_posts() ) while ( have_posts() ) : the_post(); global $post; ?>
 		<div class="page-title">
       <div class="container-fluid">
         <div class="row">
@@ -23,11 +21,32 @@
 							<div class="col-sm-10">
 								<h2><?php the_title(); ?></h2>
 								<div class="subtitle">
-									<time  datetime="<?php the_time( 'Y-m-d' ); ?>" pubdate><?php the_date(); ?></time>
+									<?php
+									if($post->post_type == 'espresso_events') {
+									?>
+									<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <time class="time-hold" datetime="<?php espresso_event_date(); ?>"><span><?php espresso_event_date('l, F j, Y'); ?></span></time>
+									<?php
+									} else if ($post->post_type == 'single') {
+									?>
+									<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <time  datetime="<?php the_time( 'Y-m-d' ); ?>" pubdate><?php the_date(); ?></time>
+									<?php
+									}
+									?>
+
+
 								</div><!--/subtitle-->
 							</div><!--/col-sm-10-->
-							<div class="col-sm-2 btn-group">
-								<?php comments_popup_link('Leave a Comment', '1 Comment', '% Comments', 'btn btn-outlined pull-right'); ?>
+							<div class="col-sm-2 col-xs-12 btn-group">
+								<?php
+
+								if($post->post_type == 'espresso_events') {
+									?>
+									<a href="#" class="btn btn-outlined btn-header"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp; Sign Up</a>
+									<?php
+								} else if ($post->post_type == 'single') {
+									comments_popup_link('Leave a Comment', '1 Comment', '% Comments', 'btn btn-outlined btn-header');
+								}
+								?>
 							</div><!--/col-sm-2-->
 						</div><!--/row-->
           </div><!--/col-sm-12-->
