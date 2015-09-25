@@ -49,22 +49,34 @@
 				
 				if (obj.distance < 200) {
 					var textToFind = obj.name;
-					var dd = document.getElementById('ug_closest_location');
-					//var ddarray = document.getElementsByClass('ug_closest_location');
-					for (var i = 0; i < dd.options.length; i++) {
-						if (dd.options[i].text === textToFind) {
-							dd.selectedIndex = i;
-							dd.options[i].selected = true;
-							//alert(dd.selectedIndex);
-							
-							//dd.option[id='8'].attr("selected", "selected");
-							//dd.option[id='8'].selected = true;
-							
-							document.getElementsByClassName("jcf-option-hidden")[0].innerHTML = obj.name;
-							
-							break;
-						}
-					}				
+					//var dd = document.getElementById('ug_closest_location');
+										
+
+					//select closest location in all marked drop downs
+					var ddArray = document.querySelectorAll(".geolocate .ug_closest_location");
+					for (var k = 0; k < ddArray.length; ++k) {
+						//alert(ddArray[k]);
+						
+						for (var i = 0; i < ddArray[k].options.length; i++) {
+							//if (ddArray[k].options[i].attr('id')) {
+								//console.log(ddArray[k].options[i]);
+							//}
+							if (ddArray[k].options[i].text === textToFind) {
+								ddArray[k].selectedIndex = i;
+								ddArray[k].options[i].selected = true;
+								//alert(dd.selectedIndex);
+								
+								break;
+							}
+						}						
+						
+					}
+					
+					//set text display for all selected dropdowns
+					var children = document.querySelectorAll(".geolocate .jcf-option-hidden");
+					for (var j = 0; j < children.length; ++j) {
+						children[j].innerHTML = obj.name;
+					}					
 					
 					
 					//$("ug_closest_location").val(obj.name);
