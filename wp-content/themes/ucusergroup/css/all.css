@@ -1771,41 +1771,60 @@ body > .jcf-select-drop.jcf-drop-flipped {
   margin-bottom: 25px;
 }
 
-/* line 3, ../scss/components/_events.scss */
+/* line 2, ../scss/components/_events.scss */
+.ee-table.ee-registrations-list {
+  margin-bottom: 12.5px;
+}
+
+/* line 6, ../scss/components/_events.scss */
+.ee-table.ee-registrations-list,
 .tkt-slctr-tbl {
   width: 100%;
   background: #f7fafb;
   border: 1px solid #e4eef2;
   border-collapse: initial;
 }
-/* line 9, ../scss/components/_events.scss */
+/* line 13, ../scss/components/_events.scss */
+.ee-table.ee-registrations-list th,
+.ee-table.ee-registrations-list td,
 .tkt-slctr-tbl th,
 .tkt-slctr-tbl td {
   padding: 5px 20px !important;
 }
-/* line 15, ../scss/components/_events.scss */
+/* line 18, ../scss/components/_events.scss */
+.ee-table.ee-registrations-list .tiny-text,
+.tkt-slctr-tbl .tiny-text {
+  padding-bottom: 12.5px;
+}
+/* line 23, ../scss/components/_events.scss */
+.ee-table.ee-registrations-list .ee-ticket-selector-ticket-price-th,
+.ee-table.ee-registrations-list .tckt-slctr-tbl-td-price,
 .tkt-slctr-tbl .ee-ticket-selector-ticket-price-th,
 .tkt-slctr-tbl .tckt-slctr-tbl-td-price {
   display: none;
 }
-/* line 20, ../scss/components/_events.scss */
+/* line 28, ../scss/components/_events.scss */
+.ee-table.ee-registrations-list .display-tckt-slctr-tkt-details.display-the-hidden,
 .tkt-slctr-tbl .display-tckt-slctr-tkt-details.display-the-hidden {
   display: none;
 }
-/* line 24, ../scss/components/_events.scss */
+/* line 32, ../scss/components/_events.scss */
+.ee-table.ee-registrations-list .ee-ticket-selector-ticket-qty-th,
+.ee-table.ee-registrations-list .tckt-slctr-tbl-td-qty,
 .tkt-slctr-tbl .ee-ticket-selector-ticket-qty-th,
 .tkt-slctr-tbl .tckt-slctr-tbl-td-qty {
   text-align: right;
 }
 
-/* line 31, ../scss/components/_events.scss */
+/* line 39, ../scss/components/_events.scss */
 .event-content .ee-event-datetimes-ul {
   list-style: none;
   padding: 0 0 12.5px;
   border-bottom: 1px solid #e4eef2;
 }
 
-/* line 38, ../scss/components/_events.scss */
+/* line 46, ../scss/components/_events.scss */
+.spco-next-step-btn,
 .ticket-selector-submit-btn {
   border-radius: 30px;
   border: none;
@@ -1815,32 +1834,97 @@ body > .jcf-select-drop.jcf-drop-flipped {
   text-transform: uppercase;
   transition: background 0.3s, opacity 0.3s, color 0.3s ease;
 }
-/* line 47, ../scss/components/_events.scss */
+/* line 56, ../scss/components/_events.scss */
+.spco-next-step-btn:hover,
 .ticket-selector-submit-btn:hover {
   background: #5c8700;
 }
 
-/* line 53, ../scss/components/_events.scss */
+/* line 62, ../scss/components/_events.scss */
 .tckt-slctr-tbl-td-name b {
   font-weight: 100;
 }
 
-/* line 58, ../scss/components/_events.scss */
-.espresso-venue-dv {
-  border-top: 1px solid #e4eef2;
-}
-/* line 60, ../scss/components/_events.scss */
+/* line 69, ../scss/components/_events.scss */
 .espresso-venue-dv h4 {
   margin: 0;
 }
-/* line 64, ../scss/components/_events.scss */
+/* line 73, ../scss/components/_events.scss */
 .espresso-venue-dv p {
   margin: 0;
 }
 
-/* line 69, ../scss/components/_events.scss */
+/* line 78, ../scss/components/_events.scss */
 #espresso-registration-footer-dv {
   display: none;
+}
+
+/* line 82, ../scss/components/_events.scss */
+.spco-steps-big-hdr,
+#spco-steps-display-dv {
+  display: none;
+}
+
+/* line 92, ../scss/components/_events.scss */
+.spco-ticket-info-dv.small-text thead th:nth-of-type(3n+4), .spco-ticket-info-dv.small-text thead th:nth-of-type(3n+3) {
+  display: none;
+}
+/* line 99, ../scss/components/_events.scss */
+.spco-ticket-info-dv.small-text .item .item_r,
+.spco-ticket-info-dv.small-text .item .item_c {
+  display: none;
+}
+
+/* line 107, ../scss/components/_events.scss */
+.content .spco-whats-next-buttons {
+  padding-top: 0;
+}
+/* line 111, ../scss/components/_events.scss */
+.content .small-text {
+  font-weight: 100;
+  font-size: 0.95em;
+}
+/* line 116, ../scss/components/_events.scss */
+.content .ee-attention {
+  background: #d9edf7;
+  border: 1px solid #bce8f1;
+  text-align: left;
+  color: #31708f;
+}
+/* line 123, ../scss/components/_events.scss */
+.content #espresso-social-buttons-dv {
+  margin: 50px 0;
+}
+/* line 14, ../scss/bootstrap/mixins/_clearfix.scss */
+.content #espresso-social-buttons-dv:before, .content #espresso-social-buttons-dv:after {
+  content: " ";
+  display: table;
+}
+/* line 19, ../scss/bootstrap/mixins/_clearfix.scss */
+.content #espresso-social-buttons-dv:after {
+  clear: both;
+}
+/* line 128, ../scss/components/_events.scss */
+.content .tiny-text {
+  font-size: .9em;
+  font-weight: 100;
+}
+/* line 133, ../scss/components/_events.scss */
+.content .ee-icon-only-lnk {
+  margin: 0 10px 25px 0;
+}
+/* line 137, ../scss/components/_events.scss */
+.content .ee-button, .content .ee-button:active, .content .ee-button:visited {
+  line-height: 1.5;
+}
+
+/* line 143, ../scss/components/_events.scss */
+.ee-reg-form-attendee-dv input {
+  padding: 10px;
+}
+/* line 147, ../scss/components/_events.scss */
+.ee-reg-form-attendee-dv .ee-reg-qstn {
+  margin-bottom: 12.5px;
 }
 
 @media only screen and (min-width: 1025px) {

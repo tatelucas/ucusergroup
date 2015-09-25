@@ -19,6 +19,12 @@ jQuery(function(){
 		}, 300, "swing");
 	});
 
+	$(".btn-join-event").click(function(e) {
+		e.preventDefault();
+		$(".event-tickets form").submit();
+	});
+
+
 });
 
 // initialize custom form elements

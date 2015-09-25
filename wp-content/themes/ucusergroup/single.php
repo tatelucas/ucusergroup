@@ -41,7 +41,7 @@
 
 								if($post->post_type == 'espresso_events') {
 									?>
-									<a href="#" class="btn btn-outlined btn-header"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp; Sign Up</a>
+									<a href="#" class="btn btn-outlined btn-header btn-join-event"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp; Sign Up</a>
 									<?php
 								} else if ($post->post_type == 'single') {
 									comments_popup_link('Leave a Comment', '1 Comment', '% Comments', 'btn btn-outlined btn-header');

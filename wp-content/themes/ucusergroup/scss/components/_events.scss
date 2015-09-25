@@ -1,5 +1,9 @@
 //@import "bootstrap";
+.ee-table.ee-registrations-list {
+  margin-bottom: $line-height-computed/2  ;
+}
 
+.ee-table.ee-registrations-list,
 .tkt-slctr-tbl {
   width: 100%;
   background: #f7fafb;
@@ -9,6 +13,10 @@
   th,
   td {
     padding: 5px 20px !important;
+  }
+
+  .tiny-text {
+    padding-bottom: $line-height-computed/2;
   }
 
   // Hiding the price columns since everything is free
@@ -35,6 +43,7 @@
   }
 }
 
+.spco-next-step-btn,
 .ticket-selector-submit-btn {
   border-radius: 30px;
   border: none;
@@ -56,7 +65,7 @@
 }
 
 .espresso-venue-dv {
-  border-top: 1px solid #e4eef2;
+
   h4 {
     margin: 0;
   }
@@ -68,4 +77,74 @@
 
 #espresso-registration-footer-dv {
   display: none;
+}
+
+.spco-steps-big-hdr,
+#spco-steps-display-dv {
+  display: none;
+}
+
+// Hide price info on the checkout page
+
+.spco-ticket-info-dv.small-text {
+  thead {
+    th {
+      &:nth-of-type(3n+4),
+      &:nth-of-type(3n+3) {
+        display: none;
+      }
+    }
+  }
+  .item {
+    .item_r ,
+    .item_c {
+      display: none;
+    }
+  }
+}
+
+.content {
+  .spco-whats-next-buttons {
+    padding-top: 0;
+  }
+
+  .small-text {
+    font-weight: 100;
+    font-size: 0.95em;
+  }
+
+  .ee-attention {
+    background: #d9edf7;
+    border: 1px solid #bce8f1;
+    text-align: left;
+    color: #31708f;
+  }
+
+  #espresso-social-buttons-dv {
+    margin: $line-height-computed*2 0;
+    @include clearfix;
+  }
+
+  .tiny-text {
+      font-size: .9em;
+      font-weight: 100;
+  }
+
+  .ee-icon-only-lnk {
+      margin: 0 10px $line-height-computed 0;
+  }
+
+  .ee-button, .ee-button:active, .ee-button:visited {
+    line-height: 1.5;
+  }
+}
+
+.ee-reg-form-attendee-dv {
+  input {
+    padding: 10px;
+  }
+
+  .ee-reg-qstn {
+    margin-bottom: $line-height-computed/2;
+  }
 }
