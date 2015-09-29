@@ -284,7 +284,128 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
   // ----------------------------------------------------------
   // end geo-location
   // ----------------------------------------------------------
+  
+  
+  // ------------------------------
+  // custom fields for geo-location
+  // ------------------------------
+  
+		// A callback function to add a custom field to our "cities" taxonomy
+		function city_taxonomy_custom_fields($tag) {
+		   // Check for existing taxonomy meta for the term you're editing
+			$t_id = $tag->term_id; // Get the ID of the term you're editing
+			$term_meta = get_option( "taxonomy_term_$t_id" ); // Do the check
+			print_r('hey you');
+		?>
 
+			<tr class="form-field">
+				<th scope="row" valign="top">
+					<label for="city_latitude"><?php _e('Latitude'); ?></label>
+				</th>
+				<td>
+					<input type="text" name="term_meta[city_latitude]" id="term_meta[city_latitude]" size="25" style="width:60%;" value="<?php echo $term_meta['city_latitude'] ? $term_meta['city_latitude'] : ''; ?>"><br />
+					<span class="description"><?php _e('Latitude'); ?></span>
+				</td>
+			</tr>
+			
+			<tr class="form-field">
+				<th scope="row" valign="top">
+					<label for="city_longitude"><?php _e('Longitude'); ?></label>
+				</th>
+				<td>
+					<input type="text" name="term_meta[city_longitude]" id="term_meta[city_longitude]" size="25" style="width:60%;" value="<?php echo $term_meta['city_longitude'] ? $term_meta['city_longitude'] : ''; ?>"><br />
+					<span class="description"><?php _e('Longitude'); ?></span>
+				</td>
+			</tr>			
+
+		<?php
+		}
+		
+		
+		// A callback function to save our extra taxonomy field(s)
+		function save_cities_taxonomy_custom_fields( $term_id ) {
+			if ( isset( $_POST['term_meta'] ) ) {
+				global $wpdb;
+				$t_id = $term_id;		
+				$term_meta = get_option( "taxonomy_term_$t_id" );
+				$cat_keys = array_keys( $_POST['term_meta'] );
+					foreach ( $cat_keys as $key ){
+					//if ( isset( $_POST['term_meta'][$key] ) ){
+					//assume is set, so we can catch removals and blank submissions, ie deletes
+						$term_meta[$key] = $_POST['term_meta'][$key];
+							
+							if ($key == "city_latitude") {
+								
+								$latitude = !empty($term_meta[$key]) ? $term_meta[$key] : "NULL";
+								
+								$latExists = "SELECT EXISTS(SELECT 1 FROM {$wpdb->prefix}terms_meta WHERE term_id=$t_id)";
+								$latExists = $wpdb->get_results($latExists, ARRAY_N);
+								
+								//update DB
+								
+								if ($latExists[0][0] == 1) {								
+									$sql = "
+										UPDATE {$wpdb->prefix}terms_meta
+										SET term_latitude=$latitude
+										WHERE term_id=$t_id 
+									";
+								} else {
+									$sql = "
+										INSERT INTO {$wpdb->prefix}terms_meta
+										(term_id, term_latitude)
+										VALUES ($t_id, $latitude)
+									";									
+								}
+
+									// update the terms_meta fields so the lat-lng is db searchable
+									$resultone = $wpdb->get_results($sql);								
+							}
+							
+							if ($key == "city_longitude") {
+								
+								$longitude = !empty($term_meta[$key]) ? $term_meta[$key] : "NULL";
+								
+								$lngExists = "SELECT EXISTS(SELECT 1 FROM {$wpdb->prefix}terms_meta WHERE term_id=$t_id)";
+								$lngExists = $wpdb->get_results($lngExists, ARRAY_N);								
+								
+								//update DB
+								
+								if ($lngExists[0][0] == 1) {									
+									$sql = "
+										UPDATE {$wpdb->prefix}terms_meta
+										SET term_longitude=$longitude
+										WHERE term_id=$t_id 
+									";
+								} else {
+									$sql = "
+										INSERT INTO {$wpdb->prefix}terms_meta
+										(term_id, term_longitude)
+										VALUES ($t_id, $longitude)
+									";									
+								}
+
+									// update the terms_meta fields so the lat-lng is db searchable
+									$resulttwo = $wpdb->get_results($sql);								
+							}							
+							
+					//}
+				}
+				//save the option array
+				update_option( "taxonomy_term_$t_id", $term_meta );
+			}
+		}	
+
+
+	// Add the fields to the "cities" taxonomy, using our callback function
+	add_action( 'city_edit_form_fields', 'city_taxonomy_custom_fields', 10, 2 );
+
+	// Save the changes made on the "presenters" taxonomy, using our callback function
+	add_action( 'edited_city', 'save_cities_taxonomy_custom_fields', 10, 2 );		
+
+  // ------------------------------
+  // end custom fields for geo-location
+  // ------------------------------
+		
 
   // ==========================================================
   // ==========================================================
