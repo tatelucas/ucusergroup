@@ -109,6 +109,22 @@
   // filter for tags (as a taxonomy) with comma
 //  replace '--' with ', ' in the output - allow tags with comma this way
 
+
+  //add cities to the admin menu
+	function ug_cities_adjust_the_wp_menu() {
+		add_menu_page(
+			'Cities',
+			'Cities',
+			'add_users',
+			'edit-tags.php?taxonomy=city',
+			'',
+			'div',
+			6
+		);
+	}
+	add_action( 'admin_menu', 'ug_cities_adjust_the_wp_menu', 999 );  
+
+
 if(!is_admin()){ // make sure the filters are only called in the frontend
 
   $custom_taxonomy_type = 'city'; // here goes your taxonomy type
