@@ -225,7 +225,7 @@
           <?php foreach($posts as $post): ?>
           <li class="col-sm-4">
             <a href="<?php echo get_permalink($post->ID); ?>">
-              <?php echo get_the_post_thumbnail($post->ID, 'homepage-blog-size') ?>
+              <?php echo get_post_image($post) ?>
             </a>
             <div class="text-block">
               <h2><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h2>

@@ -43,14 +43,7 @@
 			<?php while ( have_posts() ) : the_post(); ?>
 					<li class="col-sm-4">
 						<a href="<?php echo get_permalink($post->ID); ?>">
-							<?php
-							$thumb = get_the_post_thumbnail($post->ID, 'homepage-blog-size');
-							if ($thumb) {
-								echo $thumb;
-							} else {
-								echo '<img src="http://ucusergroup.wpengine.com/wp-content/uploads/2015/09/bluelogo.png" alt="' . $post->post_title . '" />';
-							}
-							?>
+              <?php echo get_post_image($post) ?>
 						</a>
 						<div class="text-block">
 							<h2><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h2>

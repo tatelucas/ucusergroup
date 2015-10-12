@@ -597,3 +597,12 @@ function wpse32932_parse_query( $wp ){
     return $wp;
   */
 }
+
+function get_post_image($post) {
+  $thumb = get_the_post_thumbnail($post->ID, 'homepage-blog-size');
+  if ($thumb) {
+  	return $thumb;
+  } else {
+  	return '<img src="/wp-content/uploads/2015/07/defaulthome.jpg" alt="' . $post->post_title . '" />';
+  }
+}
