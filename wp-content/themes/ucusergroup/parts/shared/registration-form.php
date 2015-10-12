@@ -22,9 +22,3 @@
     <input class="btn btn-success" type="submit" value="Join Today" id="register" />
   </fieldset>
 </form>
-
-<script>
-	jQuery(document).ready(function($) {
-		getLocation();
-	});	 
-</script>

@@ -217,15 +217,20 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
 	wp_localize_script( 'ug_do_geolocate', 'ug_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 	}
 
+	
+	
+	//set up ajax functions
 	add_action( 'wp_enqueue_scripts', 'load_geo_scripts' );
     add_action( 'wp_ajax_uc_ajax_request_city', 'uc_ajax_request_city' );
 	add_action( 'wp_ajax_nopriv_uc_ajax_request_city', 'uc_ajax_request_city' );
+	add_action( 'wp_ajax_uc_ajax_closest_meetups', 'uc_ajax_closest_meetups' );
+	add_action( 'wp_ajax_nopriv_uc_ajax_closest_meetups', 'uc_ajax_closest_meetups' );
 
 
 
 
 	function uc_ajax_request_city() {
-
+	
 		if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {  //check to see if this is ajax
 
 			if (isset($_POST["lat"]) && !empty($_POST["lat"])) { //Checks if action value exists
@@ -296,6 +301,111 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
 	} //end
 
 
+	  //
+	  // Event Espresso get upcoming closest events
+	  //	
+	
+	
+if ( ! function_exists( 'espresso_event_date' )) {
+	/**
+	 * espresso_event_date
+	 * returns the primary date for an event
+	 *
+	 * @param string $date_format
+	 * @param string $time_format
+	 * @param bool   $EVT_ID
+	 * @param bool $echo
+	 * @return string
+	 */
+	function espresso_event_date( $date_format = '', $time_format = '', $EVT_ID = FALSE, $echo = TRUE ) {
+		$date_format = ! empty( $date_format ) ? $date_format : get_option( 'date_format' );
+		$time_format = ! empty( $time_format ) ? $time_format : get_option( 'time_format' );
+		$date_format = apply_filters( 'FHEE__espresso_event_date__date_format', $date_format );
+		$time_format = apply_filters( 'FHEE__espresso_event_date__time_format', $time_format );
+		EE_Registry::instance()->load_helper( 'Event_View' );
+		if($echo){
+			echo date_i18n( $date_format . ' ' . $time_format, strtotime( EEH_Event_View::the_event_date( $date_format, $time_format, $EVT_ID )));
+			return '';
+		}
+		return date_i18n( $date_format . ' ' . $time_format, strtotime( EEH_Event_View::the_event_date( $date_format, $time_format, $EVT_ID )));
+
+	}
+}	
+	
+	
+	function uc_ajax_closest_meetups() {
+		//expects post $id of closest city, and (optional) $limit
+
+		if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {  //check to see if this is ajax
+		
+			if (isset($_POST["id"])) {
+				$id = $_POST["id"];
+				$limit = 3; //default limit
+				if (isset($_POST["limit"]) && is_int($_POST["limit"])) {
+					$limit = $_POST["limit"];
+				}
+			
+            $attsNextThreeEvents = array(
+              'title' => NULL,
+              'limit' => $limit,
+              'css_class' => NULL,
+              'show_expired' => FALSE,
+              'month' => NULL,
+              'category_slug' => NULL,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'city',
+					'field'    => 'term_id',
+					'terms'    => array( $id ),
+				),
+			),			  
+              'order_by' => 'start_date',
+              'sort' => 'ASC'
+            );
+            global $wp_query;
+            $wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
+			
+			
+            if (have_posts()) : while (have_posts()) : the_post();
+              $userGroupNames = wp_get_post_terms($post->ID, 'ug-name');
+              $userGroupName = $userGroupNames ? $userGroupNames[0] : '';
+          ?>
+            <div class="col-sm-4 col-xs-12 location-col">
+              <a href="<?php the_permalink(); ?>">
+                <time class="time-hold" datetime="<?php espresso_event_date('j', ' '); ?>"><span><?php espresso_event_date('j', ' '); ?></span><?php espresso_event_date('F', ' '); ?></time>
+                <span class="name-hold">
+                  <?php
+                    if($userGroupName){
+                      echo str_replace('--', ', ', $userGroupName->name);
+                    } else {
+                      ug_venue_location();
+                    }
+                  ?>
+                </span>
+                <span class="text-hold"><?php ug_venue_location(); ?></span>
+              </a>
+            </div>
+          <?php
+            endwhile;
+            endif;
+            wp_reset_query();
+            wp_reset_postdata();
+			
+
+				//$return["json"] = json_encode($result);
+
+				//print_r($return);
+				//echo json_encode($return);
+
+				exit;
+			}	//end post
+
+		} //end if ajax
+
+		// Always die in functions echoing ajax content
+	   wp_die();
+	} //end	
+	
 
   // ----------------------------------------------------------
   // end geo-location
@@ -311,7 +421,6 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
 		   // Check for existing taxonomy meta for the term you're editing
 			$t_id = $tag->term_id; // Get the ID of the term you're editing
 			$term_meta = get_option( "taxonomy_term_$t_id" ); // Do the check
-			print_r('hey you');
 		?>
 
 			<tr class="form-field">
@@ -421,6 +530,9 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
   // ------------------------------
   // end custom fields for geo-location
   // ------------------------------
+  
+
+  
 		
 
   // ==========================================================

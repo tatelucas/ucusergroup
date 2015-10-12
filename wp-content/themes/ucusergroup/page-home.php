@@ -46,19 +46,23 @@
         </div>
 
         <div class="gray-box">
-          <?php
+			<div id="ajaxReplaceClosestLocations">
+          <?php		  
             $attsNextThreeEvents = array(
               'title' => NULL,
               'limit' => 3,
               'css_class' => NULL,
               'show_expired' => FALSE,
               'month' => NULL,
-              'category_slug' => NULL,
+              'category_slug' => NULL,		  
               'order_by' => 'start_date',
               'sort' => 'ASC'
             );
             global $wp_query;
             $wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
+			
+			
+			
             if (have_posts()) : while (have_posts()) : the_post();
               $userGroupNames = wp_get_post_terms($post->ID, 'ug-name');
               $userGroupName = $userGroupNames ? $userGroupNames[0] : '';
@@ -84,7 +88,8 @@
             wp_reset_query();
             wp_reset_postdata();
           ?>
-        </div>
+		  </div>
+        </div><!-- end grey box -->
 
         <div class="row">
           <div class="col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
@@ -231,13 +236,6 @@
         </ul>
       </div>
     </div>
-
-
-<script>
-	jQuery(document).ready(function($) {
-		getLocation();
-	});
-</script>
 
 
 <?php get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>
