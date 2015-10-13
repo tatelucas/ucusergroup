@@ -2159,61 +2159,62 @@ body > .jcf-select-drop.jcf-drop-flipped {
 .spco-next-step-btn:hover,
 .ticket-selector-submit-btn:hover {
   background: #5c8700;
+  color: white;
 }
 
-/* line 62, ../scss/components/_events.scss */
+/* line 63, ../scss/components/_events.scss */
 .tckt-slctr-tbl-td-name b {
   font-weight: 100;
 }
 
-/* line 69, ../scss/components/_events.scss */
+/* line 70, ../scss/components/_events.scss */
 .espresso-venue-dv h4 {
   margin: 0;
 }
-/* line 73, ../scss/components/_events.scss */
+/* line 74, ../scss/components/_events.scss */
 .espresso-venue-dv p {
   margin: 0;
 }
 
-/* line 78, ../scss/components/_events.scss */
+/* line 79, ../scss/components/_events.scss */
 #espresso-registration-footer-dv {
   display: none;
 }
 
-/* line 82, ../scss/components/_events.scss */
+/* line 83, ../scss/components/_events.scss */
 #espresso-thank-you-page-overview-dv .ee-button.ee-roundish.indented-text.big-text,
 .spco-steps-big-hdr,
 #spco-steps-display-dv {
   display: none;
 }
 
-/* line 93, ../scss/components/_events.scss */
+/* line 94, ../scss/components/_events.scss */
 .spco-ticket-info-dv.small-text thead th:nth-of-type(3n+4), .spco-ticket-info-dv.small-text thead th:nth-of-type(3n+3) {
   display: none;
 }
-/* line 100, ../scss/components/_events.scss */
+/* line 101, ../scss/components/_events.scss */
 .spco-ticket-info-dv.small-text .item .item_r,
 .spco-ticket-info-dv.small-text .item .item_c {
   display: none;
 }
 
-/* line 108, ../scss/components/_events.scss */
+/* line 109, ../scss/components/_events.scss */
 .content .spco-whats-next-buttons {
   padding-top: 0;
 }
-/* line 112, ../scss/components/_events.scss */
+/* line 113, ../scss/components/_events.scss */
 .content .small-text {
   font-weight: 100;
   font-size: 0.95em;
 }
-/* line 117, ../scss/components/_events.scss */
+/* line 118, ../scss/components/_events.scss */
 .content .ee-attention {
   background: #d9edf7;
   border: 1px solid #bce8f1;
   text-align: left;
   color: #31708f;
 }
-/* line 124, ../scss/components/_events.scss */
+/* line 125, ../scss/components/_events.scss */
 .content #espresso-social-buttons-dv {
   margin: 50px 0;
 }
@@ -2226,52 +2227,52 @@ body > .jcf-select-drop.jcf-drop-flipped {
 .content #espresso-social-buttons-dv:after {
   clear: both;
 }
-/* line 129, ../scss/components/_events.scss */
+/* line 130, ../scss/components/_events.scss */
 .content .tiny-text {
   font-size: .9em;
   font-weight: 100;
 }
-/* line 134, ../scss/components/_events.scss */
+/* line 135, ../scss/components/_events.scss */
 .content .ee-icon-only-lnk {
   margin: 0 10px 25px 0;
 }
-/* line 138, ../scss/components/_events.scss */
+/* line 139, ../scss/components/_events.scss */
 .content .ee-button, .content .ee-button:active, .content .ee-button:visited {
   line-height: 1.5;
 }
 
-/* line 144, ../scss/components/_events.scss */
+/* line 145, ../scss/components/_events.scss */
 .ee-reg-form-attendee-dv input {
   padding: 10px;
 }
-/* line 148, ../scss/components/_events.scss */
+/* line 149, ../scss/components/_events.scss */
 .ee-reg-form-attendee-dv .ee-reg-qstn {
   margin-bottom: 12.5px;
 }
 
-/* line 153, ../scss/components/_events.scss */
+/* line 154, ../scss/components/_events.scss */
 #espresso-social-buttons-dv-g-plusone {
   margin-left: 10px;
 }
 
-/* line 160, ../scss/components/_events.scss */
+/* line 161, ../scss/components/_events.scss */
 .ee_participant_widget .event-attendees-list li {
   margin-bottom: 12.5px;
 }
-/* line 164, ../scss/components/_events.scss */
+/* line 165, ../scss/components/_events.scss */
 .ee_participant_widget .event-attendees-list img {
   border-radius: 50%;
   margin-right: 5px;
 }
 
-/* line 174, ../scss/components/_events.scss */
+/* line 175, ../scss/components/_events.scss */
 #espresso_calendar .fc-day-header {
   background: #149EEB;
   border: 1px solid #149EEB;
   color: white;
 }
 
-/* line 183, ../scss/components/_events.scss */
+/* line 184, ../scss/components/_events.scss */
 .fc-header-left .fc-button,
 .fc-header-right .fc-button {
   border-radius: 23px !important;
