@@ -561,6 +561,13 @@
 	padding-bottom: $line-height-computed*2;
 }
 
+.page-id-105,
+.page-id-103 {
+	.middle {
+		padding-bottom: 0;
+	}
+}
+
 .page-title {
 	background: #149EEB;
 	color: #fff;
@@ -891,6 +898,29 @@
 					color: $navy-blue;
 				}
 			}
+		}
+
+		p {
+			margin: 0;
+			padding: 0;
+			position: relative;
+
+			a {
+				&:before {
+					position: absolute;
+					content: '\e604';
+					font-family: 'icomoon';
+				}
+
+				span {
+					padding-left: 20px;
+				}
+			}
+
+			&:last-of-type {
+				padding-bottom: $line-height-computed;
+			}
+
 		}
 	}
 }
