@@ -2209,6 +2209,25 @@ body > .jcf-select-drop.jcf-drop-flipped {
   margin-right: 5px;
 }
 
+/* line 172, ../scss/components/_events.scss */
+#espresso_calendar {
+  margin-bottom: 50px !important;
+}
+/* line 175, ../scss/components/_events.scss */
+#espresso_calendar .fc-day-header {
+  background: #149EEB;
+  border: 1px solid #149EEB;
+  color: white;
+}
+
+/* line 184, ../scss/components/_events.scss */
+.fc-header-left .fc-button,
+.fc-header-right .fc-button {
+  border-radius: 23px !important;
+  min-width: 20px;
+  text-align: center;
+}
+
 @media only screen and (min-width: 1025px) {
   /* line 48, ../scss/all.scss */
   a[href^=tel], a[href^=skype], a[href^=sms] {

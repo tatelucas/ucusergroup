@@ -160,10 +160,30 @@
     li {
     margin-bottom: $line-height-computed/2;
     }
-    
+
     img {
       border-radius: 50%;
       margin-right: 5px;
     }
+  }
+}
+
+
+#espresso_calendar {
+  margin-bottom: $line-height-computed*2 !important;
+
+  .fc-day-header {
+    background: #149EEB;
+    border: 1px solid #149EEB;
+    color: white;
+  }
+}
+
+.fc-header-left,
+.fc-header-right {
+  .fc-button {
+    border-radius: 23px !important;
+    min-width: 20px;
+    text-align: center;
   }
 }
