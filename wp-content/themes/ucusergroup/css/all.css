@@ -2159,7 +2159,7 @@ body > .jcf-select-drop.jcf-drop-flipped {
 .spco-next-step-btn:hover,
 .ticket-selector-submit-btn:hover {
   background: #5c8700;
-  color: white;
+  color: white !important;
 }
 
 /* line 63, ../scss/components/_events.scss */
