@@ -310,7 +310,7 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
 	  //
 
     //for some reason, event espresso does not load here, so force it to load. - dwl
-  require_once( EE_PUBLIC . 'template_tags.php' );
+  include_once( EE_PUBLIC . 'template_tags.php' );
 
 
 	function uc_ajax_closest_meetups() {
