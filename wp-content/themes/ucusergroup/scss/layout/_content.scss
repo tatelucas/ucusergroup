@@ -558,6 +558,7 @@
 
 .middle {
 	background: #fff;
+	padding-bottom: $line-height-computed*2;
 }
 
 .page-title {
@@ -866,4 +867,30 @@
 	margin-bottom: $line-height-computed;
 
 	#map { position:absolute; top:0; bottom:0; width:100%; height: 400px; }
+}
+
+
+.browse-meetups {
+	.browse-meetup-city {
+		background: #f7fafb;
+		border: 1px solid #e4eef2;
+		margin-bottom: $line-height-computed;
+		padding: $padding-base-vertical $padding-base-horizontal;
+		text-align: center;
+
+		h4 {
+			border-bottom: 1px solid #e4eef2;
+			padding-bottom: $line-height-computed;
+			margin: $line-height-computed/2 $padding-base-horizontal $line-height-computed;
+			font-weight: 500;
+
+			a {
+				color: $blue;
+
+				&:hover {
+					color: $navy-blue;
+				}
+			}
+		}
+	}
 }

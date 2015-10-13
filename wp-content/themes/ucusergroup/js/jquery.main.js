@@ -26,7 +26,7 @@ jQuery(function(){
 
 	$('#user_login').attr( 'placeholder', 'Username' );
 	$('#user_pass').attr( 'placeholder', 'Password' );
-	
+
 });
 
 // initialize custom form elements
@@ -51,6 +51,11 @@ function initBackgroundResize() {
 function initSameHeight() {
 	jQuery('.news-list').sameHeight({
 		elements: '.text-block',
+		flexible: true,
+		multiLine: true
+	});
+	jQuery('.browse-meetups').sameHeight({
+		elements: '.browse-meetup-city',
 		flexible: true,
 		multiLine: true
 	});

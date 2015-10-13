@@ -15,6 +15,12 @@
 <div class="middle">
   <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
+    <?php
+    $ucUserGroupCities = get_terms(array('city'), array(
+      'hide_empty' => false,
+    ));
+    ?>
+
     <div class="page-title">
       <div class="container-fluid">
         <div class="row">
@@ -42,7 +48,52 @@
         <div class="col-sm-12">
           <?php the_content(); ?>
 
-          <?php comments_template( '', true ); ?>
+          <div class="row browse-meetups">
+          <?php
+          if ($ucUserGroupCities) {
+            foreach($ucUserGroupCities as $ucUserGroupCity) {
+            ?>
+              <div class="col-sm-3">
+                <div class="browse-meetup-city same-height-left">
+                  <h4><a href="<?php echo get_term_link($ucUserGroupCity->name, 'city'); ?>"><?php echo $ucUserGroupCity->name; ?></a></h4>
+
+                  <?php
+                  $attsNextThreeEvents = array(
+                    'title' => NULL,
+                    'limit' => 3,
+                    'css_class' => NULL,
+                    'show_expired' => FALSE,
+                    'month' => NULL,
+                    'category_slug' => NULL,
+                    'order_by' => 'start_date',
+                    'sort' => 'ASC',
+                    'tax_query' => array(
+              				array(
+              					'taxonomy' => 'city',
+              					'field'    => 'term_id',
+              					'terms'    => array( $ucUserGroupCity->term_id ),
+              				)
+                  )
+                  );
+                  global $wp_query;
+                  $wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
+                  if (have_posts()) : while (have_posts()) : the_post();
+                      the_title();
+                    endwhile;
+                  else:
+                    echo '<p>No upcoming meetups</p>';
+                  endif;
+                  wp_reset_query();
+                  wp_reset_postdata();
+                  ?>
+
+                </div>
+              </div>
+            <?php
+            }
+          }
+          ?>
+        </div><!--/row-->
         </div>
       </div>
     </div><!-- /content -->
@@ -55,9 +106,6 @@ var myIcon = L.icon({
       iconAnchor: [15, 35],
       popupAnchor: [0, -35]
     });
-
-
-
 
 L.mapbox.accessToken = 'pk.eyJ1IjoidWN1c2VyZ3JvdXAiLCJhIjoiY2llendlNWNoMWVtcnNrbTNqYWhkZmtzOSJ9.FUTl0ZC0j6bErseY_7So6Q';
 var map = L.mapbox.map('map', 'ucusergroup.ciezwe45e1emssrm02vw6snax', {
@@ -73,9 +121,6 @@ var map = L.mapbox.map('map', 'ucusergroup.ciezwe45e1emssrm02vw6snax', {
 });
 
 <?php
-$ucUserGroupCities = get_terms(
-  array('city')
-);
 foreach($ucUserGroupCities as $ucUserGroupCity){
   $term_meta = get_option( "taxonomy_term_$ucUserGroupCity->term_id" );
 
