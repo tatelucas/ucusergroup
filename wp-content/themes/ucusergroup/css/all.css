@@ -1165,16 +1165,21 @@ p {
   text-decoration: underline;
 }
 
-/* line 610, ../scss/layout/_content.scss */
+/* line 609, ../scss/layout/_content.scss */
+.page-template-page-mapbox .page-title {
+  margin-bottom: 0;
+}
+
+/* line 619, ../scss/layout/_content.scss */
 .lib-panel {
   margin-bottom: 20px;
 }
 
-/* line 614, ../scss/layout/_content.scss */
+/* line 623, ../scss/layout/_content.scss */
 .card-img {
   text-align: center;
 }
-/* line 617, ../scss/layout/_content.scss */
+/* line 626, ../scss/layout/_content.scss */
 .card-img img {
   width: 90%;
   height: auto;
@@ -1185,7 +1190,7 @@ p {
   border: 5px solid #EAEAEA;
 }
 
-/* line 635, ../scss/layout/_content.scss */
+/* line 644, ../scss/layout/_content.scss */
 .lib-panel .row,
 .lib-panel .col-sm-6,
 .lib-panel .col-sm-9,
@@ -1194,23 +1199,23 @@ p {
   background-color: #FFFFFF;
 }
 
-/* line 643, ../scss/layout/_content.scss */
+/* line 652, ../scss/layout/_content.scss */
 .lib-panel .lib-row {
   padding: 0 20px 0 20px;
 }
 
-/* line 647, ../scss/layout/_content.scss */
+/* line 656, ../scss/layout/_content.scss */
 .lib-panel .lib-row.lib-header {
   background-color: #FFFFFF;
   font-size: 20px;
   padding: 10px 20px 0 20px;
 }
-/* line 652, ../scss/layout/_content.scss */
+/* line 661, ../scss/layout/_content.scss */
 .lib-panel .lib-row.lib-header p {
   margin-bottom: 12.5px;
 }
 
-/* line 657, ../scss/layout/_content.scss */
+/* line 666, ../scss/layout/_content.scss */
 .lib-panel .lib-row.lib-header .lib-header-seperator {
   height: 2px;
   width: 26px;
@@ -1218,7 +1223,7 @@ p {
   margin: 7px 0 7px 0;
 }
 
-/* line 664, ../scss/layout/_content.scss */
+/* line 673, ../scss/layout/_content.scss */
 .lib-panel .lib-row.lib-desc {
   position: relative;
   height: 100%;
@@ -1226,7 +1231,7 @@ p {
   font-size: 13px;
 }
 
-/* line 670, ../scss/layout/_content.scss */
+/* line 679, ../scss/layout/_content.scss */
 .lib-panel .lib-row.lib-desc a {
   position: absolute;
   width: 100%;
@@ -1234,13 +1239,13 @@ p {
   left: 20px;
 }
 
-/* line 677, ../scss/layout/_content.scss */
+/* line 686, ../scss/layout/_content.scss */
 .row-margin-bottom {
   margin-bottom: 20px;
 }
 
 @media (min-width: 993px) {
-  /* line 682, ../scss/layout/_content.scss */
+  /* line 691, ../scss/layout/_content.scss */
   .home-about {
     column-count: 2;
     column-gap: 50px;
@@ -1249,24 +1254,24 @@ p {
     -webkit-column-count: 2;
     -webkit-column-gap: 50px;
   }
-  /* line 689, ../scss/layout/_content.scss */
+  /* line 698, ../scss/layout/_content.scss */
   .home-about h1 {
     column-span: all;
     -webkit-column-span: all;
   }
 }
-/* line 698, ../scss/layout/_content.scss */
+/* line 707, ../scss/layout/_content.scss */
 .register-page h2,
 .login-page h2 {
   margin-bottom: 50px;
 }
-/* line 702, ../scss/layout/_content.scss */
+/* line 711, ../scss/layout/_content.scss */
 .register-page .subscribe-form,
 .login-page .subscribe-form {
   padding-left: 0;
   padding-bottom: 100px;
 }
-/* line 712, ../scss/layout/_content.scss */
+/* line 721, ../scss/layout/_content.scss */
 .register-page #user_login,
 .register-page #user_pass,
 .login-page #user_login,
@@ -1288,30 +1293,30 @@ p {
   -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
-/* line 733, ../scss/layout/_content.scss */
+/* line 742, ../scss/layout/_content.scss */
 .register-page p,
 .login-page p {
   margin-bottom: 5px;
 }
-/* line 737, ../scss/layout/_content.scss */
+/* line 746, ../scss/layout/_content.scss */
 .register-page .login-remember,
 .login-page .login-remember {
   padding: 10px;
   float: left;
   width: 50%;
 }
-/* line 743, ../scss/layout/_content.scss */
+/* line 752, ../scss/layout/_content.scss */
 .register-page .login-submit,
 .login-page .login-submit {
   float: right;
   padding-top: 10px;
 }
-/* line 749, ../scss/layout/_content.scss */
+/* line 758, ../scss/layout/_content.scss */
 .register-page .login-username label,
 .login-page .login-username label {
   display: none;
 }
-/* line 754, ../scss/layout/_content.scss */
+/* line 763, ../scss/layout/_content.scss */
 .register-page #wp-submit,
 .login-page #wp-submit {
   display: inline-block;
@@ -1339,18 +1344,18 @@ p {
   padding: 18px 28px 17px 31px;
 }
 
-/* line 781, ../scss/layout/_content.scss */
+/* line 790, ../scss/layout/_content.scss */
 .post-pagination {
   margin: 25px 0 50px;
   text-align: center;
 }
 
-/* line 787, ../scss/layout/_content.scss */
+/* line 796, ../scss/layout/_content.scss */
 .navigation.pagination h2.screen-reader-text {
   display: none;
 }
 
-/* line 792, ../scss/layout/_content.scss */
+/* line 801, ../scss/layout/_content.scss */
 .wpcf7-form-control.wpcf7-submit,
 .page-numbers {
   display: inline-block;
@@ -1371,7 +1376,7 @@ p {
   margin: 0 0 0 1.4%;
   padding: 10px 20px;
 }
-/* line 812, ../scss/layout/_content.scss */
+/* line 821, ../scss/layout/_content.scss */
 .wpcf7-form-control.wpcf7-submit.current, .wpcf7-form-control.wpcf7-submit:hover,
 .page-numbers.current,
 .page-numbers:hover {
@@ -1379,19 +1384,19 @@ p {
   color: #2e568c;
 }
 
-/* line 819, ../scss/layout/_content.scss */
+/* line 828, ../scss/layout/_content.scss */
 .wpcf7-form-control.wpcf7-submit {
   background: #7fba00;
   color: white;
   border: none;
 }
-/* line 824, ../scss/layout/_content.scss */
+/* line 833, ../scss/layout/_content.scss */
 .wpcf7-form-control.wpcf7-submit:hover {
   background: #5c8700;
   color: white;
 }
 
-/* line 832, ../scss/layout/_content.scss */
+/* line 841, ../scss/layout/_content.scss */
 .wpcf7-form-control-wrap input,
 .wpcf7-form-control-wrap textarea {
   width: 90%;
@@ -1400,15 +1405,31 @@ p {
   border: 1px solid #e1e1e1;
 }
 
-/* line 842, ../scss/layout/_content.scss */
+/* line 851, ../scss/layout/_content.scss */
 .archive-list li {
   border-bottom: 1px solid #e1e1e1;
   padding-bottom: 25px;
   margin-bottom: 25px;
 }
-/* line 847, ../scss/layout/_content.scss */
+/* line 856, ../scss/layout/_content.scss */
 .archive-list li h2 {
   margin: 0;
+}
+
+/* line 862, ../scss/layout/_content.scss */
+.map-container {
+  width: 100%;
+  position: relative;
+  height: 400px;
+  margin-bottom: 25px;
+}
+/* line 868, ../scss/layout/_content.scss */
+.map-container #map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 400px;
 }
 
 @media (min-width: 1025px) {

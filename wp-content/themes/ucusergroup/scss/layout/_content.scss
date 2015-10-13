@@ -605,6 +605,15 @@
 	}
 }
 
+.page-template-page-mapbox {
+	.page-title {
+		margin-bottom: 0;
+
+		@include media('>tablet') {
+			//padding: $line-height-computed 0;
+		}
+	}
+}
 
 // About carousel-indicators
 .lib-panel {
@@ -848,4 +857,13 @@
 				margin: 0;
 			}
 		}
+}
+
+.map-container {
+	width: 100%;
+	position: relative;
+	height: 400px;
+	margin-bottom: $line-height-computed;
+
+	#map { position:absolute; top:0; bottom:0; width:100%; height: 400px; }
 }
