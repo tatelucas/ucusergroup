@@ -36,6 +36,9 @@
         $ucUserGroupCitiesSelect .= '<option id="'. $ucUserGroupCity->term_id .' value="' . $ucUserGroupCity->name . '">' . $ucUserGroupCity->name . '</option>';
       }
     }
+    $ucUserGroupCitiesSelect .= '<option>
+    None of the above
+    </option>';
     $ucUserGroupCitiesSelect .= '</select>';
 
     echo $ucUserGroupCitiesSelect;
@@ -122,7 +125,7 @@
 			6
 		);
 	}
-	add_action( 'admin_menu', 'ug_cities_adjust_the_wp_menu', 999 );  
+	add_action( 'admin_menu', 'ug_cities_adjust_the_wp_menu', 999 );
 
 
 if(!is_admin()){ // make sure the filters are only called in the frontend
@@ -217,8 +220,8 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
 	wp_localize_script( 'ug_do_geolocate', 'ug_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 	}
 
-	
-	
+
+
 	//set up ajax functions
 	add_action( 'wp_enqueue_scripts', 'load_geo_scripts' );
     add_action( 'wp_ajax_uc_ajax_request_city', 'uc_ajax_request_city' );
@@ -230,7 +233,7 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
 
 
 	function uc_ajax_request_city() {
-	
+
 		if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {  //check to see if this is ajax
 
 			if (isset($_POST["lat"]) && !empty($_POST["lat"])) { //Checks if action value exists
@@ -303,24 +306,53 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
 
 	  //
 	  // Event Espresso get upcoming closest events
-	  //	
+	  //
 
 //for some reason, event espresso does not load here, so force it to load. - dwl
 require_once( EE_PUBLIC . 'template_tags.php' );
-	
-	
+
+
+	  //
+
+
+if ( ! function_exists( 'espresso_event_date' )) {
+	/**
+	 * espresso_event_date
+	 * returns the primary date for an event
+	 *
+	 * @param string $date_format
+	 * @param string $time_format
+	 * @param bool   $EVT_ID
+	 * @param bool $echo
+	 * @return string
+	 */
+	function espresso_event_date( $date_format = '', $time_format = '', $EVT_ID = FALSE, $echo = TRUE ) {
+		$date_format = ! empty( $date_format ) ? $date_format : get_option( 'date_format' );
+		$time_format = ! empty( $time_format ) ? $time_format : get_option( 'time_format' );
+		$date_format = apply_filters( 'FHEE__espresso_event_date__date_format', $date_format );
+		$time_format = apply_filters( 'FHEE__espresso_event_date__time_format', $time_format );
+		EE_Registry::instance()->load_helper( 'Event_View' );
+		if($echo){
+			echo date_i18n( $date_format . ' ' . $time_format, strtotime( EEH_Event_View::the_event_date( $date_format, $time_format, $EVT_ID )));
+			return '';
+		}
+		return date_i18n( $date_format . ' ' . $time_format, strtotime( EEH_Event_View::the_event_date( $date_format, $time_format, $EVT_ID )));
+
+	}
+}
+
 	function uc_ajax_closest_meetups() {
 		//expects post $id of closest city, and (optional) $limit
 
 		if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {  //check to see if this is ajax
-		
+
 			if (isset($_POST["id"])) {
 				$id = $_POST["id"];
 				$limit = 3; //default limit
 				if (isset($_POST["limit"]) && is_int($_POST["limit"])) {
 					$limit = $_POST["limit"];
 				}
-			
+
             $attsNextThreeEvents = array(
               'title' => NULL,
               'limit' => $limit,
@@ -334,14 +366,14 @@ require_once( EE_PUBLIC . 'template_tags.php' );
 					'field'    => 'term_id',
 					'terms'    => array( $id ),
 				),
-			),			  
+			),
               'order_by' => 'start_date',
               'sort' => 'ASC'
             );
             global $wp_query;
             $wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
-			
-			
+
+
             if (have_posts()) : while (have_posts()) : the_post();
               $userGroupNames = wp_get_post_terms($post->ID, 'ug-name');
               $userGroupName = $userGroupNames ? $userGroupNames[0] : '';
@@ -366,7 +398,7 @@ require_once( EE_PUBLIC . 'template_tags.php' );
             endif;
             wp_reset_query();
             wp_reset_postdata();
-			
+
 
 				//$return["json"] = json_encode($result);
 
@@ -380,18 +412,18 @@ require_once( EE_PUBLIC . 'template_tags.php' );
 
 		// Always die in functions echoing ajax content
 	   wp_die();
-	} //end	
-	
+	} //end
+
 
   // ----------------------------------------------------------
   // end geo-location
   // ----------------------------------------------------------
-  
-  
+
+
   // ------------------------------
   // custom fields for geo-location
   // ------------------------------
-  
+
 		// A callback function to add a custom field to our "cities" taxonomy
 		function city_taxonomy_custom_fields($tag) {
 		   // Check for existing taxonomy meta for the term you're editing
@@ -408,7 +440,7 @@ require_once( EE_PUBLIC . 'template_tags.php' );
 					<span class="description"><?php _e('Latitude'); ?></span>
 				</td>
 			</tr>
-			
+
 			<tr class="form-field">
 				<th scope="row" valign="top">
 					<label for="city_longitude"><?php _e('Longitude'); ?></label>
@@ -417,99 +449,99 @@ require_once( EE_PUBLIC . 'template_tags.php' );
 					<input type="text" name="term_meta[city_longitude]" id="term_meta[city_longitude]" size="25" style="width:60%;" value="<?php echo $term_meta['city_longitude'] ? $term_meta['city_longitude'] : ''; ?>"><br />
 					<span class="description"><?php _e('Longitude'); ?></span>
 				</td>
-			</tr>			
+			</tr>
 
 		<?php
 		}
-		
-		
+
+
 		// A callback function to save our extra taxonomy field(s)
 		function save_cities_taxonomy_custom_fields( $term_id ) {
 			if ( isset( $_POST['term_meta'] ) ) {
 				global $wpdb;
-				$t_id = $term_id;		
+				$t_id = $term_id;
 				$term_meta = get_option( "taxonomy_term_$t_id" );
 				$cat_keys = array_keys( $_POST['term_meta'] );
 					foreach ( $cat_keys as $key ){
 					//if ( isset( $_POST['term_meta'][$key] ) ){
 					//assume is set, so we can catch removals and blank submissions, ie deletes
 						$term_meta[$key] = $_POST['term_meta'][$key];
-							
+
 							if ($key == "city_latitude") {
-								
+
 								$latitude = !empty($term_meta[$key]) ? $term_meta[$key] : "NULL";
-								
+
 								$latExists = "SELECT EXISTS(SELECT 1 FROM {$wpdb->prefix}terms_meta WHERE term_id=$t_id)";
 								$latExists = $wpdb->get_results($latExists, ARRAY_N);
-								
+
 								//update DB
-								
-								if ($latExists[0][0] == 1) {								
+
+								if ($latExists[0][0] == 1) {
 									$sql = "
 										UPDATE {$wpdb->prefix}terms_meta
 										SET term_latitude=$latitude
-										WHERE term_id=$t_id 
+										WHERE term_id=$t_id
 									";
 								} else {
 									$sql = "
 										INSERT INTO {$wpdb->prefix}terms_meta
 										(term_id, term_latitude)
 										VALUES ($t_id, $latitude)
-									";									
+									";
 								}
 
 									// update the terms_meta fields so the lat-lng is db searchable
-									$resultone = $wpdb->get_results($sql);								
+									$resultone = $wpdb->get_results($sql);
 							}
-							
+
 							if ($key == "city_longitude") {
-								
+
 								$longitude = !empty($term_meta[$key]) ? $term_meta[$key] : "NULL";
-								
+
 								$lngExists = "SELECT EXISTS(SELECT 1 FROM {$wpdb->prefix}terms_meta WHERE term_id=$t_id)";
-								$lngExists = $wpdb->get_results($lngExists, ARRAY_N);								
-								
+								$lngExists = $wpdb->get_results($lngExists, ARRAY_N);
+
 								//update DB
-								
-								if ($lngExists[0][0] == 1) {									
+
+								if ($lngExists[0][0] == 1) {
 									$sql = "
 										UPDATE {$wpdb->prefix}terms_meta
 										SET term_longitude=$longitude
-										WHERE term_id=$t_id 
+										WHERE term_id=$t_id
 									";
 								} else {
 									$sql = "
 										INSERT INTO {$wpdb->prefix}terms_meta
 										(term_id, term_longitude)
 										VALUES ($t_id, $longitude)
-									";									
+									";
 								}
 
 									// update the terms_meta fields so the lat-lng is db searchable
-									$resulttwo = $wpdb->get_results($sql);								
-							}							
-							
+									$resulttwo = $wpdb->get_results($sql);
+							}
+
 					//}
 				}
 				//save the option array
 				update_option( "taxonomy_term_$t_id", $term_meta );
 			}
-		}	
+		}
 
 
 	// Add the fields to the "cities" taxonomy, using our callback function
 	add_action( 'city_edit_form_fields', 'city_taxonomy_custom_fields', 10, 2 );
 
 	// Save the changes made on the "presenters" taxonomy, using our callback function
-	add_action( 'edited_city', 'save_cities_taxonomy_custom_fields', 10, 2 );		
+	add_action( 'edited_city', 'save_cities_taxonomy_custom_fields', 10, 2 );
 
   // ------------------------------
   // end custom fields for geo-location
   // ------------------------------
-  
 
-  
-		
+
+
+
 
   // ==========================================================
   // ==========================================================

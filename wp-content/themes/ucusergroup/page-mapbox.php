@@ -78,7 +78,7 @@
                   global $wp_query;
                   $wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
                   if (have_posts()) : while (have_posts()) : the_post();
-                      the_title();
+                      echo '<p><a href="' . get_the_permalink() . '"><span>' . get_the_title() . '</span></a></p>';
                     endwhile;
                   else:
                     echo '<p>No upcoming meetups</p>';
