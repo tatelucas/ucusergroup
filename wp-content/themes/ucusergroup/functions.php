@@ -24,16 +24,16 @@
     );
 
     if($updateLocOnChange){
-      $ucUserGroupCitiesSelect  = '<select data-location-select id="ug_closest_location" class="ug_closest_location">';
+      $ucUserGroupCitiesSelect  = '<select name="user_group" data-location-select id="ug_closest_location" class="ug_closest_location">';
     } else {
-      $ucUserGroupCitiesSelect  = '<select id="ug_closest_location" class="ug_closest_location">';
+      $ucUserGroupCitiesSelect  = '<select name="user_group" id="user_group" class="ug_closest_location">';
     }
     $ucUserGroupCitiesSelect .= '<option class="hidden">Select</option>';
     foreach($ucUserGroupCities as $ucUserGroupCity){
       if($updateLocOnChange){
         $ucUserGroupCitiesSelect .= '<option id="'. $ucUserGroupCity->term_id .'" value="' . get_term_link($ucUserGroupCity->name, 'city') . '">' . $ucUserGroupCity->name . '</option>';
       } else {
-        $ucUserGroupCitiesSelect .= '<option id="'. $ucUserGroupCity->term_id .' value="' . $ucUserGroupCity->name . '">' . $ucUserGroupCity->name . '</option>';
+        $ucUserGroupCitiesSelect .= '<option id="'. $ucUserGroupCity->term_id .'" value="'. $ucUserGroupCity->term_id . '">' . $ucUserGroupCity->name . '</option>';
       }
     }
     $ucUserGroupCitiesSelect .= '</select>';
@@ -157,8 +157,9 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
 
   add_action('user_register', 'register_extra_fields');
   function register_extra_fields ( $user_id, $password = "", $meta = array() ){
-    update_user_meta( $user_id, 'user_state', $_POST['user_state'] );
-  }
+    update_user_meta( $user_id, 'user_group', $_POST['user_group'] );
+	update_user_meta( $user_id, 'user_state', $_POST['user_state'] );
+  }  
 
 
   // ----------------------------------------------------------
