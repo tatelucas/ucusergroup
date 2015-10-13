@@ -1422,15 +1422,19 @@ p {
 .archive-list li h2 {
   margin: 0;
 }
+/* line 868, ../scss/layout/_content.scss */
+.archive-list li .event-time-cont {
+  padding: 6.25px 0;
+}
 
-/* line 870, ../scss/layout/_content.scss */
+/* line 874, ../scss/layout/_content.scss */
 .map-container {
   width: 100%;
   position: relative;
   height: 400px;
   margin-bottom: 25px;
 }
-/* line 876, ../scss/layout/_content.scss */
+/* line 880, ../scss/layout/_content.scss */
 .map-container #map {
   position: absolute;
   top: 0;
@@ -1439,7 +1443,7 @@ p {
   height: 400px;
 }
 
-/* line 881, ../scss/layout/_content.scss */
+/* line 885, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city {
   background: #f7fafb;
   border: 1px solid #e4eef2;
@@ -1447,38 +1451,38 @@ p {
   padding: 6px 12px;
   text-align: center;
 }
-/* line 888, ../scss/layout/_content.scss */
+/* line 892, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city h4 {
   border-bottom: 1px solid #e4eef2;
   padding-bottom: 25px;
   margin: 12.5px 12px 25px;
   font-weight: 500;
 }
-/* line 894, ../scss/layout/_content.scss */
+/* line 898, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city h4 a {
   color: #2e3b4e;
 }
-/* line 897, ../scss/layout/_content.scss */
+/* line 901, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city h4 a:hover {
   color: #00aff0;
 }
-/* line 903, ../scss/layout/_content.scss */
+/* line 907, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city p {
   margin: 0;
   padding: 0;
   position: relative;
 }
-/* line 909, ../scss/layout/_content.scss */
+/* line 913, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city p a:before {
   position: absolute;
   content: '\e604';
   font-family: 'icomoon';
 }
-/* line 915, ../scss/layout/_content.scss */
+/* line 919, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city p a span {
   padding-left: 20px;
 }
-/* line 920, ../scss/layout/_content.scss */
+/* line 924, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city p:last-of-type {
   padding-bottom: 25px;
 }
