@@ -241,38 +241,42 @@ p {
   }
 }
 /* line 107, ../scss/base/_base.scss */
+.btn-group .btn.btn-logout, .btn-group #comments .btn-logout#submit, #comments .btn-group .btn-logout#submit {
+  padding: 16px 24px 16px 24px;
+}
+/* line 111, ../scss/base/_base.scss */
 .btn-group .btn + .btn, .btn-group #comments #submit + .btn, #comments .btn-group #submit + .btn, .btn-group #comments .btn + #submit, #comments .btn-group .btn + #submit, .btn-group #comments #submit + #submit, #comments .btn-group #submit + #submit {
   border-left: 1px solid #fff;
   z-index: 3;
   padding: 16px 24px 16px 16px;
 }
 @media (max-width: 1249px) {
-  /* line 107, ../scss/base/_base.scss */
+  /* line 111, ../scss/base/_base.scss */
   .btn-group .btn + .btn, .btn-group #comments #submit + .btn, #comments .btn-group #submit + .btn, .btn-group #comments .btn + #submit, #comments .btn-group .btn + #submit, .btn-group #comments #submit + #submit, #comments .btn-group #submit + #submit {
     padding: 16px 10px;
   }
 }
-/* line 118, ../scss/base/_base.scss */
+/* line 122, ../scss/base/_base.scss */
 .btn-group .btn.btn-primary:first-child, .btn-group #comments .btn-primary#submit:first-child, #comments .btn-group .btn-primary#submit:first-child {
   background: #3b6db2;
 }
-/* line 121, ../scss/base/_base.scss */
+/* line 125, ../scss/base/_base.scss */
 .btn-group .btn.btn-primary:first-child:hover, .btn-group #comments .btn-primary#submit:first-child:hover, #comments .btn-group .btn-primary#submit:first-child:hover {
   background: #2e568c;
 }
-/* line 127, ../scss/base/_base.scss */
+/* line 131, ../scss/base/_base.scss */
 .btn-group .btn.btn-outlined, .btn-group #comments .btn-outlined#submit, #comments .btn-group .btn-outlined#submit {
   background: transparent;
   border: 1px solid white;
   color: white;
 }
-/* line 132, ../scss/base/_base.scss */
+/* line 136, ../scss/base/_base.scss */
 .btn-group .btn.btn-outlined:hover, .btn-group #comments .btn-outlined#submit:hover, #comments .btn-group .btn-outlined#submit:hover {
   background: white;
   color: #3b6db2;
 }
 
-/* line 141, ../scss/base/_base.scss */
+/* line 145, ../scss/base/_base.scss */
 .bg-stretch {
   position: absolute;
   left: 0;
@@ -283,13 +287,13 @@ p {
   overflow: hidden;
 }
 
-/* line 151, ../scss/base/_base.scss */
+/* line 155, ../scss/base/_base.scss */
 .btn-form, #comments #submit {
   background: #3b6db2;
   border-radius: 27px;
   color: #fff;
 }
-/* line 156, ../scss/base/_base.scss */
+/* line 160, ../scss/base/_base.scss */
 .btn-form:hover, #comments #submit:hover {
   background: #2e568c;
 }
@@ -777,7 +781,7 @@ p {
   content: '\e604';
   font-family: 'icomoon';
   left: 0;
-  top: -3px;
+  bottom: -5px;
 }
 
 /* line 258, ../scss/layout/_content.scss */
@@ -1638,7 +1642,7 @@ p {
   height: 28px;
   background: transparent;
   color: #fff;
-  padding: 2px 18px 2px 10px;
+  padding: 2px 18px 2px 16px;
   font-weight: 700;
 }
 @media (max-width: 1249px) {
@@ -1747,6 +1751,10 @@ p {
     left: 5px;
     font-size: 12px;
   }
+  /* line 74, ../scss/components/_search-form.scss */
+  .search-form .btn.icon-search, .search-form #comments .icon-search#submit, #comments .search-form .icon-search#submit {
+    left: 10px;
+  }
 }
 @media (max-width: 767px) {
   /* line 58, ../scss/components/_search-form.scss */
@@ -1755,12 +1763,12 @@ p {
   }
 }
 @media (max-width: 767px) {
-  /* line 79, ../scss/components/_search-form.scss */
+  /* line 83, ../scss/components/_search-form.scss */
   .location-section .search-form .btn, .location-section .search-form #comments #submit, #comments .location-section .search-form #submit {
     left: 25px;
   }
 }
-/* line 85, ../scss/components/_search-form.scss */
+/* line 89, ../scss/components/_search-form.scss */
 .search-form .btn:hover, .search-form #comments #submit:hover, #comments .search-form #submit:hover {
   color: #e9ffba;
 }

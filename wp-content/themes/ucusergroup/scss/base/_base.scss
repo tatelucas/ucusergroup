@@ -104,6 +104,10 @@ p {
 			}
 		}
 
+		&.btn-logout {
+			padding: 16px 24px 16px 24px;
+		}
+
 		+ .btn {
 			border-left: 1px solid $white;
 			z-index: 3;

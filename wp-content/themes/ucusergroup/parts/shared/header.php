@@ -33,7 +33,7 @@
         </form>
         <div class="btn-group">
           <?php if(is_user_logged_in()): ?>
-            <a href="<?php echo wp_logout_url(); ?>" class="btn btn-primary">Logout</a>
+            <a href="<?php echo wp_logout_url(); ?>" class="btn btn-primary btn-logout">Logout</a>
           <?php else: ?>
             <a href="<?php echo get_permalink(103); ?>" class="btn btn-primary">Register</a>
             <a href="<?php echo get_permalink(105); ?>" class="btn btn-primary">Login</a>

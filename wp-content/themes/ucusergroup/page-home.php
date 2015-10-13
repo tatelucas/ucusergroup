@@ -23,6 +23,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
+<!--
             <div class="visible-xs form-hold">
               <form action="#" class="search-form" role="search">
                 <fieldset>
@@ -34,6 +35,7 @@
                 <button type="button" class="btn btn-primary">Register</button>
               </div>
             </div>
+-->
             <h1>Upcoming Meetups Near You</h1>
             <div class="select-form">
               <span class="text-hold">location<i class="icon-mapmarker"></i></span>
@@ -47,22 +49,22 @@
 
         <div class="gray-box">
 			<div id="ajaxReplaceClosestLocations">
-          <?php		  
+          <?php
             $attsNextThreeEvents = array(
               'title' => NULL,
               'limit' => 3,
               'css_class' => NULL,
               'show_expired' => FALSE,
               'month' => NULL,
-              'category_slug' => NULL,		  
+              'category_slug' => NULL,
               'order_by' => 'start_date',
               'sort' => 'ASC'
             );
             global $wp_query;
             $wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
-			
-			
-			
+
+
+
             if (have_posts()) : while (have_posts()) : the_post();
               $userGroupNames = wp_get_post_terms($post->ID, 'ug-name');
               $userGroupName = $userGroupNames ? $userGroupNames[0] : '';
@@ -170,7 +172,7 @@
     <?php
     }
     ?>
-    
+
     <div class="sponsor-section">
       <div class="container-fluid">
         <div class="col-sm-12">
