@@ -308,38 +308,9 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
 	  // Event Espresso get upcoming closest events
 	  //
 
-//for some reason, event espresso does not load here, so force it to load. - dwl
-require_once( EE_PUBLIC . 'template_tags.php' );
+    //for some reason, event espresso does not load here, so force it to load. - dwl
+  require_once( EE_PUBLIC . 'template_tags.php' );
 
-
-	  //
-
-
-if ( ! function_exists( 'espresso_event_date' )) {
-	/**
-	 * espresso_event_date
-	 * returns the primary date for an event
-	 *
-	 * @param string $date_format
-	 * @param string $time_format
-	 * @param bool   $EVT_ID
-	 * @param bool $echo
-	 * @return string
-	 */
-	function espresso_event_date( $date_format = '', $time_format = '', $EVT_ID = FALSE, $echo = TRUE ) {
-		$date_format = ! empty( $date_format ) ? $date_format : get_option( 'date_format' );
-		$time_format = ! empty( $time_format ) ? $time_format : get_option( 'time_format' );
-		$date_format = apply_filters( 'FHEE__espresso_event_date__date_format', $date_format );
-		$time_format = apply_filters( 'FHEE__espresso_event_date__time_format', $time_format );
-		EE_Registry::instance()->load_helper( 'Event_View' );
-		if($echo){
-			echo date_i18n( $date_format . ' ' . $time_format, strtotime( EEH_Event_View::the_event_date( $date_format, $time_format, $EVT_ID )));
-			return '';
-		}
-		return date_i18n( $date_format . ' ' . $time_format, strtotime( EEH_Event_View::the_event_date( $date_format, $time_format, $EVT_ID )));
-
-	}
-}
 
 	function uc_ajax_closest_meetups() {
 		//expects post $id of closest city, and (optional) $limit
