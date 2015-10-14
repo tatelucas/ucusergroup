@@ -161,7 +161,7 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
   add_action('user_register', 'register_extra_fields');
   function register_extra_fields ( $user_id, $password = "", $meta = array() ){
     update_user_meta( $user_id, 'user_group', $_POST['user_group'] );
-	update_user_meta( $user_id, 'user_state', $_POST['user_state'] );
+	   update_user_meta( $user_id, 'user_state', $_POST['user_state'] );
   }
 
 

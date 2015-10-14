@@ -53,7 +53,8 @@
   text-transform: uppercase;
   transition: background 0.3s, opacity 0.3s, color 0.3s ease;
 
-  &:hover {
+  &:hover,
+  &:active {
     background: darken($green,10);
     color: white !important;
   }
