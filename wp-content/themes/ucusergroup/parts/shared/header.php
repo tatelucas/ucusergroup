@@ -35,8 +35,8 @@
           <?php if(is_user_logged_in()): ?>
             <a href="<?php echo wp_logout_url(); ?>" class="btn btn-primary btn-logout">Logout</a>
           <?php else: ?>
-            <a href="<?php echo get_permalink(103); ?>" class="btn btn-primary">Register</a>
-            <a href="<?php echo get_permalink(105); ?>" class="btn btn-primary">Login</a>
+            <a href="<?php echo wp_registration_url(); ?>" class="btn btn-primary">Register</a>
+            <a href="<?php echo wp_login_url(); ?>" class="btn btn-primary">Login</a>
           <?php endif; ?>
         </div>
       </div>
