@@ -367,6 +367,8 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
             </div>
           <?php
             endwhile;
+			else:
+			echo 'nothing';
             endif;
             wp_reset_query();
             wp_reset_postdata();

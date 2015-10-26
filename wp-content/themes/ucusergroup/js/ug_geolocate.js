@@ -82,6 +82,10 @@
 						}
 						
 						//set text display for all selected dropdowns
+						var children = document.querySelectorAll(".geolocate .jcf-select-text");
+						for (var j = 0; j < children.length; ++j) {
+							children[j].innerHTML = obj.name;
+						}						
 						var children = document.querySelectorAll(".geolocate .jcf-option-hidden");
 						for (var j = 0; j < children.length; ++j) {
 							children[j].innerHTML = obj.name;
@@ -146,16 +150,18 @@
 				//console.log(data);
 				//alert (data);
 				
-				var wrapper = document.createElement('div');
-				wrapper.innerHTML = data;
-				
-				var newbox = document.getElementById("ajaxReplaceClosestLocations");
-				//alert(newbox);
-				//newbox.innerHTML = wrapper;
-				//$newbox.html(data);
-				$('#ajaxReplaceClosestLocations').html(wrapper);
-				
-				//alert("Form submitted successfully.\nReturned json: " + data["json"]);
+				if (data != 'nothing') {
+					var wrapper = document.createElement('div');
+					wrapper.innerHTML = data;
+					
+					var newbox = document.getElementById("ajaxReplaceClosestLocations");
+					//alert(newbox);
+					//newbox.innerHTML = wrapper;
+					//$newbox.html(data);
+					$('#ajaxReplaceClosestLocations').html(wrapper);
+					
+					//alert("Form submitted successfully.\nReturned json: " + data["json"]);
+				}
 
 				
 			},
