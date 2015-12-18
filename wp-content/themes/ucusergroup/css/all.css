@@ -1236,23 +1236,35 @@ p {
   height: 100%;
   display: block;
   font-size: 13px;
+  margin-bottom: 35px;
 }
 
-/* line 687, ../scss/layout/_content.scss */
+/* line 689, ../scss/layout/_content.scss */
 .lib-panel .lib-row.lib-desc a {
-  position: absolute;
-  width: 100%;
-  bottom: 10px;
-  left: 20px;
+    /*
+		position: absolute;
+    width: 100%;
+    bottom: 10px;
+    left: 20px;
+		*/
 }
 
-/* line 694, ../scss/layout/_content.scss */
+/* line 699, ../scss/layout/_content.scss */
+.lib-panel .lib-row.lib-desc p {
+  margin: 0;
+}
+/* line 703, ../scss/layout/_content.scss */
+.lib-panel .lib-row.lib-desc p + p {
+  margin: 20px 0 0 0;
+}
+
+/* line 708, ../scss/layout/_content.scss */
 .row-margin-bottom {
   margin-bottom: 20px;
 }
 
 @media (min-width: 993px) {
-  /* line 699, ../scss/layout/_content.scss */
+  /* line 713, ../scss/layout/_content.scss */
   .home-about {
     column-count: 2;
     column-gap: 50px;
@@ -1261,24 +1273,24 @@ p {
     -webkit-column-count: 2;
     -webkit-column-gap: 50px;
   }
-  /* line 706, ../scss/layout/_content.scss */
+  /* line 720, ../scss/layout/_content.scss */
   .home-about h1 {
     column-span: all;
     -webkit-column-span: all;
   }
 }
-/* line 715, ../scss/layout/_content.scss */
+/* line 729, ../scss/layout/_content.scss */
 .register-page h2,
 .login-page h2 {
   margin-bottom: 50px;
 }
-/* line 719, ../scss/layout/_content.scss */
+/* line 733, ../scss/layout/_content.scss */
 .register-page .subscribe-form,
 .login-page .subscribe-form {
   padding-left: 0;
   padding-bottom: 100px;
 }
-/* line 729, ../scss/layout/_content.scss */
+/* line 743, ../scss/layout/_content.scss */
 .register-page #user_login,
 .register-page #user_pass,
 .login-page #user_login,
@@ -1300,30 +1312,30 @@ p {
   -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
-/* line 750, ../scss/layout/_content.scss */
+/* line 764, ../scss/layout/_content.scss */
 .register-page p,
 .login-page p {
   margin-bottom: 5px;
 }
-/* line 754, ../scss/layout/_content.scss */
+/* line 768, ../scss/layout/_content.scss */
 .register-page .login-remember,
 .login-page .login-remember {
   padding: 10px;
   float: left;
   width: 50%;
 }
-/* line 760, ../scss/layout/_content.scss */
+/* line 774, ../scss/layout/_content.scss */
 .register-page .login-submit,
 .login-page .login-submit {
   float: right;
   padding-top: 10px;
 }
-/* line 766, ../scss/layout/_content.scss */
+/* line 780, ../scss/layout/_content.scss */
 .register-page .login-username label,
 .login-page .login-username label {
   display: none;
 }
-/* line 771, ../scss/layout/_content.scss */
+/* line 785, ../scss/layout/_content.scss */
 .register-page #wp-submit,
 .login-page #wp-submit {
   display: inline-block;
@@ -1351,18 +1363,18 @@ p {
   padding: 18px 28px 17px 31px;
 }
 
-/* line 798, ../scss/layout/_content.scss */
+/* line 812, ../scss/layout/_content.scss */
 .post-pagination {
   margin: 25px 0 50px;
   text-align: center;
 }
 
-/* line 804, ../scss/layout/_content.scss */
+/* line 818, ../scss/layout/_content.scss */
 .navigation.pagination h2.screen-reader-text {
   display: none;
 }
 
-/* line 809, ../scss/layout/_content.scss */
+/* line 823, ../scss/layout/_content.scss */
 .wpcf7-form-control.wpcf7-submit,
 .page-numbers {
   display: inline-block;
@@ -1383,7 +1395,7 @@ p {
   margin: 0 0 0 1.4%;
   padding: 10px 20px;
 }
-/* line 829, ../scss/layout/_content.scss */
+/* line 843, ../scss/layout/_content.scss */
 .wpcf7-form-control.wpcf7-submit.current, .wpcf7-form-control.wpcf7-submit:hover,
 .page-numbers.current,
 .page-numbers:hover {
@@ -1391,19 +1403,19 @@ p {
   color: #2e568c;
 }
 
-/* line 836, ../scss/layout/_content.scss */
+/* line 850, ../scss/layout/_content.scss */
 .wpcf7-form-control.wpcf7-submit {
   background: #7fba00;
   color: white;
   border: none;
 }
-/* line 841, ../scss/layout/_content.scss */
+/* line 855, ../scss/layout/_content.scss */
 .wpcf7-form-control.wpcf7-submit:hover {
   background: #5c8700;
   color: white;
 }
 
-/* line 849, ../scss/layout/_content.scss */
+/* line 863, ../scss/layout/_content.scss */
 .wpcf7-form-control-wrap input,
 .wpcf7-form-control-wrap textarea {
   width: 90%;
@@ -1412,29 +1424,29 @@ p {
   border: 1px solid #e1e1e1;
 }
 
-/* line 859, ../scss/layout/_content.scss */
+/* line 873, ../scss/layout/_content.scss */
 .archive-list li {
   border-bottom: 1px solid #e1e1e1;
   padding-bottom: 25px;
   margin-bottom: 25px;
 }
-/* line 864, ../scss/layout/_content.scss */
+/* line 878, ../scss/layout/_content.scss */
 .archive-list li h2 {
   margin: 0;
 }
-/* line 868, ../scss/layout/_content.scss */
+/* line 882, ../scss/layout/_content.scss */
 .archive-list li .event-time-cont {
   padding: 6.25px 0;
 }
 
-/* line 874, ../scss/layout/_content.scss */
+/* line 888, ../scss/layout/_content.scss */
 .map-container {
   width: 100%;
   position: relative;
   height: 400px;
   margin-bottom: 25px;
 }
-/* line 880, ../scss/layout/_content.scss */
+/* line 894, ../scss/layout/_content.scss */
 .map-container #map {
   position: absolute;
   top: 0;
@@ -1443,7 +1455,7 @@ p {
   height: 400px;
 }
 
-/* line 885, ../scss/layout/_content.scss */
+/* line 899, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city {
   background: #f7fafb;
   border: 1px solid #e4eef2;
@@ -1451,38 +1463,38 @@ p {
   padding: 6px 12px;
   text-align: center;
 }
-/* line 892, ../scss/layout/_content.scss */
+/* line 906, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city h4 {
   border-bottom: 1px solid #e4eef2;
   padding-bottom: 25px;
   margin: 12.5px 12px 25px;
   font-weight: 500;
 }
-/* line 898, ../scss/layout/_content.scss */
+/* line 912, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city h4 a {
   color: #2e3b4e;
 }
-/* line 901, ../scss/layout/_content.scss */
+/* line 915, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city h4 a:hover {
   color: #00aff0;
 }
-/* line 907, ../scss/layout/_content.scss */
+/* line 921, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city p {
   margin: 0;
   padding: 0;
   position: relative;
 }
-/* line 913, ../scss/layout/_content.scss */
+/* line 927, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city p a:before {
   position: absolute;
   content: '\e604';
   font-family: 'icomoon';
 }
-/* line 919, ../scss/layout/_content.scss */
+/* line 933, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city p a span {
   padding-left: 20px;
 }
-/* line 924, ../scss/layout/_content.scss */
+/* line 938, ../scss/layout/_content.scss */
 .browse-meetups .browse-meetup-city p:last-of-type {
   padding-bottom: 25px;
 }
