@@ -588,3 +588,18 @@ function get_post_image($post) {
   	return '<img src="/wp-content/uploads/2015/07/defaulthome.jpg" alt="' . $post->post_title . '" />';
   }
 }
+
+
+
+
+add_filter( 'wpe_heartbeat_allowed_pages', 'my_wpe_add_allowed_pages' );
+function my_wpe_add_allowed_pages( $heartbeat_allowed_pages ) {
+    $heartbeat_allowed_pages = array(
+    	'index.php',
+    	'admin.php',
+    	'edit.php',
+    	'post.php',
+    	'post-new.php',
+    );
+    return $heartbeat_allowed_pages;
+}
