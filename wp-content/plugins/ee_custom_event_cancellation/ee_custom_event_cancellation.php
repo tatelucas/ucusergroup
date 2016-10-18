@@ -136,21 +136,26 @@ function register_new_tony_shortcodes123(){
 		break;
 		}
 	}
-	echo '<table class="x_social" style="margin:0; font-family:Helvetica,Arial,sans-serif; text-align: center;font-size: 18px !important; margin-left: auto; margin-right: auto; background: #ebebeb none repeat scroll 0 0; position: absolute;color: black !important; width: 600px;" >
-	<tbody style="margin:0; padding:0; font-family:Helvetica,Arial,sans-serif">
-<tr style="margin:0; padding:0; font-family:Helvetica,Arial,sans-serif">
-<td style="margin:0; padding:0; font-family:Helvetica,Arial,sans-serif; padding-top:20px">
-<table class="x_column" style="margin:0; padding:3px 7px; font-family:Helvetica,Arial,sans-serif; color:black; display:block; font-size:14px; font-weight:bold; margin-bottom:10px; text-align:center; text-decoration:none; margin:0; padding:0; font-family:Helvetica,Arial,sans-serif; float:left;" align="left">
-  <tbody style="margin:0; padding:0; font-family:Helvetica,Arial,sans-serif; ">
-If you can\'t make it to this event, please <a href="'.get_home_url().'/?page_id='.$pageid.'&reg_code='.$code.'&id='.$id.'&txn_reg_status_change=1">cancel your registration</a>
-</tbody>
-</table>
-<p style="margin:0; padding:0; Helvetica,Arial,sans-serif; font-size:14px; font-weight:normal; line-height:1.6; margin-bottom:10px">&nbsp;
- </p>
-</td>
-</tr>
-</tbody>
-</table>';
+	echo '
+	<table class="x_social" style="margin:0; font-family:Helvetica,Arial,sans-serif; text-align: center;font-size: 18px !important; margin-left: auto; margin-right: auto; background: #ebebeb none repeat scroll 0 0; position: absolute;color: black !important; width: 600px;" >
+		<tbody style="margin:0; padding:0; font-family:Helvetica,Arial,sans-serif">
+			<tr style="margin:0; padding:0; font-family:Helvetica,Arial,sans-serif">
+				<td style="margin:0; padding:0; font-family:Helvetica,Arial,sans-serif;">
+					<table class="x_column" style="margin:0; padding:3px 7px; font-family:Helvetica,Arial,sans-serif; color:black; display:block; font-size:14px; font-weight:bold; text-align:center; text-decoration:none; margin:0; padding:0; font-family:Helvetica,Arial,sans-serif; float:left;" align="left">
+						<tbody style="margin:0; padding:0; font-family:Helvetica,Arial,sans-serif; ">
+							<tr>
+								<td style="padding: 15px;">
+									If you can\'t make it to this event, please <a href="'.get_home_url().'/?page_id='.$pageid.'&reg_code='.$code.'&id='.$id.'&txn_reg_status_change=1">cancel your registration</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				<p style="margin:0; padding:0; Helvetica,Arial,sans-serif; font-size:14px; font-weight:normal; line-height:1.6; margin-bottom:10px">&nbsp;
+				</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>';
 	}
 }
 add_action( 'AHEE__EE_Email_Messenger_main_wrapper_template_after_main_body', 'register_new_tony_shortcodes123', 10, 5 );
