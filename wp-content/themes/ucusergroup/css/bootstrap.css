@@ -1721,7 +1721,7 @@ body {
   font-size: 14px;
   line-height: 1.857;
   color: #2e3b4e;
-  background-color: #3b6db2;
+  background-color: #fff;
 }
 
 /* line 36, ../scss/bootstrap/_scaffolding.scss */
@@ -1777,7 +1777,7 @@ img {
 .img-thumbnail {
   padding: 4px;
   line-height: 1.857;
-  background-color: #3b6db2;
+  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -3520,7 +3520,7 @@ th {
 }
 /* line 62, ../scss/bootstrap/_tables.scss */
 .table .table {
-  background-color: #3b6db2;
+  background-color: #fff;
 }
 
 /* line 75, ../scss/bootstrap/_tables.scss */
@@ -5486,7 +5486,7 @@ tbody.collapse.in {
 /* line 96, ../scss/bootstrap/_navs.scss */
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
   color: #8b8c8d;
-  background-color: #3b6db2;
+  background-color: #fff;
   border: 1px solid #ddd;
   border-bottom-color: transparent;
   cursor: default;
@@ -5579,7 +5579,7 @@ tbody.collapse.in {
   .nav-tabs.nav-justified > .active > a:hover,
   .nav-tabs-justified > .active > a:focus,
   .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom-color: #3b6db2;
+    border-bottom-color: #fff;
   }
 }
 
@@ -6618,7 +6618,7 @@ a.badge:hover, a.badge:focus {
   padding: 4px;
   margin-bottom: 25px;
   line-height: 1.857;
-  background-color: #3b6db2;
+  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: border 0.2s ease-in-out;

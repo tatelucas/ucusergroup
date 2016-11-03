@@ -1574,6 +1574,7 @@ p {
 #footer {
   padding: 45px 0;
   color: #a0daf5;
+  background-color: #3b6db2;
   font-size: 13px;
   line-height: 16px;
 }
@@ -1589,57 +1590,57 @@ p {
     text-align: center;
   }
 }
-/* line 15, ../scss/layout/_footer.scss */
+/* line 16, ../scss/layout/_footer.scss */
 #footer a {
   color: #a0daf5;
 }
-/* line 18, ../scss/layout/_footer.scss */
+/* line 19, ../scss/layout/_footer.scss */
 #footer a:hover {
   color: #fff;
 }
-/* line 24, ../scss/layout/_footer.scss */
+/* line 25, ../scss/layout/_footer.scss */
 #footer .social-list a {
   color: #fff;
 }
-/* line 27, ../scss/layout/_footer.scss */
+/* line 28, ../scss/layout/_footer.scss */
 #footer .social-list a:hover {
   color: #a0daf5;
 }
 @media (max-width: 767px) {
-  /* line 33, ../scss/layout/_footer.scss */
+  /* line 34, ../scss/layout/_footer.scss */
   #footer .top-holder {
     float: none !important;
   }
 }
 
-/* line 40, ../scss/layout/_footer.scss */
+/* line 41, ../scss/layout/_footer.scss */
 .logo-footer {
   float: left;
   width: 93px;
   margin: 0 31px 0 0;
 }
 @media (max-width: 767px) {
-  /* line 40, ../scss/layout/_footer.scss */
+  /* line 41, ../scss/layout/_footer.scss */
   .logo-footer {
     float: none;
     margin: 0 auto 15px;
   }
 }
 
-/* line 51, ../scss/layout/_footer.scss */
+/* line 52, ../scss/layout/_footer.scss */
 .copy {
   float: left;
   margin: 22px 0 0;
 }
 @media (max-width: 767px) {
-  /* line 51, ../scss/layout/_footer.scss */
+  /* line 52, ../scss/layout/_footer.scss */
   .copy {
     margin: 0 0 15px;
     float: none;
   }
 }
 
-/* line 61, ../scss/layout/_footer.scss */
+/* line 62, ../scss/layout/_footer.scss */
 .social-list {
   text-align: right;
   letter-spacing: -4px;
@@ -1648,14 +1649,14 @@ p {
   margin-top: 9px;
 }
 @media (max-width: 767px) {
-  /* line 61, ../scss/layout/_footer.scss */
+  /* line 62, ../scss/layout/_footer.scss */
   .social-list {
     text-align: center;
     float: none !important;
     margin-top: 0;
   }
 }
-/* line 75, ../scss/layout/_footer.scss */
+/* line 76, ../scss/layout/_footer.scss */
 .social-list li {
   display: inline-block;
   vertical-align: middle;
@@ -1663,27 +1664,27 @@ p {
   margin: 0 0 0 29px;
 }
 @media (max-width: 767px) {
-  /* line 75, ../scss/layout/_footer.scss */
+  /* line 76, ../scss/layout/_footer.scss */
   .social-list li {
     margin: 0 10px;
   }
 }
-/* line 85, ../scss/layout/_footer.scss */
+/* line 86, ../scss/layout/_footer.scss */
 .social-list li:first-child {
   margin-left: 0;
 }
 @media (max-width: 767px) {
-  /* line 85, ../scss/layout/_footer.scss */
+  /* line 86, ../scss/layout/_footer.scss */
   .social-list li:first-child {
     margin-left: 10px;
   }
 }
-/* line 94, ../scss/layout/_footer.scss */
+/* line 95, ../scss/layout/_footer.scss */
 .social-list a {
   display: inline-block;
   vertical-align: top;
 }
-/* line 99, ../scss/layout/_footer.scss */
+/* line 100, ../scss/layout/_footer.scss */
 .social-list .icon-linkedin {
   margin-top: -2px;
 }
