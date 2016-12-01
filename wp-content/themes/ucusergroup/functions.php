@@ -603,3 +603,105 @@ function my_wpe_add_allowed_pages( $heartbeat_allowed_pages ) {
     );
     return $heartbeat_allowed_pages;
 }
+
+
+
+/* add javascript for timezones */
+function ucusergroup_timezone_custom_scripts(){
+    
+    // Register and Enqueue a Script
+    // get_stylesheet_directory_uri will look up child theme location
+    wp_register_script( 'moment', get_stylesheet_directory_uri() . '/js/moment.js', array('jquery'));
+    wp_enqueue_script( 'moment' );
+	wp_register_script( 'moment-timezone-with-data-2010-2020', get_stylesheet_directory_uri() . '/js/moment-timezone-with-data-2010-2020.js', array('jquery'));
+    wp_enqueue_script( 'moment-timezone-with-data-2010-2020' );
+	wp_register_script( 'jstz', get_stylesheet_directory_uri() . '/js/jstz.min.js', array('jquery'));
+    wp_enqueue_script( 'jstz' );   
+}
+add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
+
+
+
+  function sfbug_custom_local_timezone_display() {
+   ?>
+   <script type="text/javascript">   	
+	//customize time elements on the page to user's local time
+		jQuery( "time" ).each(function( index ) {
+			  var timex = jQuery( this ).text();
+			  //alert(jQuery( this ).text());
+			  
+			  var timey = new Date(timex);
+			  
+				//moment interprets the time, guesses the user's timezone, and reformats the date using the new timezone
+				var format = 'dddd, MMMM D, YYYY h:mm a z'; //'YYYY/MM/DD HH:mm:ss ZZ';
+				var timez = moment(timey).tz(moment.tz.guess()).format(format);
+				//alert(timez);
+				
+				jQuery( this ).text(timez);
+		});
+		
+
+		
+		jQuery( ".ee-event-datetimes-li" ).each(function( index ) {
+			//grab timeblock from the page
+			var timeblock = jQuery( this ).text();
+			//the timeblock comes in very unclean, split it at the hyphen to get the start time
+			var timeo = timeblock.split('-')[0];
+			alert(timeo);
+			
+				//this timeblock is still ugly.  Use moment to find the year (why it can't figure out the whole date, I don't know)
+				var pageformat = 'MMMM D, YYYYh:mm a z';
+				var timeyear = moment(timeo, pageformat).format('YYYY');
+				
+				//split this timeblock on the year, take the 2nd part, which is the start time
+				var timep = timeo.split(timeyear)[1];
+				alert(timep);
+				
+				//using only the start time, have moment have it to the user's timezone, and give us just the start time again
+				var pagetimeformat = 'h:mm a z';
+				var timeformat = 'h:mm a z';
+				var startTimeNew = moment(timep, pagetimeformat).tz(moment.tz.guess()).format(timeformat);
+				alert (startTimeNew);
+				
+				//get the end time from the page
+				var oldEndTime = timeblock.split('-')[1];
+				//using only the end time, have moment have it to the user's timezone, and give us just the end time again
+				var pagetimeformat = 'h:mm a z';
+				var timeformat = 'h:mm a z';
+				var endTimeNew = moment(oldEndTime, pagetimeformat).tz(moment.tz.guess()).format(timeformat);
+				alert (endTimeNew);
+				
+				
+				//jQuery( this ).text(startTimeNew + ' - ' + endTimeNew);
+
+
+				//todo -- add a check for events crossing multiple dates, check for invalid date
+				
+				
+				//alert(timeyear);
+				//var format = 'MMMM D, YYYY h:mm a z'; //'YYYY/MM/DD HH:mm:ss ZZ';
+				
+				//var timeformat = 'h:mm a z';
+				//var timep = moment(timeo, pageformat).format(format);
+				//alert(timep);			
+			
+			//alert (timea);
+			  
+			  /*
+			  var timex = jQuery( this ).text();
+			  //alert(jQuery( this ).text());
+			  
+			  var timey = new Date(timex);
+			  
+				var format = 'dddd, MMMM D, YYYY h:mm a z'; //'YYYY/MM/DD HH:mm:ss ZZ';
+				var timez = moment(timey).tz(moment.tz.guess()).format(format);
+				//alert(timez);
+				
+				jQuery( this ).text(timez);
+				*/
+		});			
+
+   </script>
+   <?php
+   }
+  add_action( 'wp_footer', 'sfbug_custom_local_timezone_display' );
