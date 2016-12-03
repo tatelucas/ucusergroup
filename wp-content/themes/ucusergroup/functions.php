@@ -636,8 +636,11 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 				var format = 'dddd, MMMM D, YYYY h:mm a z'; //'YYYY/MM/DD HH:mm:ss ZZ';
 				var timez = moment(timey).tz(moment.tz.guess()).format(format);
 				//alert(timez);
-				
-				jQuery( this ).text(timez);
+
+				if (timez.indexOf('Invalid') <= -1) {
+					jQuery( this ).text(timez);
+				}
+				//else, do nothing and leave the date as originally displayed - there was a problem parsing it
 		});	
 
 
