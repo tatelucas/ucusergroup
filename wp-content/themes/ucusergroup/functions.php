@@ -638,68 +638,77 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 				//alert(timez);
 				
 				jQuery( this ).text(timez);
-		});
-		
+		});	
 
-		
+
 		jQuery( ".ee-event-datetimes-li" ).each(function( index ) {
+			//this one customizes date in ul li array -- that is, dateblock on individual event page, and dates in sidebar events
+			//each li date element has two child spans -- one with the date, and one with the time.  We need them both in order to change the timezones properly
+
+			//first, get the date, or date range
+			var dateblock = jQuery(this).find('.ee-event-datetimes-li-daterange').html();
+			//dateblock will either be one date or a range.  Test for a hyphen to see if it is a range.
+				if (dateblock.indexOf("-") > 0) {
+					//split it at the hyphen to get the dates
+					var oldStartDate = dateblock.split('-')[0].trim();
+					var oldEndDate = dateblock.split('-')[1].trim();
+				} else {
+					//the timeblock has no hyphen.  It's just a single day event.
+					var oldStartDate = dateblock.trim();
+					var oldEndDate = oldStartDate;
+				}			
+			
 			//grab timeblock from the page
-			var timeblock = jQuery( this ).text();
-			//the timeblock comes in very unclean, split it at the hyphen to get the start time
-			var timeo = timeblock.split('-')[0];
-			alert(timeo);
-			
-				//this timeblock is still ugly.  Use moment to find the year (why it can't figure out the whole date, I don't know)
-				var pageformat = 'MMMM D, YYYYh:mm a z';
-				var timeyear = moment(timeo, pageformat).format('YYYY');
+			var timeblock = jQuery(this).find('.ee-event-datetimes-li-timerange').html();
+			//timeblock will either be one date/time or a range.  Test for a hyphen to see if it is a range.
+			if (timeblock.indexOf("-") > 0) {
+				//split it at the hyphen to get the times
+				var oldStartTime = timeblock.split('-')[0].trim();
+				var oldEndTime = timeblock.split('-')[1].trim();
+				//var oldStartTime = oldStartTime.trim();
 				
-				//split this timeblock on the year, take the 2nd part, which is the start time
-				var timep = timeo.split(timeyear)[1];
-				alert(timep);
+			} else {
+				//the timeblock has no hyphen.  I really don't think this is supposed to happen with the timerange (it will with daterange)
+				var oldStartTime = timeblock;
+				var oldEndTime = oldStartTime;
+			}
 				
-				//using only the start time, have moment have it to the user's timezone, and give us just the start time again
-				var pagetimeformat = 'h:mm a z';
+				var oldStartTime = oldStartDate.trim() + ' ' + oldStartTime.trim();
+				var oldEndTime = oldEndDate + ' ' + oldEndTime;
+
+				//for whatever reason, event espresso uses $nbsp; instead of space.  This messes up the date function, so they've got to be replaced.
+				var oldStartTime = oldStartTime.replace(/&nbsp;/g, ' ');
+				var oldEndTime = oldEndTime.replace(/&nbsp;/g, ' ');
+				
+				
+				var pagetimeformat = 'MMMM D, YYYY h:mm a z';
 				var timeformat = 'h:mm a z';
-				var startTimeNew = moment(timep, pagetimeformat).tz(moment.tz.guess()).format(timeformat);
-				alert (startTimeNew);
-				
-				//get the end time from the page
-				var oldEndTime = timeblock.split('-')[1];
-				//using only the end time, have moment have it to the user's timezone, and give us just the end time again
-				var pagetimeformat = 'h:mm a z';
-				var timeformat = 'h:mm a z';
-				var endTimeNew = moment(oldEndTime, pagetimeformat).tz(moment.tz.guess()).format(timeformat);
-				alert (endTimeNew);
-				
-				
-				//jQuery( this ).text(startTimeNew + ' - ' + endTimeNew);
+				var dateformat = 'MMMM D, YYYY';
+
+				var startDateNew = moment(oldStartTime).tz(moment.tz.guess()).format(dateformat);
+				var endDateNew = moment(oldEndTime).tz(moment.tz.guess()).format(dateformat);				
+				var startTimeNew = moment(oldStartTime).tz(moment.tz.guess()).format(timeformat);
+				var endTimeNew = moment(oldEndTime).tz(moment.tz.guess()).format(timeformat);
+				//alert(startTimeNew);
 
 
-				//todo -- add a check for events crossing multiple dates, check for invalid date
-				
-				
-				//alert(timeyear);
-				//var format = 'MMMM D, YYYY h:mm a z'; //'YYYY/MM/DD HH:mm:ss ZZ';
-				
-				//var timeformat = 'h:mm a z';
-				//var timep = moment(timeo, pageformat).format(format);
-				//alert(timep);			
+				if (startTimeNew.indexOf('Invalid') <= -1 && endTimeNew.indexOf('Invalid') <= -1) {
+					jQuery(this).find('.ee-event-datetimes-li-timerange').text(startTimeNew + ' - ' + endTimeNew);
+				}
+				//else, do nothing and leave the date as originally displayed - there was a problem parsing it
+				if (startTimeNew.indexOf('Invalid') <= -1 && endTimeNew.indexOf('Invalid') <= -1) {
+					if (startDateNew != endDateNew) {
+						//if this is a date range, show date range
+						jQuery(this).find('.ee-event-datetimes-li-daterange').text(startDateNew + ' - ' + endDateNew);
+					} else {
+						//if single day, just show single day
+						jQuery(this).find('.ee-event-datetimes-li-daterange').text(startDateNew);
+					}
+				}				
+				//else, do nothing and leave the date as originally displayed - there was a problem parsing it
 			
-			//alert (timea);
-			  
-			  /*
-			  var timex = jQuery( this ).text();
-			  //alert(jQuery( this ).text());
-			  
-			  var timey = new Date(timex);
-			  
-				var format = 'dddd, MMMM D, YYYY h:mm a z'; //'YYYY/MM/DD HH:mm:ss ZZ';
-				var timez = moment(timey).tz(moment.tz.guess()).format(format);
-				//alert(timez);
-				
-				jQuery( this ).text(timez);
-				*/
-		});			
+		});
+	
 
    </script>
    <?php
