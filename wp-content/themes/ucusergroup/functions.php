@@ -712,6 +712,64 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 			
 		});
 	
+	
+		jQuery(window).load(function ()
+		{
+			//if this is the calendar page, run the date fixes on the calendar
+			if ( jQuery( "#espresso_calendar" ).length ) {
+				//note: this code only partially works -- because the actual dates are not accessible in the calendar, moment guesses the timezones based on TODAY.
+				// this means that the results will be incorrect if the date of the event is across a timechange that has not yet occurred.
+
+				var i = setInterval(function ()
+				{
+					if (jQuery('.fc-event-inner').length)
+					{
+						clearInterval(i);
+						// safe to execute your code here
+						
+						//time offset at server (Eastern Time)
+						var qsite = moment().tz("America/New_York").format('Z');
+						//timezone abbreviation of user
+						var quser = moment().tz(moment.tz.guess()).format('z');			
+						
+						jQuery( ".event-start-time" ).each(function( index ) {
+							
+							  var timea = jQuery( this ).text();
+							  //add offset suffix so moment knows how to change it
+							  var timea = timea + ' ' + qsite;
+							  
+							  var enterformat = 'h:mm a ZZ';
+							  var timeb = moment(timea, enterformat).format('h:mm a z');
+
+							if (timeb.indexOf('Invalid') <= -1) {
+							  jQuery( this ).text(timeb);		
+							}
+							//else, do nothing, it could not parse the date correctly
+						});
+
+						jQuery( ".event-end-time" ).each(function( index ) {
+							
+							  var timea = jQuery( this ).text();
+							  var timea = timea + ' ' + qsite;
+							  
+							  var enterformat = 'h:mm a ZZ';
+							  
+							  //moment interprets the time, and reformats the date using the new timezone
+							  var timeb = moment(timea, enterformat).format('h:mm a z');
+
+							if (timeb.indexOf('Invalid') <= -1) {							  
+							  jQuery( this ).text(timeb + " " + quser);
+							}
+							//else, do nothing, it could not parse the date correctly							  
+						});							
+						
+					}
+				}, 100);				
+				
+				
+			}
+			
+		});
 
    </script>
    <?php
