@@ -6,26 +6,26 @@ jQuery(function(){
 	initScalingNavigation();
 	jQuery('input, textarea').placeholder();
 
-	$('[data-location-select]').on('change', function(){
-		window.location = $(this).val();
+	jQuery('[data-location-select]').on('change', function(){
+		window.location = jQuery(this).val();
 	});
 
-	$('[data-button-scroll').on('click', function(e){
+	jQuery('[data-button-scroll').on('click', function(e){
 		e.preventDefault();
-		var scrollTarget = $(this).attr('href');
-		var scrollTargetOffset = $(scrollTarget).offset().top
-		$('html,body').animate({
+		var scrollTarget = jQuery(this).attr('href');
+		var scrollTargetOffset = jQuery(scrollTarget).offset().top
+		jQuery('html,body').animate({
 			scrollTop: scrollTargetOffset
 		}, 300, "swing");
 	});
 
-	$(".btn-join-event").click(function(e) {
+	jQuery(".btn-join-event").click(function(e) {
 		e.preventDefault();
-		$(".event-tickets form").submit();
+		jQuery(".event-tickets form").submit();
 	});
 
-	$('#user_login').attr( 'placeholder', 'Username' );
-	$('#user_pass').attr( 'placeholder', 'Password' );
+	jQuery('#user_login').attr( 'placeholder', 'Username' );
+	jQuery('#user_pass').attr( 'placeholder', 'Password' );
 
 });
 
@@ -82,7 +82,7 @@ ResponsiveHelper = (function($){
 	// init variables
 	var handlers = [],
 		prevWinWidth,
-		win = $(window),
+		win = jQuery(window),
 		nativeMatchMedia = false;
 
 	// detect match media support
@@ -199,7 +199,7 @@ ResponsiveHelper = (function($){
 			biggestHeight: false
 		},opt);
 		return this.each(function(){
-			var holder = $(this), postResizeTimer, ignoreResize;
+			var holder = jQuery(this), postResizeTimer, ignoreResize;
 			var elements = holder.find(options.elements).not('.' + options.skipClass);
 			if(!elements.length) return;
 
@@ -233,11 +233,11 @@ ResponsiveHelper = (function($){
 
 			// handle flexible/responsive layout
 			if(options.flexible) {
-				$(window).bind('resize orientationchange fontresize', delayedResizeHandler);
+				jQuery(window).bind('resize orientationchange fontresize', delayedResizeHandler);
 			}
 
 			// handle complete page load including images and fonts
-			$(window).bind('load', delayedResizeHandler);
+			jQuery(window).bind('load', delayedResizeHandler);
 		});
 	};
 
@@ -246,9 +246,9 @@ ResponsiveHelper = (function($){
 
 	// get elements by rows
 	function resizeElementsByRows(boxes, options) {
-		var currentRow = $(), maxHeight, maxCalcHeight = 0, firstOffset = boxes.eq(0).offset().top;
+		var currentRow = jQuery(), maxHeight, maxCalcHeight = 0, firstOffset = boxes.eq(0).offset().top;
 		boxes.each(function(ind){
-			var curItem = $(this);
+			var curItem = jQuery(this);
 			if(curItem.offset().top === firstOffset) {
 				currentRow = currentRow.add(this);
 			} else {
@@ -271,7 +271,7 @@ ResponsiveHelper = (function($){
 	function getMaxHeight(boxes) {
 		var maxHeight = 0;
 		boxes.each(function(){
-			maxHeight = Math.max(maxHeight, $(this).outerHeight());
+			maxHeight = Math.max(maxHeight, jQuery(this).outerHeight());
 		});
 		return maxHeight;
 	}
@@ -281,13 +281,13 @@ ResponsiveHelper = (function($){
 		var calcHeight;
 		var parentHeight = typeof parent === 'number' ? parent : parent.height();
 		boxes.removeClass(options.leftEdgeClass).removeClass(options.rightEdgeClass).each(function(i){
-			var element = $(this);
+			var element = jQuery(this);
 			var depthDiffHeight = 0;
 			var isBorderBox = element.css('boxSizing') === 'border-box' || element.css('-moz-box-sizing') === 'border-box' || element.css('-webkit-box-sizing') === 'border-box';
 
 			if(typeof parent !== 'number') {
 				element.parents().each(function(){
-					var tmpParent = $(this);
+					var tmpParent = jQuery(this);
 					if(parent.is(this)) {
 						return false;
 					} else {
@@ -312,9 +312,9 @@ ResponsiveHelper = (function($){
  * jQuery FontResize Event
  */
 jQuery.onFontResize = (function($) {
-	$(function() {
+	jQuery(function() {
 		var randomID = 'font-resize-frame-' + Math.floor(Math.random() * 1000);
-		var resizeFrame = $('<iframe>').attr('id', randomID).addClass('font-resize-helper');
+		var resizeFrame = jQuery('<iframe>').attr('id', randomID).addClass('font-resize-helper');
 
 		// required styles
 		resizeFrame.css({
@@ -344,7 +344,7 @@ jQuery.onFontResize = (function($) {
 	return {
 		// public method, so it can be called from within the iframe
 		trigger: function (em) {
-			$(window).trigger("fontresize", [em]);
+			jQuery(window).trigger("fontresize", [em]);
 		}
 	};
 }(jQuery));
@@ -391,7 +391,7 @@ jQuery.onFontResize = (function($) {
 
 		hooks = {
 			'get': function(element) {
-				var $element = $(element);
+				var $element = jQuery(element);
 
 				var $passwordInput = $element.data('placeholder-password');
 				if ($passwordInput) {
@@ -401,7 +401,7 @@ jQuery.onFontResize = (function($) {
 				return $element.data('placeholder-enabled') && $element.hasClass('placeholder') ? '' : element.value;
 			},
 			'set': function(element, value) {
-				var $element = $(element);
+				var $element = jQuery(element);
 
 				var $passwordInput = $element.data('placeholder-password');
 				if ($passwordInput) {
@@ -437,11 +437,11 @@ jQuery.onFontResize = (function($) {
 			propHooks.value = hooks;
 		}
 
-		$(function() {
+		jQuery(function() {
 			// Look for forms
-			$(document).delegate('form', 'submit.placeholder', function() {
+			jQuery(document).delegate('form', 'submit.placeholder', function() {
 				// Clear the placeholder values so they don't get submitted
-				var $inputs = $('.placeholder', this).each(clearPlaceholder);
+				var $inputs = jQuery('.placeholder', this).each(clearPlaceholder);
 				setTimeout(function() {
 					$inputs.each(setPlaceholder);
 				}, 10);
@@ -449,8 +449,8 @@ jQuery.onFontResize = (function($) {
 		});
 
 		// Clear placeholder values upon page reload
-		$(window).bind('beforeunload.placeholder', function() {
-			$('.placeholder').each(function() {
+		jQuery(window).bind('beforeunload.placeholder', function() {
+			jQuery('.placeholder').each(function() {
 				this.value = '';
 			});
 		});
@@ -471,7 +471,7 @@ jQuery.onFontResize = (function($) {
 
 	function clearPlaceholder(event, value) {
 		var input = this;
-		var $input = $(input);
+		var $input = jQuery(input);
 		if (input.value == $input.attr('placeholder') && $input.hasClass('placeholder')) {
 			if ($input.data('placeholder-password')) {
 				$input = $input.hide().next().show().attr('id', $input.removeAttr('id').data('placeholder-id'));
@@ -491,7 +491,7 @@ jQuery.onFontResize = (function($) {
 	function setPlaceholder() {
 		var $replacement;
 		var input = this;
-		var $input = $(input);
+		var $input = jQuery(input);
 		var id = this.id;
 		if (input.value == '') {
 			if (input.type == 'password') {
@@ -499,7 +499,7 @@ jQuery.onFontResize = (function($) {
 					try {
 						$replacement = $input.clone().attr({ 'type': 'text' });
 					} catch(e) {
-						$replacement = $('<input>').attr($.extend(args(this), { 'type': 'text' }));
+						$replacement = jQuery('<input>').attr($.extend(args(this), { 'type': 'text' }));
 					}
 					$replacement
 						.removeAttr('name')
@@ -581,7 +581,7 @@ jQuery.onFontResize = (function($) {
 
 	// create global stylesheet if custom forms are used
 	var createStyleSheet = function() {
-		var styleTag = $('<style>').appendTo('head'),
+		var styleTag = jQuery('<style>').appendTo('head'),
 			styleSheet = styleTag.prop('sheet') || styleTag.prop('styleSheet');
 
 		// crossbrowser style handling
@@ -600,7 +600,7 @@ jQuery.onFontResize = (function($) {
 		addCSSRule('.' + commonOptions.resetAppearanceClass, 'background: none; border: none; -webkit-appearance: none; appearance: none; opacity: 0; filter: alpha(opacity=0);');
 
 		// detect rtl pages
-		var html = $('html'), body = $('body');
+		var html = jQuery('html'), body = jQuery('body');
 		if (html.css('direction') === 'rtl' || body.css('direction') === 'rtl') {
 			html.addClass(commonOptions.rtlClass);
 		}
@@ -774,7 +774,7 @@ jQuery.onFontResize = (function($) {
 	var moduleMixin = {
 		// provide function for firing native events
 		fireNativeEvent: function(elements, eventName) {
-			$(elements).each(function() {
+			jQuery(elements).each(function() {
 				var element = this, eventObject;
 				if (element.dispatchEvent) {
 					eventObject = document.createEvent('HTMLEvents');
@@ -886,7 +886,7 @@ jQuery.onFontResize = (function($) {
 			this.modules[proto.name] = Module;
 		},
 		getInstance: function(element) {
-			return $(element).data(commonOptions.dataKey);
+			return jQuery(element).data(commonOptions.dataKey);
 		},
 		replace: function(elements, moduleName, customOptions) {
 			var self = this,
@@ -896,9 +896,9 @@ jQuery.onFontResize = (function($) {
 				createStyleSheet();
 			}
 
-			$(elements).each(function() {
+			jQuery(elements).each(function() {
 				var moduleOptions,
-					element = $(this);
+					element = jQuery(this);
 
 				instance = element.data(commonOptions.dataKey);
 				if (instance) {
@@ -921,16 +921,16 @@ jQuery.onFontResize = (function($) {
 			return instance;
 		},
 		refresh: function(elements) {
-			$(elements).each(function() {
-				var instance = $(this).data(commonOptions.dataKey);
+			jQuery(elements).each(function() {
+				var instance = jQuery(this).data(commonOptions.dataKey);
 				if (instance) {
 					instance.refresh();
 				}
 			});
 		},
 		destroy: function(elements) {
-			$(elements).each(function() {
-				var instance = $(this).data(commonOptions.dataKey);
+			jQuery(elements).each(function() {
+				var instance = jQuery(this).data(commonOptions.dataKey);
 				if (instance) {
 					instance.destroy();
 				}
@@ -939,7 +939,7 @@ jQuery.onFontResize = (function($) {
 		replaceAll: function(context) {
 			var self = this;
 			$.each(this.modules, function(moduleName, module) {
-				$(module.prototype.selector, context).each(function() {
+				jQuery(module.prototype.selector, context).each(function() {
 					if (this.className.indexOf('jcf-ignore') < 0) {
 						self.replace(this, moduleName);
 					}
@@ -949,8 +949,8 @@ jQuery.onFontResize = (function($) {
 		refreshAll: function(context) {
 			if (context) {
 				$.each(this.modules, function(moduleName, module) {
-					$(module.prototype.selector, context).each(function() {
-						var instance = $(this).data(commonOptions.dataKey);
+					jQuery(module.prototype.selector, context).each(function() {
+						var instance = jQuery(this).data(commonOptions.dataKey);
 						if (instance) {
 							instance.refresh();
 						}
@@ -965,8 +965,8 @@ jQuery.onFontResize = (function($) {
 		destroyAll: function(context) {
 			if (context) {
 				$.each(this.modules, function(moduleName, module) {
-					$(module.prototype.selector, context).each(function(index, element) {
-						var instance = $(element).data(commonOptions.dataKey);
+					jQuery(module.prototype.selector, context).each(function(index, element) {
+						var instance = jQuery(element).data(commonOptions.dataKey);
 						if (instance) {
 							instance.destroy();
 						}
@@ -1013,7 +1013,7 @@ jQuery.onFontResize = (function($) {
 			return element.is('select');
 		},
 		init: function() {
-			this.element = $(this.options.element);
+			this.element = jQuery(this.options.element);
 			this.createInstance();
 		},
 		isListBox: function() {
@@ -1073,12 +1073,12 @@ jQuery.onFontResize = (function($) {
 		},
 		initStructure: function() {
 			// prepare structure
-			this.win = $(window);
-			this.doc = $(document);
-			this.realElement = $(this.options.element);
-			this.fakeElement = $(this.options.fakeAreaStructure).insertAfter(this.realElement);
+			this.win = jQuery(window);
+			this.doc = jQuery(document);
+			this.realElement = jQuery(this.options.element);
+			this.fakeElement = jQuery(this.options.fakeAreaStructure).insertAfter(this.realElement);
 			this.selectTextContainer = this.fakeElement.find(this.options.selectTextSelector);
-			this.selectText = $('<span></span>').appendTo(this.selectTextContainer);
+			this.selectText = jQuery('<span></span>').appendTo(this.selectTextContainer);
 			makeUnselectable(this.fakeElement);
 
 			// copy classes from original select
@@ -1105,7 +1105,7 @@ jQuery.onFontResize = (function($) {
 				// just hide native select
 				this.realElement.addClass(this.options.hiddenClass);
 				this.fakeElement.attr('title', this.realElement.attr('title'));
-				this.fakeDropTarget = this.options.fakeDropInBody ? $('body') : this.fakeElement;
+				this.fakeDropTarget = this.options.fakeDropInBody ? jQuery('body') : this.fakeElement;
 			}
 		},
 		attachEvents: function() {
@@ -1183,7 +1183,7 @@ jQuery.onFontResize = (function($) {
 		},
 		onSelectAreaPress: function(e) {
 			// skip click if drop inside fake element or real select is disabled
-			var dropClickedInsideFakeElement = !this.options.fakeDropInBody && $(e.target).closest(this.dropdown).length;
+			var dropClickedInsideFakeElement = !this.options.fakeDropInBody && jQuery(e.target).closest(this.dropdown).length;
 			if (dropClickedInsideFakeElement || e.button > 1 || this.realElement.is(':disabled')) {
 				return;
 			}
@@ -1213,7 +1213,7 @@ jQuery.onFontResize = (function($) {
 			this.doc.off('jcf-pointerup', this.onSelectAreaRelease);
 		},
 		onOutsideClick: function(e) {
-			var target = $(e.target),
+			var target = jQuery(e.target),
 				clickedInsideSelect = target.closest(this.fakeElement).length || target.closest(this.dropdown).length;
 
 			if (!clickedInsideSelect) {
@@ -1255,7 +1255,7 @@ jQuery.onFontResize = (function($) {
 			}
 
 			// create new drop container
-			this.dropdown = $(this.options.fakeDropStructure).appendTo(this.fakeDropTarget);
+			this.dropdown = jQuery(this.options.fakeDropStructure).appendTo(this.fakeDropTarget);
 			this.dropdown.addClass(getPrefixedClasses(this.realElement.prop('className'), this.options.selectClassPrefix));
 			makeUnselectable(this.dropdown);
 
@@ -1283,7 +1283,7 @@ jQuery.onFontResize = (function($) {
 				multipleSelectWithoutKey: this.realElement.prop('multiple'),
 				element: this.realElement
 			});
-			$(this.list).on({
+			jQuery(this.list).on({
 				select: this.onSelect,
 				press: this.onSelectDropPress,
 				release: this.onSelectDropRelease
@@ -1400,7 +1400,7 @@ jQuery.onFontResize = (function($) {
 
 				if (selectedOptionImage) {
 					if (!this.selectImage) {
-						this.selectImage = $('<img>').prependTo(this.selectTextContainer).hide();
+						this.selectImage = jQuery('<img>').prependTo(this.selectTextContainer).hide();
 					}
 					this.selectImage.attr('src', selectedOptionImage).show();
 				} else if (this.selectImage) {
@@ -1469,8 +1469,8 @@ jQuery.onFontResize = (function($) {
 			this.attachEvents();
 		},
 		initStructure: function() {
-			this.realElement = $(this.options.element);
-			this.fakeElement = $(this.options.fakeStructure).insertAfter(this.realElement);
+			this.realElement = jQuery(this.options.element);
+			this.fakeElement = jQuery(this.options.fakeStructure).insertAfter(this.realElement);
 			this.listHolder = this.fakeElement.find(this.options.listHolder);
 			makeUnselectable(this.fakeElement);
 
@@ -1509,7 +1509,7 @@ jQuery.onFontResize = (function($) {
 			});
 
 			// select list event handlers
-			$(this.list).on({
+			jQuery(this.list).on({
 				select: this.onSelect,
 				press: this.onFakeOptionsPress,
 				release: this.onFakeOptionsRelease
@@ -1588,9 +1588,9 @@ jQuery.onFontResize = (function($) {
 			this.attachEvents();
 		},
 		initStructure: function() {
-			this.element = $(this.options.element);
+			this.element = jQuery(this.options.element);
 			this.indexSelector = '[' + this.options.indexAttribute + ']';
-			this.container = $(this.options.containerStructure).appendTo(this.options.holder);
+			this.container = jQuery(this.options.containerStructure).appendTo(this.options.holder);
 			this.listHolder = this.container.find(this.options.containerSelector);
 			this.lastClickedIndex = this.element.prop('selectedIndex');
 			this.rebuildList();
@@ -1605,11 +1605,11 @@ jQuery.onFontResize = (function($) {
 			}
 		},
 		onPress: function(e) {
-			$(this).trigger('press', e);
+			jQuery(this).trigger('press', e);
 			this.listHolder.on('jcf-pointerup', this.onRelease);
 		},
 		onRelease: function(e) {
-			$(this).trigger('release', e);
+			jQuery(this).trigger('release', e);
 			this.listHolder.off('jcf-pointerup', this.onRelease);
 		},
 		onHoverItem: function(e) {
@@ -1683,7 +1683,7 @@ jQuery.onFontResize = (function($) {
 			}
 
 			// make callback when item selected
-			$(this).trigger('select');
+			jQuery(this).trigger('select');
 		},
 		rebuildList: function() {
 			// rebuild options
@@ -1693,7 +1693,7 @@ jQuery.onFontResize = (function($) {
 			// recursively create fake options
 			this.storedSelectHTML = rootElement.innerHTML;
 			this.optionIndex = 0;
-			this.list = $(this.createOptionsList(rootElement));
+			this.list = jQuery(this.createOptionsList(rootElement));
 			this.listHolder.empty().append(this.list);
 			this.realOptions = this.element.find('option');
 			this.fakeOptions = this.list.find(this.indexSelector);

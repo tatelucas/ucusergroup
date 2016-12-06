@@ -213,6 +213,11 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
   function load_geo_scripts() {
 	  wp_localize_script( 'ajax-script', 'ajax_object.ajaxurl', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
+    wp_register_script('ucusergroup',  get_template_directory_uri() . '/js/jquery.main.js', false, '3');
+  	wp_enqueue_script('ucusergroup');
+  	wp_register_script('bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js', false, '3.3.5');
+  	wp_enqueue_script('bootstrap');
+
 	//wp_register_script('googlemaps', 'http://maps.googleapis.com/maps/api/js?' . $locale . '&key=' . GOOGLE_MAPS_V3_API_KEY . '&sensor=false', false, '3');
 	wp_register_script('googlemaps', 'http://maps.googleapis.com/maps/api/js?sensor=false', false, '3');
 	wp_register_script( 'ug_do_geolocate', get_template_directory_uri() . '/js/ug_geolocate.js' );
@@ -608,7 +613,7 @@ function my_wpe_add_allowed_pages( $heartbeat_allowed_pages ) {
 
 /* add javascript for timezones */
 function ucusergroup_timezone_custom_scripts(){
-    
+
     // Register and Enqueue a Script
     // get_stylesheet_directory_uri will look up child theme location
     wp_register_script( 'moment', get_stylesheet_directory_uri() . '/js/moment.js', array('jquery'));
@@ -616,7 +621,7 @@ function ucusergroup_timezone_custom_scripts(){
 	wp_register_script( 'moment-timezone-with-data-2010-2020', get_stylesheet_directory_uri() . '/js/moment-timezone-with-data-2010-2020.js', array('jquery'));
     wp_enqueue_script( 'moment-timezone-with-data-2010-2020' );
 	wp_register_script( 'jstz', get_stylesheet_directory_uri() . '/js/jstz.min.js', array('jquery'));
-    wp_enqueue_script( 'jstz' );   
+    wp_enqueue_script( 'jstz' );
 }
 add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 
@@ -624,14 +629,14 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 
   function sfbug_custom_local_timezone_display() {
    ?>
-   <script type="text/javascript">   	
+   <script type="text/javascript">
 	//customize time elements on the page to user's local time
 		jQuery( "time" ).each(function( index ) {
 			  var timex = jQuery( this ).text();
 			  //alert(jQuery( this ).text());
-			  
+
 			  var timey = new Date(timex);
-			  
+
 				//moment interprets the time, guesses the user's timezone, and reformats the date using the new timezone
 				var format = 'dddd, MMMM D, YYYY h:mm a z'; //'YYYY/MM/DD HH:mm:ss ZZ';
 				var timez = moment(timey).tz(moment.tz.guess()).format(format);
@@ -641,7 +646,7 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 					jQuery( this ).text(timez);
 				}
 				//else, do nothing and leave the date as originally displayed - there was a problem parsing it
-		});	
+		});
 
 
 		jQuery( ".ee-event-datetimes-li" ).each(function( index ) {
@@ -659,8 +664,8 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 					//the timeblock has no hyphen.  It's just a single day event.
 					var oldStartDate = dateblock.trim();
 					var oldEndDate = oldStartDate;
-				}			
-			
+				}
+
 			//grab timeblock from the page
 			var timeblock = jQuery(this).find('.ee-event-datetimes-li-timerange').html();
 			//timeblock will either be one date/time or a range.  Test for a hyphen to see if it is a range.
@@ -669,27 +674,27 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 				var oldStartTime = timeblock.split('-')[0].trim();
 				var oldEndTime = timeblock.split('-')[1].trim();
 				//var oldStartTime = oldStartTime.trim();
-				
+
 			} else {
 				//the timeblock has no hyphen.  I really don't think this is supposed to happen with the timerange (it will with daterange)
 				var oldStartTime = timeblock;
 				var oldEndTime = oldStartTime;
 			}
-				
+
 				var oldStartTime = oldStartDate.trim() + ' ' + oldStartTime.trim();
 				var oldEndTime = oldEndDate + ' ' + oldEndTime;
 
 				//for whatever reason, event espresso uses $nbsp; instead of space.  This messes up the date function, so they've got to be replaced.
 				var oldStartTime = oldStartTime.replace(/&nbsp;/g, ' ');
 				var oldEndTime = oldEndTime.replace(/&nbsp;/g, ' ');
-				
-				
+
+
 				var pagetimeformat = 'MMMM D, YYYY h:mm a z';
 				var timeformat = 'h:mm a z';
 				var dateformat = 'MMMM D, YYYY';
 
 				var startDateNew = moment(oldStartTime).tz(moment.tz.guess()).format(dateformat);
-				var endDateNew = moment(oldEndTime).tz(moment.tz.guess()).format(dateformat);				
+				var endDateNew = moment(oldEndTime).tz(moment.tz.guess()).format(dateformat);
 				var startTimeNew = moment(oldStartTime).tz(moment.tz.guess()).format(timeformat);
 				var endTimeNew = moment(oldEndTime).tz(moment.tz.guess()).format(timeformat);
 				//alert(startTimeNew);
@@ -707,12 +712,12 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 						//if single day, just show single day
 						jQuery(this).find('.ee-event-datetimes-li-daterange').text(startDateNew);
 					}
-				}				
+				}
 				//else, do nothing and leave the date as originally displayed - there was a problem parsing it
-			
+
 		});
-	
-	
+
+
 		jQuery(window).load(function ()
 		{
 			//if this is the calendar page, run the date fixes on the calendar
@@ -726,49 +731,49 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 					{
 						clearInterval(i);
 						// safe to execute your code here
-						
+
 						//time offset at server (Eastern Time)
 						var qsite = moment().tz("America/New_York").format('Z');
 						//timezone abbreviation of user
-						var quser = moment().tz(moment.tz.guess()).format('z');			
-						
+						var quser = moment().tz(moment.tz.guess()).format('z');
+
 						jQuery( ".event-start-time" ).each(function( index ) {
-							
+
 							  var timea = jQuery( this ).text();
 							  //add offset suffix so moment knows how to change it
 							  var timea = timea + ' ' + qsite;
-							  
+
 							  var enterformat = 'h:mm a ZZ';
 							  var timeb = moment(timea, enterformat).format('h:mm a z');
 
 							if (timeb.indexOf('Invalid') <= -1) {
-							  jQuery( this ).text(timeb);		
+							  jQuery( this ).text(timeb);
 							}
 							//else, do nothing, it could not parse the date correctly
 						});
 
 						jQuery( ".event-end-time" ).each(function( index ) {
-							
+
 							  var timea = jQuery( this ).text();
 							  var timea = timea + ' ' + qsite;
-							  
+
 							  var enterformat = 'h:mm a ZZ';
-							  
+
 							  //moment interprets the time, and reformats the date using the new timezone
 							  var timeb = moment(timea, enterformat).format('h:mm a z');
 
-							if (timeb.indexOf('Invalid') <= -1) {							  
+							if (timeb.indexOf('Invalid') <= -1) {
 							  jQuery( this ).text(timeb + " " + quser);
 							}
-							//else, do nothing, it could not parse the date correctly							  
-						});							
-						
+							//else, do nothing, it could not parse the date correctly
+						});
+
 					}
-				}, 100);				
-				
-				
+				}, 100);
+
+
 			}
-			
+
 		});
 
    </script>

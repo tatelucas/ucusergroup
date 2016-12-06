@@ -6,17 +6,7 @@
 <?php get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 
     <div class="banner">
-      <div class="bg-stretch">
-        <img src="<?php the_field('banner_image'); ?>" width="1170" height="505" alt="image description">
-      </div>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-5">
-            <h1><span><?php the_field('banner_text_top'); ?></span> <?php the_field('banner_text'); ?></h1>
-            <a href="#upcoming-meetups" type="button" data-button-scroll class="btn btn-success hidden-xs"><i class="icon-search"></i>Find a Meetup near you</a>
-          </div>
-        </div>
-      </div>
+      <?php echo do_shortcode('[wooslider slide_page="homepageslides" slider_type="slides" limit="15" thumbnails="default" order="ASC" order_by="menu_order"]'); ?>
     </div>
 
     <div id="upcoming-meetups" class="location-section">
