@@ -628,14 +628,10 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 	//customize time elements on the page to user's local time
 		jQuery( "time" ).each(function( index ) {
 			  var timex = jQuery( this ).text();
-			  //alert(jQuery( this ).text());
-			  
-			  var timey = new Date(timex);
 			  
 				//moment interprets the time, guesses the user's timezone, and reformats the date using the new timezone
 				var format = 'dddd, MMMM D, YYYY h:mm a z'; //'YYYY/MM/DD HH:mm:ss ZZ';
-				var timez = moment(timey).tz(moment.tz.guess()).format(format);
-				//alert(timez);
+				var timez = moment(timex, true).tz(moment.tz.guess()).format(format);
 
 				if (timez.indexOf('Invalid') <= -1) {
 					jQuery( this ).text(timez);
