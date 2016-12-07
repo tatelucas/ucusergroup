@@ -636,12 +636,19 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 
 				//moment interprets the time, guesses the user's timezone, and reformats the date using the new timezone
 				var format = 'dddd, MMMM D, YYYY h:mm a z'; //'YYYY/MM/DD HH:mm:ss ZZ';
-				var timez = moment(timex, true).tz(moment.tz.guess()).format(format);
 
-				if (timez.indexOf('Invalid') <= -1) {
-					jQuery( this ).text(timez);
+				var timey = new moment(timex, format).format(format);				
+				if (timey.indexOf('Invalid') <= -1) {		
+				//this check is to make sure the date coming in is a full-format date, moment is picky
+				  
+					var timez = moment(timex).tz(moment.tz.guess()).format(format);
+
+					if (timez.indexOf('Invalid') <= -1) {
+						jQuery( this ).text(timez);
+					}
+					//else, do nothing and leave the date as originally displayed - there was a problem parsing it				  
+				  
 				}
-				//else, do nothing and leave the date as originally displayed - there was a problem parsing it
 		});
 
 
