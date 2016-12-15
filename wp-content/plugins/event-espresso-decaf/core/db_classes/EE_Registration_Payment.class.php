@@ -19,9 +19,9 @@ class EE_Registration_Payment extends EE_Base_Class {
 	 * @param string $timezone
 	 * @return EE_Registration_Payment
 	 */
-	public static function new_instance( $props_n_values = array(), $timezone = '' ) {
-		$has_object = parent::_check_for_object( $props_n_values, __CLASS__ );
-		return $has_object ? $has_object : new self( $props_n_values, false, $timezone );
+	public static function new_instance( $props_n_values = array(), $timezone = '', $date_formats = array() ) {
+		$has_object = parent::_check_for_object( $props_n_values, __CLASS__, $timezone, $date_formats );
+		return $has_object ? $has_object : new self( $props_n_values, false, $timezone, $date_formats );
 	}
 
 
@@ -77,6 +77,28 @@ class EE_Registration_Payment extends EE_Base_Class {
 	 */
 	public function set_amount( $amount = 0.000 ) {
 		$this->set( 'RPY_amount', $amount );
+	}
+
+
+
+	/**
+	 * registration
+	 * @access    public
+	 * @return \EE_Registration
+	 */
+	public function registration() {
+		return $this->get_first_related( 'Registration' );
+	}
+
+
+
+	/**
+	 * payment
+	 * @access    public
+	 * @return \EE_Payment
+	 */
+	public function payment() {
+		return $this->get_first_related( 'Payment' );
 	}
 
 

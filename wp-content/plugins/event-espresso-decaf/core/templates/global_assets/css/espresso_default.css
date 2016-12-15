@@ -40,8 +40,8 @@
 	font-weight: 400;
 	font-variant: normal;
 	line-height: 1;
-    	text-align: center;
-    	text-decoration: inherit;
+    text-align: center;
+    text-decoration: inherit;
 	text-transform: none;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -251,7 +251,7 @@
 	/*margin-left:0 !important;*/
 	padding: 10px 0;
 }
- .espresso_events .ee-event-datetimes-ul li {
+.espresso_events .ee-event-datetimes-ul li {
  	list-style-type: none;
  	margin: 0 0 1em;
 }
@@ -768,6 +768,12 @@ input.ee-register-button {
 	letter-spacing: -.5px;
 }
 
+.ee-infinity-sign {
+	font-size: 1.5em;
+	line-height: 1em;
+	letter-spacing: -.25px;
+}
+
 .indented-text {
 	text-shadow:0 -1px 0  rgba( 0, 0, 0, 0.4 );
 }
@@ -942,6 +948,16 @@ input.ee-register-button {
 	border-bottom: 1px dotted #999;
 }
 
+.ee-clearfix:before,
+.ee-clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.ee-clearfix:after {
+	clear: both;
+}
+
 /******************* TEMPLATE FIXES ****************** */
 
 article .espresso_events,
@@ -954,6 +970,10 @@ article .espresso_venues {
 	margin-bottom: 48px;
 }
 
+.ee-clearfix .ee-event-datetimes-li {
+	float: left;
+	width: 50%;
+}
 
 /******************* iCal ****************** */
 
@@ -1001,6 +1021,102 @@ article .espresso_venues {
 	vertical-align: middle;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+a[href*="message_type=receipt"],
+a[href*="message_type=receipt"]:active,
+a[href*="message_type=receipt"]:visited {
+	margin-top: 1em;
+}
+
+/******************* SMALL SCREENS ****************** */
+
+@media only screen and (max-width: 640px) {
+	.ee-clearfix .ee-event-datetimes-li {
+		float: none;
+		width: auto;
+	}
+}
+
+/******************* RESPONSIVE TABLES ****************** */
+.ee-responsive-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1em 0 2em;
+}
+
+/* Zebra striping */
+.ee-responsive-table tr:nth-of-type(even) {
+	background: #f9f9f9;
+}
+
+.ee-responsive-table th {
+	background: #ddd;
+	color: #444;
+	font-weight: bold;
+	text-align: center;
+}
+
+.ee-responsive-table th,
+.ee-responsive-table td {
+	padding: 6px;
+	border: 1px solid #eee;
+}
+
+.ee-responsive-table td {
+	color: #777;
+	text-align: left;
+}
+
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
+
+	/* Force table to not be like tables anymore */
+	.ee-responsive-table,
+	.ee-responsive-table thead,
+	.ee-responsive-table tbody,
+	.ee-responsive-table th,
+	.ee-responsive-table td,
+	.ee-responsive-table tr {
+		display: block;
+	}
+
+	/* Hide table headers (but not display: none;, for accessibility) */
+	.ee-responsive-table thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	.ee-responsive-table tr {
+		border: 1px solid #ccc;
+	}
+
+	.ee-responsive-table td {
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+	}
+
+	.ee-responsive-table td:before {
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+	}
+
+	/*
+	Label the data
+	*/
+	.ee-responsive-table td:before {
+		content: attr(data-th) ": ";
+	}
 }
 
 /*******************************************************/

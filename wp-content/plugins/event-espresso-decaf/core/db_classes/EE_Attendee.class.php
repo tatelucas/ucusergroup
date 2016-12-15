@@ -24,15 +24,16 @@
  * @subpackage            includes/classes/EE_Transaction.class.php
  * @author                Mike Nelson
  */
-class EE_Attendee extends EE_CPT_Base implements EEI_Contact, EEI_Address {
+class EE_Attendee extends EE_CPT_Base implements EEI_Contact, EEI_Address, EEI_Admin_Links {
 
 	/**
 	 * Sets some dynamic defaults
 	 * @param array  $fieldValues
 	 * @param bool   $bydb
 	 * @param string $timezone
+	 * @param array $date_formats
 	 */
-	protected function __construct( $fieldValues = NULL, $bydb = FALSE, $timezone = NULL ) {
+	protected function __construct( $fieldValues = NULL, $bydb = FALSE, $timezone = NULL, $date_formats = array() ) {
 		if ( !isset( $fieldValues[ 'ATT_full_name' ] ) ) {
 			$fname = isset( $fieldValues[ 'ATT_fname' ] ) ? $fieldValues[ 'ATT_fname' ] . ' ' : '';
 			$lname = isset( $fieldValues[ 'ATT_lname' ] ) ? $fieldValues[ 'ATT_lname' ] : '';
@@ -45,30 +46,35 @@ class EE_Attendee extends EE_CPT_Base implements EEI_Contact, EEI_Address {
 		if ( !isset( $fieldValues[ 'ATT_short_bio' ] ) && isset( $fieldValues[ 'ATT_bio' ] ) ) {
 			$fieldValues[ 'ATT_short_bio' ] = substr( $fieldValues[ 'ATT_bio' ], 0, 50 );
 		}
-		parent::__construct( $fieldValues, $bydb, $timezone );
+		parent::__construct( $fieldValues, $bydb, $timezone, $date_formats );
 	}
 
 
 
 	/**
 	 *
-	 * @param array $props_n_values
+	 * @param array $props_n_values  incoming values
+	 * @param string $timezone  incoming timezone (if not set the timezone set for the website will be
+	 *                          		used.)
+	 * @param array $date_formats  incoming date_formats in an array where the first value is the
+	 *                             		    date_format and the second value is the time format
 	 * @return EE_Attendee
 	 */
-	public static function new_instance( $props_n_values = array() ) {
-		$classname = __CLASS__;
-		$has_object = parent::_check_for_object( $props_n_values, $classname );
-		return $has_object ? $has_object : new self( $props_n_values );
+	public static function new_instance( $props_n_values = array(), $timezone = null, $date_formats = array() ) {
+		$has_object = parent::_check_for_object( $props_n_values, __CLASS__, $timezone, $date_formats );
+		return $has_object ? $has_object : new self( $props_n_values, false, $timezone, $date_formats );
 	}
 
 
 
 	/**
-	 * @param array $props_n_values
+	 * @param array $props_n_values  incoming values from the database
+	 * @param string $timezone  incoming timezone as set by the model.  If not set the timezone for
+	 *                          		the website will be used.
 	 * @return EE_Attendee
 	 */
-	public static function new_instance_from_db( $props_n_values = array() ) {
-		return new self( $props_n_values, TRUE );
+	public static function new_instance_from_db( $props_n_values = array(), $timezone = null ) {
+		return new self( $props_n_values, TRUE, $timezone );
 	}
 
 
@@ -341,7 +347,7 @@ class EE_Attendee extends EE_CPT_Base implements EEI_Contact, EEI_Address {
 	 * @return string
 	 */
 	public function state_abbrev() {
-		return $this->state_obj() instanceof EE_State ? $this->state_obj()->abbrev() : __( 'Unknown', 'event_espresso' );
+		return $this->state_obj() instanceof EE_State ? $this->state_obj()->abbrev() : '';
 	}
 
 
@@ -362,7 +368,7 @@ class EE_Attendee extends EE_CPT_Base implements EEI_Contact, EEI_Address {
 		if( $this->state_obj() ){
 			return $this->state_obj()->name();
 		}else{
-			return __( 'Unknown', 'event_espresso' );
+			return '';
 		}
 	}
 
@@ -410,7 +416,7 @@ class EE_Attendee extends EE_CPT_Base implements EEI_Contact, EEI_Address {
 		if( $this->country_obj() ){
 			return $this->country_obj()->name();
 		}else{
-			return __( 'Unknown', 'event_espresso' );
+			return '';
 		}
 	}
 
@@ -560,6 +566,54 @@ class EE_Attendee extends EE_CPT_Base implements EEI_Contact, EEI_Address {
 		$billing_form->clean_sensitive_data();
 		return update_post_meta($this->ID(), $this->get_billing_info_postmeta_name( $payment_method ), $billing_form->input_values( true ) );
 	}
+
+	/**
+	 * Return the link to the admin details for the object.
+	 * @return string
+	 */
+	public function get_admin_details_link() {
+		return $this->get_admin_edit_link();
+	}
+
+	/**
+	 * Returns the link to the editor for the object.  Sometimes this is the same as the details.
+	 * @return string
+	 */
+	public function get_admin_edit_link() {
+		EE_Registry::instance()->load_helper( 'URL' );
+		return EEH_URL::add_query_args_and_nonce(
+			array(
+				'page' => 'espresso_registrations',
+				'action' => 'edit_attendee',
+				'post' => $this->ID()
+			),
+			admin_url( 'admin.php' )
+		);
+	}
+
+	/**
+	 * Returns the link to a settings page for the object.
+	 * @return string
+	 */
+	public function get_admin_settings_link() {
+		return $this->get_admin_edit_link();
+	}
+
+	/**
+	 * Returns the link to the "overview" for the object (typically the "list table" view).
+	 * @return string
+	 */
+	public function get_admin_overview_link() {
+		EE_Registry::instance()->load_helper( 'URL' );
+		return EEH_URL::add_query_args_and_nonce(
+			array(
+				'page' => 'espresso_registrations',
+				'action' => 'contact_list'
+			),
+			admin_url( 'admin.php' )
+		);
+	}
+
 
 }
 

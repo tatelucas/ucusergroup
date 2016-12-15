@@ -58,6 +58,34 @@ class EE_Html_messenger extends EE_messenger  {
 	}
 
 
+
+
+	/**
+	 * HTML Messenger desires execution immediately.
+	 * @see  parent::send_now() for documentation.
+	 * @since  4.9.0
+	 * @return bool
+	 */
+	public function send_now() {
+		return true;
+	}
+
+
+
+
+	/**
+	 * HTML Messenger allows an empty to field.
+	 * @see parent::allow_empty_to_field() for documentation
+	 * @since  4.9.0
+	 * @return bool
+	 */
+	public function allow_empty_to_field() {
+		return true;
+	}
+
+
+
+
 	/**
 	 * @see abstract declaration in EE_messenger for details.
 	 */
@@ -394,8 +422,9 @@ class EE_Html_messenger extends EE_messenger  {
 	protected function _get_main_template( $preview = FALSE ) {
 		$wrapper_template = $this->_tmp_pack->get_wrapper( $this->name, 'main' );
 
-		//require template helper
-		EE_Registry::instance()->load_helper( 'Template' );
+		//include message type as a template arg
+		$this->_template_args['message_type'] = $this->_incoming_message_type;
+
 		return EEH_Template::display_template( $wrapper_template, $this->_template_args, TRUE );
 	}
 

@@ -1,5 +1,5 @@
 <?php if (!defined('EVENT_ESPRESSO_VERSION')) exit('No direct script access allowed');
-do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
+/**
  *
  * Event Espresso
  *
@@ -80,7 +80,7 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 	  * EE_Encryption object
 	  * @var EE_Encryption
 	  */
-	 private $encryption = NULL;
+	 protected $encryption = NULL;
 
 	 /**
 	  * well... according to the server...
@@ -122,34 +122,39 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 
 
 	/**
-	 *		@singleton method used to instantiate class object
-	 *		@access public
-	 *		@return EE_Session
+	 *	@singleton method used to instantiate class object
+	 *	@access public
+	 * @param \EE_Encryption $encryption
+	 *	@return EE_Session
 	 */
-	public static function instance ( ) {
+	public static function instance( EE_Encryption $encryption = null ) {
 		// check if class object is instantiated
-		if ( ! self::$_instance instanceof EE_Session ) {
-			self::$_instance = new self();
+		// session loading is turned ON by default, but prior to the init hook, can be turned back OFF via:
+		// add_filter( 'FHEE_load_EE_Session', '__return_false' );
+		if ( ! self::$_instance instanceof EE_Session && apply_filters( 'FHEE_load_EE_Session', true ) ) {
+			self::$_instance = new self( $encryption );
 		}
 		return self::$_instance;
 	}
 
 
 
-	/**
-	* 	private constructor to prevent direct creation
-	* 	@Constructor
-	* 	@access private
-	* 	@return EE_Session
-	*/
-	private function __construct() {
+	 /**
+	  * protected constructor to prevent direct creation
+	  * @Constructor
+	  * @access protected
+	  * @param \EE_Encryption $encryption
+	  */
+	 protected function __construct( EE_Encryption $encryption = null ) {
 
 		// session loading is turned ON by default, but prior to the init hook, can be turned back OFF via: add_filter( 'FHEE_load_EE_Session', '__return_false' );
 		if ( ! apply_filters( 'FHEE_load_EE_Session', TRUE ) ) {
-			return NULL;
+			return;
 		}
 		do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );
-		define( 'ESPRESSO_SESSION', TRUE );
+		if ( ! defined( 'ESPRESSO_SESSION' ) ) {
+			define( 'ESPRESSO_SESSION', true );
+		}
 		// default session lifespan in seconds
 		$this->_lifespan = apply_filters(
 			'FHEE__EE_Session__construct___lifespan',
@@ -172,9 +177,9 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 			}
 		}
 		// are we using encryption?
-		if ( $this->_use_encryption ) {
-			// instantiate the class object making all properties and methods accessible via $this->encryption ex: $this->encryption->encrypt();
-			$this->encryption = EE_Registry::instance()->load_core( 'Encryption' );
+		if ( $this->_use_encryption && $encryption instanceof EE_Encryption ) {
+			// encrypt data via: $this->encryption->encrypt();
+			$this->encryption = $encryption;
 		}
 		// filter hook allows outside functions/classes/plugins to change default empty cart
 		$extra_default_session_vars = apply_filters( 'FHEE__EE_Session__construct__extra_default_session_vars', array() );
@@ -191,7 +196,7 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 		// once everything is all said and done,
 		add_action( 'shutdown', array( $this, 'update' ), 100 );
 		add_action( 'shutdown', array( $this, 'garbage_collection' ), 999 );
-
+		add_filter( 'wp_redirect', array( $this, 'update_on_redirect' ), 100, 1 );
 	}
 
 
@@ -346,7 +351,6 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 			$this->reset_checkout();
 			$this->reset_transaction();
 		}
-		do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );
 		 if ( ! empty( $key ))  {
 			return  isset( $this->_session_data[ $key ] ) ? $this->_session_data[ $key ] : NULL;
 		}  else  {
@@ -363,8 +367,6 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 	  * @return 	TRUE on success, FALSE on fail
 	  */
 	public function set_session_data( $data ) {
-
-		do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );
 
 		// nothing ??? bad data ??? go home!
 		if ( empty( $data ) || ! is_array( $data )) {
@@ -444,13 +446,6 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 			// no previous session = go back and create one (on top of the data above)
 			return FALSE;
 		}
-
-		// have we met before???
-		// let's compare our stored session details with the current visitor
-		// first the ip address
-		if ( $session_data['ip_address'] != $this->_ip_address ) {
-			return FALSE;
-		}
 		// now the user agent
 		if ( $session_data['user_agent'] != $this->_user_agent ) {
 			return FALSE;
@@ -479,6 +474,23 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 	  * @return string
 	  */
 	protected function _generate_session_id() {
+		// check if the SID was passed explicitly, otherwise get from session, then add salt and hash it to reduce length
+		if ( isset( $_REQUEST[ 'EESID' ] ) ) {
+			$session_id = sanitize_text_field( $_REQUEST[ 'EESID' ] );
+		} else {
+			$session_id = md5( session_id() . get_current_blog_id() . $this->_get_sid_salt() );
+		}
+		return apply_filters( 'FHEE__EE_Session___generate_session_id__session_id', $session_id );
+	}
+
+
+
+	 /**
+	  * _get_sid_salt
+	  *
+	  * @return string
+	  */
+	protected function _get_sid_salt() {
 		// was session id salt already saved to db ?
 		if ( empty( $this->_sid_salt ) ) {
 			// no?  then maybe use WP defined constant
@@ -492,12 +504,10 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 			}
 			// and save it as a permanent session setting
 			$session_settings = get_option( 'ee_session_settings' );
-			$session_settings['sid_salt'] = $this->_sid_salt;
+			$session_settings[ 'sid_salt' ] = $this->_sid_salt;
 			update_option( 'ee_session_settings', $session_settings );
 		}
-		// check if the SID was passed explicitly, otherwise get from session, then add salt and hash it to reduce length
-		$session_id = isset( $_REQUEST[ 'EESID' ] ) ? sanitize_text_field( $_REQUEST[ 'EESID' ] ) : md5( session_id() . $this->_sid_salt );
-		return apply_filters( 'FHEE__EE_Session___generate_session_id__session_id', $session_id );
+		return $this->_sid_salt;
 	}
 
 
@@ -524,7 +534,6 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 	  * @return TRUE on success, FALSE on fail
 	  */
 	public function update( $new_session = FALSE ) {
-		do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );
 		$this->_session_data = isset( $this->_session_data )
 			&& is_array( $this->_session_data )
 			&& isset( $this->_session_data['id'])
@@ -609,6 +618,19 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 
 
 
+	 /**
+	  * since WordPress has no do_action()s within wp_safe_redirect,
+	  * we have to hack into one of the supplied filters
+	  * in order to make sure the session is updated prior to redirecting.
+	  * This is a callback for the 'wp_redirect' filter
+	  *
+	  * @param string $location
+	  * @return mixed
+	  */
+	 public function update_on_redirect( $location ) {
+		 $this->update();
+		 return $location;
+	}
 
 
 	/**
@@ -617,7 +639,7 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 	 * 	@return bool
 	 */
 	private function _create_espresso_session( ) {
-		do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );
+		do_action( 'AHEE_log', __CLASS__, __FUNCTION__, '' );
 		// use the update function for now with $new_session arg set to TRUE
 		return  $this->update( TRUE ) ? TRUE : FALSE;
 	}
@@ -633,12 +655,12 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 	 * 	@return string
 	 */
 	private function _save_session_to_db() {
-		do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );
 		if (
 			! EE_Registry::instance()->REQ instanceof EE_Request_Handler
 			|| ! (
 				EE_Registry::instance()->REQ->is_espresso_page()
 				|| EE_Registry::instance()->REQ->front_ajax
+				|| is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX )
 			)
 		) {
 			return FALSE;
@@ -668,7 +690,6 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 	 *	@return string
 	 */
 	private function _visitor_ip() {
-		do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );
 		$visitor_ip = '0.0.0.0';
 		$server_keys = array(
 			'HTTP_CLIENT_IP',
@@ -702,7 +723,6 @@ do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );/**
 	 */
 	public function _get_page_visit() {
 
-		do_action( 'AHEE_log', __FILE__, __FUNCTION__, '' );
 //		echo '<h3>'. __CLASS__ .'->'.__FUNCTION__.'  ( line no: ' . __LINE__ . ' )</h3>';
 		$page_visit = home_url('/') . 'wp-admin/admin-ajax.php';
 

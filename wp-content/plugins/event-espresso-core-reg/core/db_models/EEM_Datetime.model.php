@@ -47,7 +47,7 @@ class EEM_Datetime extends EEM_Soft_Delete_Base {
 				'DTT_ID'=> new EE_Primary_Key_Int_Field('DTT_ID', __('Datetime ID','event_espresso')),
 				'EVT_ID'=>new EE_Foreign_Key_Int_Field('EVT_ID', __('Event ID','event_espresso'), false, 0, 'Event'),
 				'DTT_name' => new EE_Plain_Text_Field('DTT_name', __('Datetime Name', 'event_espresso'), false, ''),
-				'DTT_description' => new EE_Full_HTML_Field('DTT_description', __('Description for Datetime', 'event_espresso'), false, ''),
+				'DTT_description' => new EE_Post_Content_Field('DTT_description', __('Description for Datetime', 'event_espresso'), false, ''),
 				'DTT_EVT_start'=>new EE_Datetime_Field('DTT_EVT_start', __('Start time/date of Event','event_espresso'), false, time(), $timezone ),
 				'DTT_EVT_end'=>new EE_Datetime_Field('DTT_EVT_end', __('End time/date of Event','event_espresso'), false, time(), $timezone ),
 				'DTT_reg_limit'=>new EE_Infinite_Integer_Field('DTT_reg_limit', __('Registration Limit for this time','event_espresso'), true, EE_INF),
@@ -342,6 +342,8 @@ class EEM_Datetime extends EEM_Soft_Delete_Base {
 	 * @return wpdb results array
 	 */
 	public function get_dtt_months_and_years( $where_params, $evt_active_status = '' ) {
+		$current_time_for_DTT_EVT_start = $this->current_time_for_query( 'DTT_EVT_start' );
+		$current_time_for_DTT_EVT_end = $this->current_time_for_query( 'DTT_EVT_end' );
 
 		switch ( $evt_active_status ) {
 			case 'upcoming' :
@@ -350,13 +352,13 @@ class EEM_Datetime extends EEM_Soft_Delete_Base {
 					if ( isset( $where_params['DTT_EVT_start'] ) ) {
 						$where_params['DTT_EVT_start*****'] = $where_params['DTT_EVT_start'];
 					}
-					$where_params['DTT_EVT_start'] = array('>', $this->current_time_for_query( 'DTT_EVT_start' ) );
+					$where_params['DTT_EVT_start'] = array('>', $current_time_for_DTT_EVT_start );
 					break;
 
 			case 'expired' :
 				if ( isset( $where_params['Event.status'] ) ) unset( $where_params['Event.status'] );
 				//get events to exclude
-				$exclude_query[0] = array_merge( $where_params, array( 'DTT_EVT_end' => array( '>', $this->current_time_for_query( 'DTT_EVT_end' ) ) ) );
+				$exclude_query[0] = array_merge( $where_params, array( 'DTT_EVT_end' => array( '>', $current_time_for_DTT_EVT_end ) ) );
 				//first get all events that have datetimes where its not expired.
 				$event_ids = $this->_get_all_wpdb_results( $exclude_query, OBJECT_K, 'Datetime.EVT_ID' );
 				$event_ids = array_keys( $event_ids );
@@ -364,7 +366,7 @@ class EEM_Datetime extends EEM_Soft_Delete_Base {
 				if ( isset( $where_params['DTT_EVT_end'] ) ) {
 					$where_params['DTT_EVT_end****'] = $where_params['DTT_EVT_end'];
 				}
-				$where_params['DTT_EVT_end'] = array( '<', EEM_Datetime::instance()->current_time_for_query( 'DTT_EVT_end' ) );
+				$where_params['DTT_EVT_end'] = array( '<', $current_time_for_DTT_EVT_end );
 				$where_params['Event.EVT_ID'] = array( 'NOT IN', $event_ids );
 				break;
 
@@ -376,8 +378,8 @@ class EEM_Datetime extends EEM_Soft_Delete_Base {
 				if ( isset( $where_params['Datetime.DTT_EVT_end'] ) ) {
 					$where_params['Datetime.DTT_EVT_end*****'] = $where_params['DTT_EVT_end'];
 				}
-				$where_params['DTT_EVT_start'] = array('<',  $this->current_time_for_query( 'DTT_EVT_start' ) );
-				$where_params['DTT_EVT_end'] = array('>', $this->current_time_for_query( 'DTT_EVT_end' ) );
+				$where_params['DTT_EVT_start'] = array('<',  $current_time_for_DTT_EVT_start );
+				$where_params['DTT_EVT_end'] = array('>', $current_time_for_DTT_EVT_end );
 				break;
 
 			case 'inactive' :
@@ -401,9 +403,13 @@ class EEM_Datetime extends EEM_Soft_Delete_Base {
 		$query_params[0] = $where_params;
 		$query_params['group_by'] = array('dtt_year', 'dtt_month');
 		$query_params['order_by'] = array( 'DTT_EVT_start' => 'DESC' );
+
+		$query_interval = EEH_DTT_Helper::get_sql_query_interval_for_offset( $this->get_timezone(), 'DTT_EVT_start' );
+
 		$columns_to_select = array(
-			'dtt_year' => array('YEAR(DTT_EVT_start)', '%s'),
-			'dtt_month' => array('MONTHNAME(DTT_EVT_start)', '%s')
+			'dtt_year' => array('YEAR(' . $query_interval . ')', '%s'),
+			'dtt_month' => array('MONTHNAME(' . $query_interval . ')', '%s'),
+			'dtt_month_num' => array('MONTH(' . $query_interval .')', '%s')
 			);
 		return $this->_get_all_wpdb_results( $query_params, OBJECT, $columns_to_select );
 	}

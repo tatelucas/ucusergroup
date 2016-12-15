@@ -123,7 +123,6 @@ class EE_PMT_Check extends EE_PMT_Base{
 	 * @return string
 	 */
 	public function payment_overview_content(EE_Payment $payment){
-		EE_Registry::instance()->load_helper('Template');
 		$extra_meta_for_payment_method = $this->_pm_instance->all_extra_meta_array();
 		$template_vars = array_merge(
 						array(
@@ -135,9 +134,10 @@ class EE_PMT_Check extends EE_PMT_Base{
 							'address_to_send_payment'=>'',
 							),
 						$extra_meta_for_payment_method);
-		return EEH_Template::display_template($this->_file_folder.'templates'.DS.'check_payment_details_content.template.php',
-				$template_vars,
-				true);
+		return EEH_Template::locate_template(
+				'payment_methods' . DS . 'Check'. DS . 'templates'.DS.'check_payment_details_content.template.php',
+				$template_vars
+				);
 	}
 
 
