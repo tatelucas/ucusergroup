@@ -1532,6 +1532,9 @@ p {
 /* WooSlider Tweaks */
 /* line 979, ../scss/layout/_content.scss */
 body.home .wooslider {
+  max-width: 1170px;
+  margin-right: auto;
+  margin-left: auto;
   border: 0px;
   background: transparent;
   border-radius: 0px;
@@ -1541,12 +1544,12 @@ body.home .wooslider {
   box-shadow: none;
   position: relative;
 }
-/* line 989, ../scss/layout/_content.scss */
+/* line 992, ../scss/layout/_content.scss */
 body.home .wooslider .slide-content {
   margin: 0;
   position: relative;
 }
-/* line 994, ../scss/layout/_content.scss */
+/* line 997, ../scss/layout/_content.scss */
 body.home .wooslider .slider-hover-text {
   position: absolute;
   top: 10%;
@@ -1554,7 +1557,7 @@ body.home .wooslider .slider-hover-text {
   width: 80%;
 }
 @media (max-width: 767px) {
-  /* line 994, ../scss/layout/_content.scss */
+  /* line 997, ../scss/layout/_content.scss */
   body.home .wooslider .slider-hover-text {
     position: relative;
     display: block;
@@ -1563,11 +1566,11 @@ body.home .wooslider .slider-hover-text {
     margin: 20px auto;
     width: 90%;
   }
-  /* line 1008, ../scss/layout/_content.scss */
+  /* line 1011, ../scss/layout/_content.scss */
   body.home .wooslider .slider-hover-text h1 {
     margin-bottom: 20px;
   }
-  /* line 1012, ../scss/layout/_content.scss */
+  /* line 1015, ../scss/layout/_content.scss */
   body.home .wooslider .slider-hover-text p {
     margin: 0;
   }

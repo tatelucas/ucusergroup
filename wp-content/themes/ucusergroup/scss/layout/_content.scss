@@ -977,6 +977,9 @@
 /* WooSlider Tweaks */
 body.home {
 	.wooslider {
+		max-width: 1170px;
+		margin-right: auto;
+		margin-left: auto;		
 	  border: 0px;
 	  background: transparent;
 	  border-radius: 0px;
