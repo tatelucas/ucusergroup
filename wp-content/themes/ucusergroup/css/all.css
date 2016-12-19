@@ -1576,6 +1576,12 @@ body.home .wooslider .slider-hover-text {
   }
 }
 
+/* calendar tweaks */
+/* line 1024, ../scss/layout/_content.scss */
+.time_cal_qtip {
+  display: none;
+}
+
 @media (min-width: 1025px) {
   /* line 1, ../scss/layout/_sidebar.scss */
   .sidebar-container {
