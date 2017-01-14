@@ -783,3 +783,13 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
    <?php
    }
   add_action( 'wp_footer', 'sfbug_custom_local_timezone_display' );
+
+  
+  
+//change wordpress registration page  
+add_filter( 'register_url', 'custom_register_url' );
+function custom_register_url( $register_url )
+{
+    $register_url = "/create-account";
+    return $register_url;
+}
