@@ -793,3 +793,68 @@ function custom_register_url( $register_url )
     $register_url = "/create-account";
     return $register_url;
 }
+
+
+ 
+//Ultimate Member Customization
+
+/* Add fields to account page */
+
+if( is_plugin_active( 'ultimate-member/index.php' ) ) {
+	add_action('um_after_account_general', 'showExtraFields', 100);
+}
+
+function showExtraFields()
+{
+	
+	$ucUserGroupCities = get_terms(
+      array('city')
+    );
+
+	$custom_fields = [
+		"user_group" => "Your Skype User Group",
+	];
+
+	foreach ($custom_fields as $key => $value) {
+		$fields[ $key ] = array(
+				'title' => $value,
+				'metakey' => $key,
+				'type' => 'select',
+				'label' => $value,
+		);
+
+		$um_current_fields = $_SESSION['um_account_fields'][ 'general' ];
+		//print_R($um_current_fields);
+		//print_R($fields);
+		$fields = array_merge ($um_current_fields, $fields);
+		apply_filters('um_account_secure_fields', $fields, 'general' );
+
+		$field_value = get_user_meta(um_user('ID'), $key, true) ? : '';
+		
+		
+		$ucUserGroupCitiesSelect  = '<select data-validate class="um-form-field valid" name="'.$key.'"
+		id="'.$key.'" data-key="'.$key.'">';
+		
+		foreach($ucUserGroupCities as $ucUserGroupCity){
+			$selected = '';
+			if ($field_value == $ucUserGroupCity->term_id) {$selected = "selected";}
+			$ucUserGroupCitiesSelect .= '<option '.$selected.' id="'. $ucUserGroupCity->term_id .'" value="'. $ucUserGroupCity->term_id . '">' . $ucUserGroupCity->name . '</option>';
+		}
+		
+		$ucUserGroupCitiesSelect .= '</select>';
+
+		$html = '<div class="um-field um-field-'.$key.' um-field-select" data-key="'.$key.'">
+		<div class="um-field-label">
+		<label for="'.$key.'">'.$value.'</label>
+		<div class="um-clear"></div>
+		</div>
+		<div class="um-field-area">'
+		. $ucUserGroupCitiesSelect . '
+		
+		</div>
+		</div>';
+
+		echo $html;
+
+	}
+}
