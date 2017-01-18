@@ -326,7 +326,7 @@ p {
 }
 /* line 20, ../scss/layout/_header.scss */
 .logged-in #header .btn-group .btn, .logged-in #header .btn-group #comments #submit, #comments .logged-in #header .btn-group #submit {
-  width: 100%;
+  /*width: 100%;*/
 }
 @media (max-width: 767px) {
   /* line 1, ../scss/layout/_header.scss */
