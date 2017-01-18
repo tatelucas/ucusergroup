@@ -4,7 +4,7 @@ Plugin Name: Skype Mailchimp Plugin
 Plugin URI:
 Description: Custom Plugin to update Skype Mailchimp Mailing Lists when users change profile information.  Requires Advanced Custom Fields.
 Author: David Lorimer
-Version: 1.0
+Version: 1.1
 Author URI:
 */
 
@@ -195,8 +195,10 @@ function skype_mc_usergroup_update( $null, $object_id, $meta_key, $meta_value, $
 		//dwl - todo - 
 		// for the first while, we don't want to use the following check, as many of the registered users are not in mailchimp at all.
 		// add this code back in (swich the two following lines) after January of 2018
-		//if ($old_group != $meta_value) {
-		if (1==1) {
+		
+		//this code is already switched - dwl, Jan 2017
+		if ($old_group != $meta_value) {
+		//if (1==1) {
 			//if the value hasn't changed, don't do anything.  If it has changed, then do change on Mailchimp.
 
 			
@@ -323,7 +325,6 @@ function skype_mc_usergroup_update( $null, $object_id, $meta_key, $meta_value, $
 	}
 
 	return null; // this means: go on with the normal execution in meta.php
-
 }
 
 
@@ -378,15 +379,16 @@ function skype_mc_profile_updatex( $user_id, $old_user_data ) {
 						'send_welcome' => false
 					  )
 					);	
-	}
-	
-/* 
-//We do not have access to the old values for first and last name here, so this code does not work
-	} elseif (($userdata->first_name != $old_user_data->first_name) || ($userdata->last_name != $old_user_data->last_name)) {
-		//name has been updated
+	} else {
+		//just update the name
 		
 		$usergroupID = get_field('user_group', 'user_'.$user_id);
-		$mcListId = get_mc_mailing_list($usergroupID);			
+		$mcListId = get_mc_mailing_list($usergroupID);	
+
+				  // Mailchimp Info
+				  $api = get_mc_api();
+				  // Initializing the $MailChimp object
+				  $MailChimp = new \Drewm\MailChimp($api);		
 		
 			  $merge_vars = array(
 					   'FNAME'=>    $userdata->first_name,
@@ -406,7 +408,6 @@ function skype_mc_profile_updatex( $user_id, $old_user_data ) {
 					  )
 					);
 	}
-*/
 }
 
 
@@ -538,5 +539,38 @@ function skype_mc_profile_updatex( $user_id, $old_user_data ) {
 		} //end usergroupID is not blank		  
 		
     } //end function
+
+	
+
+//if user is deleted, remove from mailchimp	
+add_action( 'delete_user', 'skype_mailchimp_delete_user' );
+function skype_mailchimp_delete_user( $user_id ) {
+	
+	  $userdata = get_userdata( $user_id );
+	  $useremail = $userdata->user_email;
+		
+		$usergroupID = get_field('user_group', 'user_'.$user_id);
+		
+		if (!empty($usergroupID)) {		
+		
+			$mcListId = get_mc_mailing_list($usergroupID);			
+		
+				//remove from mailchimp list
+				  // Mailchimp Info
+				  $api = get_mc_api();
+				  // Initializing the $MailChimp object
+				  $MailChimp = new \Drewm\MailChimp($api);
+
+				  //delete user from Mailchimp
+							$retval = $MailChimp->call('lists/unsubscribe', array(
+								'id' => $mcListId, // your mailchimp list id here
+								'email' => array( 'email' => $useremail ),
+								'delete_member' => true,
+								'send_goodbye' => false,
+								'send_notify' => false
+							  )
+							);	
+		}
+} //end delete user							
 
 ?>
