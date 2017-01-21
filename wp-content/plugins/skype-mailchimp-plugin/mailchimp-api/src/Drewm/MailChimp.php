@@ -15,7 +15,7 @@ namespace Drewm;
  * @author Drew McLellan <drew.mclellan@gmail.com> 
  * @version 1.1.1
  */
-class MailChimp
+class SkypeMailChimp
 {
     private $api_key;
     private $api_endpoint = 'https://<dc>.api.mailchimp.com/2.0';

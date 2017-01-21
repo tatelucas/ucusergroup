@@ -27,9 +27,9 @@ require_once( 'mailchimp-api/src/Drewm/MailChimp.php' );
 //listed here for reference, set for file below
 $api = '751f17f8425c740fccbe13dd13457f17-us14';
 // Initializing the $MailChimp object
-$MailChimp = new \Drewm\MailChimp($api);
+$SkypeMailChimp = new \Drewm\SkypeMailChimp($api);
 
-//print_r($MailChimp->call('lists/list'));
+//print_r($SkypeMailChimp->call('lists/list'));
 
 
 /*
@@ -228,7 +228,7 @@ function skype_mc_usergroup_update( $null, $object_id, $meta_key, $meta_value, $
 				  
 					  
 					  // Initializing the $MailChimp object
-					  $MailChimp = new \Drewm\MailChimp($api);
+					  $SkypeMailChimp = new \Drewm\SkypeMailChimp($api);
 
 					  //get the user's email address
 					  $userdata = get_userdata( $user_id );
@@ -244,7 +244,7 @@ function skype_mc_usergroup_update( $null, $object_id, $meta_key, $meta_value, $
 
 
 							// code for single-updates
-								$retval = $MailChimp->call('lists/subscribe', array(
+								$retval = $SkypeMailChimp->call('lists/subscribe', array(
 									'id' => $mcListId, // your mailchimp list id here
 									'email' => array(
 									  'email' => $useremail
@@ -259,8 +259,8 @@ function skype_mc_usergroup_update( $null, $object_id, $meta_key, $meta_value, $
 								//print_r($retval);
 
 								if($retval['error']) {
-									$msg .= "\tCode=".$MailChimp->errorCode."\n";
-									$msg .= "\tMsg=".$MailChimp->errorMessage."\n";
+									$msg .= "\tCode=".$SkypeMailChimp->errorCode."\n";
+									$msg .= "\tMsg=".$SkypeMailChimp->errorMessage."\n";
 								}		  
 
 
@@ -293,7 +293,7 @@ function skype_mc_usergroup_update( $null, $object_id, $meta_key, $meta_value, $
 					  //$useremail = $userdata->user_email;
 
 					  //delete user from Mailchimp
-								$retval = $MailChimp->call('lists/unsubscribe', array(
+								$retval = $SkypeMailChimp->call('lists/unsubscribe', array(
 									'id' => $mcListId, // your mailchimp list id here
 									'email' => array( 'email' => $useremail ),
 									'delete_member' => true,
@@ -348,10 +348,10 @@ function skype_mc_profile_updatex( $user_id, $old_user_data ) {
 				  $api = get_mc_api();
 				  $mcListId = get_mc_mailing_list($old_group);
 				  // Initializing the $MailChimp object
-				  $MailChimp = new \Drewm\MailChimp($api);
+				  $SkypeMailChimp = new \Drewm\SkypeMailChimp($api);
 
 				  //delete user from Mailchimp
-							$retval = $MailChimp->call('lists/unsubscribe', array(
+							$retval = $SkypeMailChimp->call('lists/unsubscribe', array(
 								'id' => $mcListId, // your mailchimp list id here
 								'email' => array( 'email' => $olduseremail ),
 								'delete_member' => true,
@@ -388,7 +388,7 @@ function skype_mc_profile_updatex( $user_id, $old_user_data ) {
 				  // Mailchimp Info
 				  $api = get_mc_api();
 				  // Initializing the $MailChimp object
-				  $MailChimp = new \Drewm\MailChimp($api);		
+				  $SkypeMailChimp = new \Drewm\SkypeMailChimp($api);		
 		
 			  $merge_vars = array(
 					   'FNAME'=>    $userdata->first_name,
@@ -396,7 +396,7 @@ function skype_mc_profile_updatex( $user_id, $old_user_data ) {
 					   );
 
 				// code for single-updates
-					$retval = $MailChimp->call('lists/subscribe', array(
+					$retval = $SkypeMailChimp->call('lists/subscribe', array(
 						'id' => $mcListId, // your mailchimp list id here
 						'email' => array(
 						  'email' => $useremail
@@ -444,7 +444,7 @@ function skype_mc_profile_updatex( $user_id, $old_user_data ) {
 		  
 		  
 		  // Initializing the $MailChimp object
-		  $MailChimp = new \Drewm\MailChimp($api);
+		  $SkypeMailChimp = new \Drewm\SkypeMailChimp($api);
 
 		  //get the user's email address
 		  $userdata = get_userdata( $user_id );
@@ -460,7 +460,7 @@ function skype_mc_profile_updatex( $user_id, $old_user_data ) {
 
 
 				// code for single-updates
-					$retval = $MailChimp->call('lists/subscribe', array(
+					$retval = $SkypeMailChimp->call('lists/subscribe', array(
 						'id' => $mcListId, // your mailchimp list id here
 						'email' => array(
 						  'email' => $useremail
@@ -475,8 +475,8 @@ function skype_mc_profile_updatex( $user_id, $old_user_data ) {
 					//print_r($retval);
 
 					if($retval['error']) {
-						$msg .= "\tCode=".$MailChimp->errorCode."\n";
-						$msg .= "\tMsg=".$MailChimp->errorMessage."\n";
+						$msg .= "\tCode=".$SkypeMailChimp->errorCode."\n";
+						$msg .= "\tMsg=".$SkypeMailChimp->errorMessage."\n";
 					}		  
 
 
@@ -559,10 +559,10 @@ function skype_mailchimp_delete_user( $user_id ) {
 				  // Mailchimp Info
 				  $api = get_mc_api();
 				  // Initializing the $MailChimp object
-				  $MailChimp = new \Drewm\MailChimp($api);
+				  $SkypeMailChimp = new \Drewm\SkypeMailChimp($api);
 
 				  //delete user from Mailchimp
-							$retval = $MailChimp->call('lists/unsubscribe', array(
+							$retval = $SkypeMailChimp->call('lists/unsubscribe', array(
 								'id' => $mcListId, // your mailchimp list id here
 								'email' => array( 'email' => $useremail ),
 								'delete_member' => true,
