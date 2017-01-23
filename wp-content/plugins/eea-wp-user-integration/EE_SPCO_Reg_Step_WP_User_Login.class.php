@@ -21,12 +21,36 @@ class EE_SPCO_Reg_Step_WP_User_Login extends EE_SPCO_Reg_Step {
 	 */
 	public function __construct( EE_Checkout $checkout ) {
 		$this->_slug = 'wpuser_login';
-		$this->_name = __('Login', 'event_espresso');
+		$this->_name = __( 'Login', 'event_espresso' );
 		$this->_template = '';
 		$this->checkout = $checkout;
-		$registration_url = ! EE_Registry::instance()->CFG->addons->user_integration->registration_page ? wp_registration_url() : EE_Registry::instance()->CFG->addons->user_integration->registration_page;
 		$this->_reset_success_message();
-		$instructions = get_option( 'users_can_register' ) ? sprintf( __('The event you have selected requires logging in before you can register. You can %sregister for an account here%s if you don\'t have a login.', 'event_espresso' ), '<a href="' . $registration_url . '">', '</a>' ) : __('The event you have selected requires logging in before you can register.', 'event_espresso' );
+		add_action( 'AHEE__Single_Page_Checkout___initialize_reg_step__wpuser_login', array( $this, 'this_step_initialized' ) );
+	}
+
+
+	/**
+	 * Callback on 'AHEE__Single_Page_Checkout___initialize_reg_step__wpuser_login'.
+	 * This is implemented to delay setting the instructions text (_instructions property) because we need a redirect url
+	 * that is ONLY available after the reg step has been initialized.
+	 *
+	 * @param EE_SPCO_Reg_Step_WP_User_Login $spco_step
+	 */
+	public function this_step_initialized( EE_SPCO_Reg_Step_WP_User_Login $spco_step ) {
+		$registration_url = ! EE_Registry::instance()->CFG->addons->user_integration->registration_page
+			? esc_url(
+				add_query_arg(
+					array(
+						'ee_do_auto_login' => 1,
+						'ee_load_on_login' => 1,
+						'redirect_to' => $this->checkout->next_step->reg_step_url(),
+					),  wp_registration_url()
+				)
+			)
+			: EE_Registry::instance()->CFG->addons->user_integration->registration_page;
+		$instructions = get_option( 'users_can_register' )
+			? sprintf( __( 'The event you have selected requires logging in before you can register. You can %sregister for an account here%s if you don\'t have a login.', 'event_espresso' ), '<a href="' . $registration_url . '">', '</a>' )
+			: __( 'The event you have selected requires logging in before you can register.', 'event_espresso' );
 		$this->set_instructions( $instructions );
 	}
 
@@ -64,7 +88,7 @@ class EE_SPCO_Reg_Step_WP_User_Login extends EE_SPCO_Reg_Step {
 
 
 	public function generate_reg_form() {
-		EE_Registry::instance()->load_helper('HTML');
+		EE_Registry::instance()->load_helper( 'HTML' );
 		return new EE_Form_Section_Proper(
 			array(
 				'name' => $this->reg_form_name(),
@@ -78,27 +102,29 @@ class EE_SPCO_Reg_Step_WP_User_Login extends EE_SPCO_Reg_Step {
 							'html_id' => 'ee_user-login',
 							'html_class' => 'ee-reg-qstn',
 							'required' => true,
-							'html_label_id' => 'ee_user-login',
+							'html_label_id' => 'ee_user-login-label',
 							'html_label_class' => 'ee-reg-qstn',
-							'html_label_text' => __('Username')
+							//deliberately no text_domain because this is a wp core translated string
+							'html_label_text' => __( 'Username' ),
 							)
-						),
+					),
 					'eea_wp_user_password' => new EE_Password_Input(
 						array(
 							'html_name' => 'ee_user[password]',
 							'html_id' => 'ee_user-password',
 							'html_class' => 'ee-reg-qstn',
 							'required' => true,
-							'html_label_id' => 'ee_user-password',
+							'html_label_id' => 'ee_user-password-label',
 							'html_label_class' => 'ee-reg-qstn',
-							'html_label_text' => __('Password')
+							//deliberately no text_domain because this is a wp core translated string
+							'html_label_text' => __( 'Password' ),
 							)
-						),
+					),
 					'eea_wp_user_login_error_notice' => new EE_Form_Section_HTML( EEH_HTML::div( '', 'login_error_notice' ) . EEH_HTML::divx() )
 					),
 				'layout_strategy' => new EE_Div_Per_Section_Layout()
 				)
-			);
+		);
 	}
 
 
@@ -109,6 +135,8 @@ class EE_SPCO_Reg_Step_WP_User_Login extends EE_SPCO_Reg_Step {
 			EE_Error::add_error( __( 'No valid question responses were received.', 'event_espresso' ), __FILE__, __FUNCTION__, __LINE__ );
 			return false;
 		}
+
+
 
 		$login_data = array(
 			'user_login' => $valid_data['eea_wp_user_login_name'],
