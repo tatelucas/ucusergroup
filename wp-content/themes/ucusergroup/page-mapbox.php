@@ -9,8 +9,25 @@
 ?>
 <?php get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 
-<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.css' rel='stylesheet' />
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
+
+<style>
+#marker {
+    background-image: url('/wp-content/themes/ucusergroup/images/pin-m-circle.png');
+    background-size: cover;
+    width: 30px;
+    height: 70px;
+    cursor: pointer;
+}
+
+.mapboxgl-popup {
+    max-width: 200px;
+}
+</style>
+
+
 
 <div class="middle">
   <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
@@ -100,50 +117,49 @@
   <?php endwhile; ?>
 </div><!--/middle-->
 
-<script>
-var myIcon = L.icon({
-      iconUrl: 'https://api.tiles.mapbox.com/v4/marker/pin-m-circle+0f68b2.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IlhHVkZmaW8ifQ.hAMX5hSW-QnTeRCMAy9A8Q',
-      iconAnchor: [15, 35],
-      popupAnchor: [0, -35]
-    });
 
-L.mapbox.accessToken = 'pk.eyJ1IjoidWN1c2VyZ3JvdXAiLCJhIjoiY2llendlNWNoMWVtcnNrbTNqYWhkZmtzOSJ9.FUTl0ZC0j6bErseY_7So6Q';
-var map = L.mapbox.map('map', 'ucusergroup.ciezwe45e1emssrm02vw6snax', {
-  center: [39.8282109,-98.5817593],
-  zoom: 4,
-  zoomControl: true,
+
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoidWN1c2VyZ3JvdXAiLCJhIjoiY2llendlNWNoMWVtcnNrbTNqYWhkZmtzOSJ9.FUTl0ZC0j6bErseY_7So6Q';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/outdoors-v9',
+  center: [-98.5817593,39.8282109],
+  zoom: 3,
   attributionControl: false,
   boxZoom: false,
-  scrollWheelZoom: false,
-  closePopupOnClick: false,
-  doubleClickZoom: false,
-  tap: false
+  scrollZoom: false,
+  doubleClickZoom: true
 });
-
+	
+	
 <?php
 foreach($ucUserGroupCities as $ucUserGroupCity){
   $term_meta = get_option( "taxonomy_term_$ucUserGroupCity->term_id" );
 
   if($term_meta) {
-  ?>
-  var popupHTML  = '<div class="marker-title"><strong><a href="<?php echo get_term_link($ucUserGroupCity->name, 'city'); ?>">';
-      popupHTML += '<?php echo $ucUserGroupCity->name; ?>';
-      popupHTML += '</a></strong></div>';
+  ?>  
+		// create the popup
+		var popup = new mapboxgl.Popup({offset:[0, -35]})
+			.setHTML('<div class="marker-title"><strong><a href="<?php echo get_term_link($ucUserGroupCity->name, 'city'); ?>"><?php echo $ucUserGroupCity->name; ?></a></strong></div>');
 
-  L.marker(
-    [<?php echo $term_meta['city_latitude'] ?>, <?php echo $term_meta['city_longitude'] ?>], {
-      icon: myIcon,
-    })
-    .addTo(map).bindPopup(popupHTML);
+		// create DOM element for the marker
+		var el = document.createElement('div');
+		el.id = 'marker';
+
+		// create the marker
+		new mapboxgl.Marker(el, {offset:[-15, -35]})
+			.setLngLat([<?php echo $term_meta['city_longitude'] ?>, <?php echo $term_meta['city_latitude'] ?>])
+			.setPopup(popup) // sets a popup on this marker
+			.addTo(map);
+
   <?php
   }
 }
-?>
-
-
-
-
-
+?>	
+	
 </script>
+
 
 <?php get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>
