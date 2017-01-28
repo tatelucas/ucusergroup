@@ -83,7 +83,7 @@ function get_mc_mailing_list ($usergroupID) {
 						break;
 					case "11":
 						//Cincinnati, OH
-						$mcListID = '58a4b4415a';
+						$mcListID = '64b8ef7270';
 						return $mcListID;
 						break;
 					case "15":
