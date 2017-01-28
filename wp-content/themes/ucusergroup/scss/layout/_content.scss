@@ -351,7 +351,7 @@
 	.form-group {
 		float: left;
 		width: 24.5%;
-		margin: 0 0 0 1.7%;
+		margin: 0 0 1.7% 1.7%;
 
 		@include media('<tablet') {
 			width: 23.5%;

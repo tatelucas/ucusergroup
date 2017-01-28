@@ -890,7 +890,7 @@ p {
 .subscribe-form .form-group {
   float: left;
   width: 24.5%;
-  margin: 0 0 0 1.7%;
+  margin: 0 0 1.7% 1.7%;
 }
 @media (max-width: 991px) {
   /* line 351, ../scss/layout/_content.scss */
