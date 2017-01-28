@@ -4,7 +4,7 @@ Plugin Name: Skype Mailchimp Plugin
 Plugin URI:
 Description: Custom Plugin to update Skype Mailchimp Mailing Lists when users change profile information.  Requires Advanced Custom Fields.
 Author: David Lorimer
-Version: 1.1
+Version: 1.1.2
 Author URI:
 */
 
@@ -233,10 +233,28 @@ function skype_mc_usergroup_update( $null, $object_id, $meta_key, $meta_value, $
 					  //get the user's email address
 					  $userdata = get_userdata( $user_id );
 					  $useremail = $userdata->user_email;
+					  
+					  //set first name
+					  if (!empty($userdata->first_name)) {
+						  $first_name = $userdata->first_name;
+					  } elseif (isset($_POST['first_name'])) {
+						  $first_name = $_POST['first_name'];
+					  } else {					  
+						  $first_name = '';
+					  }
+					  
+					  //set last name
+					  if (!empty($userdata->last_name)) {
+						  $last_name = $userdata->last_name;
+					  } elseif (isset($_POST['last_name'])) {
+						  $last_name = $_POST['last_name'];
+					  } else {
+						  $last_name = '';
+					  }
 
 						  $merge_vars = array(
-								   'FNAME'=>    $userdata->first_name,
-								   'LNAME'=>    $userdata->last_name,
+								   'FNAME'=>    $first_name,
+								   'LNAME'=>    $last_name,
 								   );
 
 								   //print_r($merge_vars);
