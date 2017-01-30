@@ -24,9 +24,9 @@
     );
 
     if($updateLocOnChange){
-      $ucUserGroupCitiesSelect  = '<select name="user_group" data-location-select id="ug_closest_location" class="ug_closest_location">';
+      $ucUserGroupCitiesSelect  = '<select name="user_group" data-location-select id="ug_closest_location" class="ug_closest_location input">';
     } else {
-      $ucUserGroupCitiesSelect  = '<select name="user_group" id="user_group" class="ug_closest_location">';
+      $ucUserGroupCitiesSelect  = '<select name="user_group" id="user_group" class="ug_closest_location input">';
     }
     $ucUserGroupCitiesSelect .= '<option value="">Select Local User Group</option>';
     foreach($ucUserGroupCities as $ucUserGroupCity){
@@ -803,6 +803,7 @@ function custom_register_url( $register_url )
 
 	$first_name = ( ! empty( $_POST['first_name'] ) ) ? trim( $_POST['first_name'] ) : '';
 	$last_name = ( ! empty( $_POST['last_name'] ) ) ? trim( $_POST['last_name'] ) : '';
+	$user_group = ( ! empty( $_POST['user_group'] ) ) ? trim( $_POST['user_group'] ) : '';
 
 	?>
 			<p>
@@ -813,6 +814,9 @@ function custom_register_url( $register_url )
 				<label for="last_name"><?php _e( 'Last Name', 'mydomain' ) ?><br />
 					<input type="text" name="last_name" id="last_name" class="input" value="<?php echo esc_attr( wp_unslash( $last_name ) ); ?>" size="25" /></label>
 			</p>		
+			<p>
+				<?php ug_city_select(false); ?>
+			</p>			
 	<?php
 	}
 
@@ -841,6 +845,10 @@ function custom_register_url( $register_url )
 		if ( ! empty( $_POST['last_name'] ) ) {
 			update_user_meta( $user_id, 'last_name', trim( $_POST['last_name'] ) );
 		}
+		
+		if ( ! empty( $_POST['user_group'] ) ) {
+			update_user_meta( $user_id, 'user_group', trim( $_POST['user_group'] ) );
+		}		
 	}
 //end first and last name
 
