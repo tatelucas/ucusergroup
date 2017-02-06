@@ -916,3 +916,14 @@ function showExtraFields()
 
 	}
 }
+
+// Unregister the Bootstrap css file enqueued from the Memphis Document Library
+// as it clashes with the theme bootstrap because it is loaded too late.
+// This css file is manually added in ucusergroup/parts/shared/html-header.php
+// just before the theme bootstrap file
+function dequeue_memphis_doc_library_bootstrap() {
+	if ( is_plugin_active( 'memphis-documents-library/memphis-documents.php' ) ) {
+		wp_dequeue_style( 'bootstrap.min.css' );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'dequeue_memphis_doc_library_bootstrap');
