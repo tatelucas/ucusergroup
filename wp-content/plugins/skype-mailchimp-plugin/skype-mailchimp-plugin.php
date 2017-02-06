@@ -54,7 +54,7 @@ function get_mc_api () {
 
 function get_log_file_location () {
     //set up log location
-    $SetLogFileLocation = "../../";
+    $SetLogFileLocation = "/";
 				/* this doesn't work for some reason
 				$uploads = wp_upload_dir();
 				$upload_path = $uploads['basedir'];
@@ -290,7 +290,7 @@ function skype_mc_usergroup_update( $null, $object_id, $meta_key, $meta_value, $
 							//code 232 means the email address was never subscribed in the first place, which we can ignore.
 							file_put_contents($LogFileLocation . 'mailchimpLOG.txt', 'An error occured while trying to add a Skype user to Mailchimp - not successful: '. $chimpdelmsg . " __ " . date("M d Y H:i:s A") . PHP_EOL, FILE_APPEND);
 							//wp_mail( get_option( 'admin_email' ), 'Error Occured while updating user in Skype', "An error occured while trying to add a Skype user to Mailchimp.  Please check the following user in Mailchimp:" . PHP_EOL . $chimpdelmsg );
-							wp_mail( 'dwlorimer@gmail.com', 'Error Occured while updating user in Skype', "An error occured while trying to add a Skype user to Mailchimp.  Please check the following user in Mailchimp:" . PHP_EOL . $chimpdelmsg );
+							wp_mail( 'dwlorimer@gmail.com', 'Error Occured while updating user in Skype', "An error occured while trying to add a Skype user to Mailchimp, using skype_mc_usergroup_update.  Please check the following user in Mailchimp:" . PHP_EOL . $chimpdelmsg . PHP_EOL . $SkypeMailChimp->errorCode."\n" . "\tMsg=".$SkypeMailChimp->errorMessage."\n" );
 					  } else {
 							//file_put_contents($LogFileLocation . 'mailchimpLOG.txt', 'Added User to Mailchimp: '. $chimpdelmsg . " __ " . date("M d Y H:i:s A") . PHP_EOL, FILE_APPEND);
 					  }		
@@ -506,7 +506,8 @@ function skype_mc_profile_updatex( $user_id, $old_user_data ) {
 				//code 232 means the email address was never subscribed in the first place, which we can ignore.
 				file_put_contents($LogFileLocation . 'mailchimpLOG.txt', 'An error occured while trying to add a Skype user to Mailchimp - not successful: '. $chimpdelmsg . " __ " . date("M d Y H:i:s A") . PHP_EOL, FILE_APPEND);
 				//wp_mail( get_option( 'admin_email' ), 'Error Occured while updating user in Skype', "An error occured while trying to add a Skype user to Mailchimp.  Please check the following user in Mailchimp:" . PHP_EOL . $chimpdelmsg );
-				wp_mail( 'dwlorimer@gmail.com', 'Error Occured while updating user in Skype', "An error occured while trying to add a Skype user to Mailchimp.  Please check the following user in Mailchimp:" . PHP_EOL . $chimpdelmsg );
+				//wp_mail( 'dwlorimer@gmail.com', 'Error Occured while updating user in Skype', "An error occured while trying to add a Skype user to Mailchimp.  Please check the following user in Mailchimp:" . PHP_EOL . $chimpdelmsg );
+				wp_mail( 'dwlorimer@gmail.com', 'Error Occured while updating user in Skype', "An error occured while trying to add a Skype user to Mailchimp, using skype_mc_profile_update.  Please check the following user in Mailchimp:" . PHP_EOL . $chimpdelmsg . PHP_EOL . $SkypeMailChimp->errorCode."\n" . "\tMsg=".$SkypeMailChimp->errorMessage."\n" );
 		  } else {
 				//file_put_contents($LogFileLocation . 'mailchimpLOG.txt', 'Deleted User from Mailchimp because they were deleted from Wordpress: '. $chimpdelmsg . " __ " . date("M d Y H:i:s A") . PHP_EOL, FILE_APPEND);
 		  }		
