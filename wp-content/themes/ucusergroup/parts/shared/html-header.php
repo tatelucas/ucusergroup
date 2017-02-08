@@ -13,6 +13,15 @@
 		<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon.ico"/>
 
 		<!-- STYLESHEETS -->
+		<?php if ( is_plugin_active( 'memphis-documents-library/memphis-documents.php' ) ) :
+			if(MDOCS_DEV) {
+				$bootstrap_css_file = 'bootstrap/bootstrap.css';
+			} else {
+				$bootstrap_css_file = 'bootstrap/bootstrap.min.css';
+			}
+		?>
+			<link href="<? echo MDOC_URL . $bootstrap_css_file; ?>" rel="stylesheet" media="all" />
+		<?php endif; ?>
 		<link href="<? echo get_template_directory_uri() ?>/css/bootstrap.css" rel="stylesheet" media="all" />
 		<link href="<? echo get_template_directory_uri() ?>/css/all.css" rel="stylesheet" media="all" />
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
