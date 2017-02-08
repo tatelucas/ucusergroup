@@ -4,7 +4,7 @@ Plugin Name: Skype Mailchimp Plugin
 Plugin URI:
 Description: Custom Plugin to update Skype Mailchimp Mailing Lists when users change profile information.  Requires Advanced Custom Fields.
 Author: David Lorimer
-Version: 1.1.2
+Version: 1.1.3
 Author URI:
 */
 
@@ -166,9 +166,15 @@ function get_mc_mailing_list ($usergroupID) {
 						$mcListID = '96abea3cec';
 						return $mcListID;
 						break;					
+					case "51":
+						//Austin, TX
+						$mcListID = '667df5d949';
+						return $mcListID;
+						break;							
 					default:
 						//we have a problem
 						// the list the user selected has an ID that is not in our table
+						$mcListID = 'ERROR';
 						return 'ERROR';
 						break;
 				}	
@@ -220,7 +226,7 @@ function skype_mc_usergroup_update( $null, $object_id, $meta_key, $meta_value, $
 				  $api = get_mc_api();
 				  $mcListId = get_mc_mailing_list($usergroupID);
 				  
-				  if ($mcListID == "ERROR") {
+				  if ($mcListId == "ERROR") {
 						$err_msg = 'On SkypeUG, a Wordpress user has selected a UserGroup whose ID is not in the mapping table to match to Mailchimp list ID.  Please investigate and correct as soon as possible.  The Wordpress UserGroup ID submitted is ' . $usergroupID . '. The User ID is ' .$userdata->ID;
 						wp_mail( 'dwlorimer@gmail.com', 'Problem with SkypeUG MailChimp Lists', $err_msg);
 						wp_mail( 'tate.lucas@gmail.com', 'Problem with SkypeUG MailChimp Lists', $err_msg);			  
@@ -309,6 +315,10 @@ function skype_mc_usergroup_update( $null, $object_id, $meta_key, $meta_value, $
 					  //get the user's email address
 					  //$userdata = get_userdata( $user_id );
 					  //$useremail = $userdata->user_email;
+					  
+				  if ($mcListId == "ERROR") {
+						//do nothing, we were just deleting anyway	  
+				  } else {					  
 
 					  //delete user from Mailchimp
 								$retval = $SkypeMailChimp->call('lists/unsubscribe', array(
@@ -331,7 +341,8 @@ function skype_mc_usergroup_update( $null, $object_id, $meta_key, $meta_value, $
 							wp_mail( get_option( 'dwlorimer@gmail.com' ), 'Error Occured while updating user in Skype', "An error occured while trying to delete a Skype user from a list in Mailchimp.  Please check the following user:" . PHP_EOL . $chimpdelmsg );
 					  } else {
 							//file_put_contents($LogFileLocation . 'mailchimpLOG.txt', 'Removed User from Mailchimp list because they changed to a different list: '. $chimpdelmsg . " __ " . date("M d Y H:i:s A") . PHP_EOL, FILE_APPEND);
-					  }	 
+					  }
+				  }					  
 			  
 		}
 		  
@@ -365,66 +376,82 @@ function skype_mc_profile_updatex( $user_id, $old_user_data ) {
 				  // Mailchimp Info
 				  $api = get_mc_api();
 				  $mcListId = get_mc_mailing_list($old_group);
-				  // Initializing the $MailChimp object
-				  $SkypeMailChimp = new \Drewm\SkypeMailChimp($api);
+				  
+				  if ($mcListId == "ERROR") {
+						$err_msg = 'On SkypeUG, a Wordpress user has selected a UserGroup whose ID is not in the mapping table to match to Mailchimp list ID.  Please investigate and correct as soon as possible.  The Wordpress UserGroup ID submitted is ' . $usergroupID . '. The User ID is ' .$userdata->ID;
+						wp_mail( 'dwlorimer@gmail.com', 'Problem with SkypeUG MailChimp Lists', $err_msg);
+						wp_mail( 'tate.lucas@gmail.com', 'Problem with SkypeUG MailChimp Lists', $err_msg);			  
+				  } else {				  
+				  
+					  // Initializing the $MailChimp object
+					  $SkypeMailChimp = new \Drewm\SkypeMailChimp($api);
 
-				  //delete user from Mailchimp
-							$retval = $SkypeMailChimp->call('lists/unsubscribe', array(
-								'id' => $mcListId, // your mailchimp list id here
-								'email' => array( 'email' => $olduseremail ),
-								'delete_member' => true,
-								'send_goodbye' => false,
-								'send_notify' => false
-							  )
-							);		
+					  //delete user from Mailchimp
+								$retval = $SkypeMailChimp->call('lists/unsubscribe', array(
+									'id' => $mcListId, // your mailchimp list id here
+									'email' => array( 'email' => $olduseremail ),
+									'delete_member' => true,
+									'send_goodbye' => false,
+									'send_notify' => false
+								  )
+								);		
 
-				
-				//add new email to Mailchimp
-			  $merge_vars = array(
-					   'FNAME'=>    $userdata->first_name,
-					   'LNAME'=>    $userdata->last_name,
-					   );
+					
+					//add new email to Mailchimp
+						$merge_vars = array(
+						   'FNAME'=>    $userdata->first_name,
+						   'LNAME'=>    $userdata->last_name,
+						   );
 
-				// code for single-updates
-					$retval = $MailChimp->call('lists/subscribe', array(
-						'id' => $mcListId, // your mailchimp list id here
-						'email' => array(
-						  'email' => $useremail
-						  ),
-						'merge_vars' => $merge_vars,
-						'update_existing' => true,
-						'double_optin' => false,
-						'send_welcome' => false
-					  )
-					);	
+					// code for single-updates
+						$retval = $MailChimp->call('lists/subscribe', array(
+							'id' => $mcListId, // your mailchimp list id here
+							'email' => array(
+							  'email' => $useremail
+							  ),
+							'merge_vars' => $merge_vars,
+							'update_existing' => true,
+							'double_optin' => false,
+							'send_welcome' => false
+						  )
+						);	
+				  }
 	} else {
 		//just update the name
 		
 		$usergroupID = get_field('user_group', 'user_'.$user_id);
 		$mcListId = get_mc_mailing_list($usergroupID);	
-
-				  // Mailchimp Info
-				  $api = get_mc_api();
-				  // Initializing the $MailChimp object
-				  $SkypeMailChimp = new \Drewm\SkypeMailChimp($api);		
 		
-			  $merge_vars = array(
-					   'FNAME'=>    $userdata->first_name,
-					   'LNAME'=>    $userdata->last_name,
-					   );
+		
+				  if ($mcListId == "ERROR") {
+						$err_msg = 'On SkypeUG, a Wordpress user has selected a UserGroup whose ID is not in the mapping table to match to Mailchimp list ID.  Please investigate and correct as soon as possible.  The Wordpress UserGroup ID submitted is ' . $usergroupID . '. The User ID is ' .$userdata->ID;
+						wp_mail( 'dwlorimer@gmail.com', 'Problem with SkypeUG MailChimp Lists', $err_msg);
+						wp_mail( 'tate.lucas@gmail.com', 'Problem with SkypeUG MailChimp Lists', $err_msg);			  
+				  } else {		
 
-				// code for single-updates
-					$retval = $SkypeMailChimp->call('lists/subscribe', array(
-						'id' => $mcListId, // your mailchimp list id here
-						'email' => array(
-						  'email' => $useremail
-						  ),
-						'merge_vars' => $merge_vars,
-						'update_existing' => true,
-						'double_optin' => false,
-						'send_welcome' => false
-					  )
-					);
+						  // Mailchimp Info
+						  $api = get_mc_api();
+						  // Initializing the $MailChimp object
+						  $SkypeMailChimp = new \Drewm\SkypeMailChimp($api);		
+				
+					  $merge_vars = array(
+							   'FNAME'=>    $userdata->first_name,
+							   'LNAME'=>    $userdata->last_name,
+							   );
+
+						// code for single-updates
+							$retval = $SkypeMailChimp->call('lists/subscribe', array(
+								'id' => $mcListId, // your mailchimp list id here
+								'email' => array(
+								  'email' => $useremail
+								  ),
+								'merge_vars' => $merge_vars,
+								'update_existing' => true,
+								'double_optin' => false,
+								'send_welcome' => false
+							  )
+							);
+				  }
 	}
 }
 
