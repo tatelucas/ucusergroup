@@ -1,0 +1,12 @@
+{{#videos}}
+	<div class="vimeography-thumbnail-container">
+		<div class="vimeography-thumbnail">
+			<a href="{{link}}" rel="vimeography-video" data-title="{{name}}" data-description="{{description}}" data-plays="{{#stats}}{{plays}}{{/stats}}" data-video-width="{{width}}" data-video-height="{{height}}" data-tags="{{#tags}}{{name}}, {{/tags}}"{{#allow_downloads}}{{#download}} data-download-{{quality}}="{{link}}"{{/download}}{{/allow_downloads}}><img src="{{thumbnail_large}}" alt="{{name}}" /></a>
+		</div>
+
+		<div class="vimeography-data">
+			<h1 class="vimeography-title">{{name}}</h1>
+			<p class="vimeography-description">{{{short_description}}}</p>
+		</div>
+	</div>
+{{/videos}}
