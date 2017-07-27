@@ -6,7 +6,27 @@
 <?php get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 
     <div class="banner">
-      <?php echo do_shortcode('[wooslider slide_page="homepageslides" slider_type="slides" limit="15" thumbnails="default" order="ASC" order_by="menu_order"]'); ?>
+
+	<?php  //to activate new slider, uncomment the following block, and comment out the block after that
+		echo do_shortcode('[wooslider slide_page="homepageslides" slider_type="slides" limit="15" thumbnails="default" order="ASC" order_by="menu_order"]'); 
+	?>
+	
+	<?php //from here ?>
+	<!--
+      <div class="bg-stretch">
+        <img src="<?php the_field('banner_image'); ?>" width="1170" height="505" alt="image description">
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-5">
+            <h1><span><?php the_field('banner_text_top'); ?></span> <?php the_field('banner_text'); ?></h1>
+            <a href="#upcoming-meetups" type="button" data-button-scroll class="btn btn-success hidden-xs"><i class="icon-search"></i>Find a Meetup near you</a>
+          </div>
+        </div>
+      </div>
+	  -->
+	<?php //to here ?>
+	  
     </div>
 
     <div id="upcoming-meetups" class="location-section">
@@ -51,7 +71,8 @@
               'sort' => 'ASC'
             );
             global $wp_query;
-            $wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
+            //$wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
+			$wp_query = new EventEspresso\core\domain\services\wp_queries\EventListQuery( $attsNextThreeEvents );
 
 
 
@@ -95,12 +116,14 @@
                   'show_expired' => FALSE,
                   'month' => NULL,
                   'category_slug' => NULL,
+				  'active_status' => 'upcoming',
                   'order_by' => 'start_date',
                   'sort' => 'ASC',
                   'offset' => 3
                 );
                 global $wp_query;
-                $wp_query = new EE_Event_List_Query( $attsUpcomingEvents );
+                //$wp_query = new EE_Event_List_Query( $attsUpcomingEvents );
+				$wp_query = new EventEspresso\core\domain\services\wp_queries\EventListQuery( $attsUpcomingEvents );
                 $i = 1;
                 if (have_posts()) : while (have_posts()) : the_post();
                   $userGroupLocations = wp_get_post_terms($post->ID, 'city');

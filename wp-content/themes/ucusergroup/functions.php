@@ -348,7 +348,8 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
               'sort' => 'ASC'
             );
             global $wp_query;
-            $wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
+            //$wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
+			$wp_query = new EventEspresso\core\domain\services\wp_queries\EventListQuery( $attsNextThreeEvents );
 
 
             if (have_posts()) : while (have_posts()) : the_post();

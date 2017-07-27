@@ -45,7 +45,8 @@
 				)
 				);
 				global $wp_query;
-				$wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
+				//$wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
+				$wp_query = new EventEspresso\core\domain\services\wp_queries\EventListQuery( $attsNextThreeEvents );
 				if ( have_posts() ): ?>
 				<h1>Upcoming Events:</h1>
 				<?php while ( have_posts() ) : the_post(); ?>
@@ -115,7 +116,8 @@
 				)
 				);
 				global $wp_query;
-				$wp_query = new EE_Event_List_Query( $attsPastEvents );
+				//$wp_query = new EE_Event_List_Query( $attsPastEvents );
+				$wp_query = new EventEspresso\core\domain\services\wp_queries\EventListQuery( $attsPastEvents );
 				if ( have_posts() ): ?>
 				<h1>Past Events:</h1>
 				<?php while ( have_posts() ) : the_post(); ?>

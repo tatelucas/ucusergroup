@@ -72,9 +72,9 @@
             ?>
               <div class="col-sm-3">
                 <div class="browse-meetup-city same-height-left">
-                  <h4><a href="<?php echo get_term_link($ucUserGroupCity->name, 'city'); ?>"><?php echo $ucUserGroupCity->name; ?></a></h4>
+                  <h4><a href="<?php echo get_term_link($ucUserGroupCity->name, 'city'); ?>"><?php echo $ucUserGroupCity->name; ?></a></h4>			  
 
-                  <?php
+                  <?php	  
                   $attsNextThreeEvents = array(
                     'title' => NULL,
                     'limit' => 3,
@@ -93,7 +93,8 @@
                   )
                   );
                   global $wp_query;
-                  $wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
+                  //$wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
+				  $wp_query = new EventEspresso\core\domain\services\wp_queries\EventListQuery( $attsNextThreeEvents );
                   if (have_posts()) : while (have_posts()) : the_post();
                       echo '<p><a href="' . get_the_permalink() . '"><span>' . get_the_title() . '</span></a></p>';
                     endwhile;
