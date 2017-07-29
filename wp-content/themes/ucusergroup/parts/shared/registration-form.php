@@ -1,4 +1,4 @@
-<form action="<?php echo site_url('wp-login.php?action=register', 'login_post') ?>" class="subscribe-form" method="post">
+<form action="<?php echo site_url('wp-login.php?action=register', 'login_post') ?>" class="subscribe-form" id="subscribe-form" method="post">
   <fieldset>
     <div class="form-group">
       <input class="form-control" type="text" name="user_login" placeholder="Username" id="user_login" placeholder="Username">
@@ -25,8 +25,12 @@
       </select> -->
 	  </div>
     </div>
+	<div class="inv-recaptcha-holder"></div>
 	<div class="form-group-submit">
-    <input class="btn btn-success" type="submit" value="Join Today" id="register" />
+	
+	<input class="btn btn-success" type="submit" value="Join Today" id="register" />
+	
+	<?php do_action(‘google_invre_render_widget_action’); ?>
 	</div>
   </fieldset>
 </form>
