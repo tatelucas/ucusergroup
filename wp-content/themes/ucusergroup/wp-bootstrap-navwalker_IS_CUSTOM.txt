@@ -1,0 +1,3 @@
+wp-bootstrap-navwalker is a custom edited file.  Do not replace without editing.
+
+It has been edited to include the description below the title field, and also to clean up some bad formatting of the main dropdown link

@@ -359,7 +359,7 @@ p {
 
 /* line 48, ../scss/layout/_header.scss */
 .navbar-collapse {
-  padding-left: 316px;
+  padding-left: 275px;
   letter-spacing: -3px;
   text-align: right;
 }
@@ -465,9 +465,13 @@ p {
   color: #00aff0;
   transition: color 0.3s ease;
 }
+/* line 144, ../scss/layout/_header.scss */
+#nav .dropdown-menu a, #nav .dropdown-menu a.active, #nav .dropdown-menu a.focus {
+  background-color: transparent;
+}
 
 @media (max-width: 767px) {
-  /* line 145, ../scss/layout/_header.scss */
+  /* line 149, ../scss/layout/_header.scss */
   .phone-hold {
     background: #3b6db2;
     margin: 0 -15px;
@@ -476,14 +480,14 @@ p {
 }
 
 @media (max-width: 767px) {
-  /* line 156, ../scss/layout/_header.scss */
+  /* line 160, ../scss/layout/_header.scss */
   .img-hold {
     max-width: 38px;
   }
 }
 
 @media (max-width: 767px) {
-  /* line 162, ../scss/layout/_header.scss */
+  /* line 166, ../scss/layout/_header.scss */
   .navbar-toggle {
     padding: 0;
     border: 0;
@@ -493,7 +497,7 @@ p {
   }
 }
 @media (max-width: 767px) {
-  /* line 171, ../scss/layout/_header.scss */
+  /* line 175, ../scss/layout/_header.scss */
   .navbar-toggle .icon-bar {
     height: 5px;
     width: 26px;

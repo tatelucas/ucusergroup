@@ -46,7 +46,7 @@
 }
 
 .navbar-collapse {
-	padding-left: 316px;
+	padding-left: 275px;
 	letter-spacing: -3px;
 	text-align: right;
 	@extend %clearfix;
@@ -139,6 +139,10 @@
 		font-weight: 700;
 		color: $navy-blue;
 		transition: color 0.3s ease;
+	}
+	
+	.dropdown-menu a, .dropdown-menu a.active, .dropdown-menu a.focus	{
+		background-color: transparent;
 	}
 }
 

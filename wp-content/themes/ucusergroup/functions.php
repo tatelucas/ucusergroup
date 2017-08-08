@@ -1,5 +1,12 @@
 <?php
 
+// Register Custom Navigation Walker
+require_once('wp-bootstrap-navwalker.php');
+
+register_nav_menus( array(
+        'primary' => __( 'Primary Menu', 'ucusergroup' ),
+) );
+
 // ----------------------------------------------------------
 // sidebars
 // ----------------------------------------------------------
@@ -925,6 +932,11 @@ function showExtraFields()
 function dequeue_memphis_doc_library_bootstrap() {
 	if ( is_plugin_active( 'memphis-documents-library/memphis-documents.php' ) ) {
 		wp_dequeue_style( 'bootstrap.min.css' );
+		wp_deregister_style('bootstrap.min.css');
+		wp_dequeue_style( 'bootstrap.site.min.css' );
+		wp_deregister_style('bootstrap.site.min.css');
+		wp_dequeue_style( 'memphis-bootstrap.min.css' );
+		wp_deregister_style('memphis-bootstrap.min.css');
 	}
 }
-add_action( 'wp_enqueue_scripts', 'dequeue_memphis_doc_library_bootstrap');
+add_action( 'wp_enqueue_scripts', 'dequeue_memphis_doc_library_bootstrap', 9999);
