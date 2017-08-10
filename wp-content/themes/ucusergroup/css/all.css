@@ -341,6 +341,15 @@ p {
   height: auto;
   width: 248px;
 }
+@media (max-width: 1100px) {
+  /* line 31, ../scss/layout/_header.scss */
+  .navbar-brand {
+    float: none;
+    width: 100%;
+    text-align: center;
+    margin: 0 0 18px;
+  }
+}
 @media (max-width: 991px) {
   /* line 31, ../scss/layout/_header.scss */
   .navbar-brand {
@@ -357,26 +366,32 @@ p {
   }
 }
 
-/* line 48, ../scss/layout/_header.scss */
+/* line 55, ../scss/layout/_header.scss */
 .navbar-collapse {
   padding-left: 275px;
   letter-spacing: -3px;
   text-align: right;
 }
 @media (max-width: 1249px) {
-  /* line 48, ../scss/layout/_header.scss */
+  /* line 55, ../scss/layout/_header.scss */
   .navbar-collapse {
     padding-left: 260px;
   }
 }
+@media (max-width: 1100px) {
+  /* line 55, ../scss/layout/_header.scss */
+  .navbar-collapse {
+    padding-left: 0;
+  }
+}
 @media (max-width: 991px) {
-  /* line 48, ../scss/layout/_header.scss */
+  /* line 55, ../scss/layout/_header.scss */
   .navbar-collapse {
     padding-left: 0;
   }
 }
 @media (max-width: 767px) {
-  /* line 48, ../scss/layout/_header.scss */
+  /* line 55, ../scss/layout/_header.scss */
   .navbar-collapse {
     padding-right: 0;
     background: #f8f6f6;
@@ -384,12 +399,12 @@ p {
     padding: 0 15px;
   }
 }
-/* line 69, ../scss/layout/_header.scss */
+/* line 80, ../scss/layout/_header.scss */
 .navbar-collapse * {
   letter-spacing: 0;
 }
 
-/* line 74, ../scss/layout/_header.scss */
+/* line 85, ../scss/layout/_header.scss */
 .nav-bar {
   display: inline-block;
   vertical-align: middle;
@@ -397,13 +412,13 @@ p {
   text-align: left;
 }
 @media (max-width: 991px) {
-  /* line 74, ../scss/layout/_header.scss */
+  /* line 85, ../scss/layout/_header.scss */
   .nav-bar {
     width: 65%;
   }
 }
 @media (max-width: 767px) {
-  /* line 74, ../scss/layout/_header.scss */
+  /* line 85, ../scss/layout/_header.scss */
   .nav-bar {
     width: 100%;
     text-align: center;
@@ -412,23 +427,23 @@ p {
   }
 }
 
-/* line 92, ../scss/layout/_header.scss */
+/* line 103, ../scss/layout/_header.scss */
 #nav {
   font-size: 13px;
   line-height: 16px;
 }
 @media (max-width: 767px) {
-  /* line 92, ../scss/layout/_header.scss */
+  /* line 103, ../scss/layout/_header.scss */
   #nav {
     margin: 0 -15px;
   }
 }
-/* line 102, ../scss/layout/_header.scss */
+/* line 113, ../scss/layout/_header.scss */
 #nav li {
   float: left;
 }
 @media (max-width: 767px) {
-  /* line 102, ../scss/layout/_header.scss */
+  /* line 113, ../scss/layout/_header.scss */
   #nav li {
     width: 100% !important;
     padding: 0 15px 10px;
@@ -436,27 +451,27 @@ p {
     border-bottom: 1px solid #00aff0;
   }
 }
-/* line 113, ../scss/layout/_header.scss */
+/* line 124, ../scss/layout/_header.scss */
 #nav li.active a {
   color: #90d400;
 }
-/* line 116, ../scss/layout/_header.scss */
+/* line 127, ../scss/layout/_header.scss */
 #nav li.active a span {
   color: #7fba00;
 }
-/* line 123, ../scss/layout/_header.scss */
+/* line 134, ../scss/layout/_header.scss */
 #nav a {
   color: #788ea6;
 }
-/* line 126, ../scss/layout/_header.scss */
+/* line 137, ../scss/layout/_header.scss */
 #nav a:hover {
   color: #90d400;
 }
-/* line 129, ../scss/layout/_header.scss */
+/* line 140, ../scss/layout/_header.scss */
 #nav a:hover span {
   color: #7fba00;
 }
-/* line 135, ../scss/layout/_header.scss */
+/* line 146, ../scss/layout/_header.scss */
 #nav .style-color {
   display: block;
   font-size: 15px;
@@ -465,13 +480,13 @@ p {
   color: #00aff0;
   transition: color 0.3s ease;
 }
-/* line 144, ../scss/layout/_header.scss */
+/* line 155, ../scss/layout/_header.scss */
 #nav .dropdown-menu a, #nav .dropdown-menu a.active, #nav .dropdown-menu a.focus {
   background-color: transparent;
 }
 
 @media (max-width: 767px) {
-  /* line 149, ../scss/layout/_header.scss */
+  /* line 160, ../scss/layout/_header.scss */
   .phone-hold {
     background: #3b6db2;
     margin: 0 -15px;
@@ -480,14 +495,14 @@ p {
 }
 
 @media (max-width: 767px) {
-  /* line 160, ../scss/layout/_header.scss */
+  /* line 171, ../scss/layout/_header.scss */
   .img-hold {
     max-width: 38px;
   }
 }
 
 @media (max-width: 767px) {
-  /* line 166, ../scss/layout/_header.scss */
+  /* line 177, ../scss/layout/_header.scss */
   .navbar-toggle {
     padding: 0;
     border: 0;
@@ -497,7 +512,7 @@ p {
   }
 }
 @media (max-width: 767px) {
-  /* line 175, ../scss/layout/_header.scss */
+  /* line 186, ../scss/layout/_header.scss */
   .navbar-toggle .icon-bar {
     height: 5px;
     width: 26px;
