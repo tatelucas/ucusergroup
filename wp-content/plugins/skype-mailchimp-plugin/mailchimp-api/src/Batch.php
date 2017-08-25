@@ -15,7 +15,7 @@ class Batch
     private $operations = array();
     private $batch_id;
 
-    public function __construct(MailChimp $MailChimp, $batch_id = null)
+    public function __construct(SkypeMailChimp $MailChimp, $batch_id = null)
     {
         $this->MailChimp = $MailChimp;
         $this->batch_id = $batch_id;
