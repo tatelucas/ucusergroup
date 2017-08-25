@@ -872,13 +872,15 @@ if( is_plugin_active( 'ultimate-member/index.php' ) ) {
 
 function showExtraFields()
 {
-	
+	global $ultimatemember;
+	$id = um_user('ID');
+
 	$ucUserGroupCities = get_terms(
       array('city')
-    );
-
+    );	
+	
 	$custom_fields = [
-		"user_group" => "Your Skype User Group",
+		"user_group" => "Your Skype User Group"
 	];
 
 	foreach ($custom_fields as $key => $value) {
@@ -889,11 +891,8 @@ function showExtraFields()
 				'label' => $value,
 		);
 
-		$um_current_fields = $_SESSION['um_account_fields'][ 'general' ];
-		//print_R($um_current_fields);
-		//print_R($fields);
-		$fields = array_merge ($um_current_fields, $fields);
-		apply_filters('um_account_secure_fields', $fields, 'general' );
+		//$myvar = apply_filters('um_account_secure_fields', $fields, 'general' ); //old version of ultimate member
+		$fields = apply_filters( 'um_account_secure_fields', $fields, $id );
 
 		$field_value = get_user_meta(um_user('ID'), $key, true) ? : '';
 		
@@ -921,9 +920,10 @@ function showExtraFields()
 		</div>';
 
 		echo $html;
-
 	}
 }
+
+
 
 // Unregister the Bootstrap css file enqueued from the Memphis Document Library
 // as it clashes with the theme bootstrap because it is loaded too late.
@@ -940,3 +940,15 @@ function dequeue_memphis_doc_library_bootstrap() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'dequeue_memphis_doc_library_bootstrap', 9999);
+
+
+//Making jQuery to load from Google Library
+function replace_jquery() {
+	if (!is_admin()) {
+		// comment out the next two lines to load the local copy of jQuery
+		wp_deregister_script('jquery');
+		wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js', false, '3.2.1');
+		wp_enqueue_script('jquery');
+	}
+}
+//add_action('init', 'replace_jquery');
