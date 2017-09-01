@@ -24,7 +24,7 @@
 		<?php endif; ?>
 		<link href="<? echo get_template_directory_uri() ?>/css/bootstrap.css" rel="stylesheet" media="all" />
 		<link href="<? echo get_template_directory_uri() ?>/css/all.css" rel="stylesheet" media="all" />
-		<link href='http://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
 		<!-- END STYLESHEETS -->
 
 		<!-- JS -->
