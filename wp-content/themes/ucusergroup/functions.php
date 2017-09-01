@@ -225,8 +225,8 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
   	wp_register_script('bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js', false, '3.3.5');
   	wp_enqueue_script('bootstrap');
 
-	//wp_register_script('googlemaps', 'http://maps.googleapis.com/maps/api/js?' . $locale . '&key=' . GOOGLE_MAPS_V3_API_KEY . '&sensor=false', false, '3');
-	wp_register_script('googlemaps', 'http://maps.googleapis.com/maps/api/js?sensor=false', false, '3');
+	//wp_register_script('googlemaps', '//maps.googleapis.com/maps/api/js?' . $locale . '&key=' . GOOGLE_MAPS_V3_API_KEY . '&sensor=false', false, '3');
+	wp_register_script('googlemaps', '//maps.googleapis.com/maps/api/js?sensor=false', false, '3');
 	wp_register_script( 'ug_do_geolocate', get_template_directory_uri() . '/js/ug_geolocate.js' );
 	wp_enqueue_script('googlemaps');
 	wp_enqueue_script('ug_do_geolocate');
@@ -947,7 +947,7 @@ function replace_jquery() {
 	if (!is_admin()) {
 		// comment out the next two lines to load the local copy of jQuery
 		wp_deregister_script('jquery');
-		wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js', false, '3.2.1');
+		wp_register_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js', false, '3.2.1');
 		wp_enqueue_script('jquery');
 	}
 }
