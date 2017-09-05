@@ -924,6 +924,17 @@ function showExtraFields()
 }
 
 
+//for social login -- upon user login, check to see if they have a usergroup set.  If not, redirect to account page, and show notice
+function skype_location_login_check( $user_login, $user ) {
+	$usergroup = get_user_meta($user->ID, 'user_group', true) ? : '';
+	if (!isset($usergroup) || empty($usergroup) ) {
+		wp_redirect("/account?skypelocation=1");
+		exit;	
+	}
+}
+add_action('wp_login', 'skype_location_login_check', 99, 2);
+
+
 
 // Unregister the Bootstrap css file enqueued from the Memphis Document Library
 // as it clashes with the theme bootstrap because it is loaded too late.

@@ -763,6 +763,8 @@
 
 .register-page,
 .login-page {
+	padding-bottom: $line-height-computed*4;
+
 	h2 {
 		margin-bottom: $line-height-computed*2;
 	}
@@ -770,7 +772,7 @@
 	.subscribe-form {
 		//background: red;
 		padding-left: 0;
-		padding-bottom: $line-height-computed*4;
+		padding-bottom: $line-height-computed;
 
 		.form-group {
 			//width: 100%;

@@ -34,3 +34,4 @@
 	</div>
   </fieldset>
 </form>
+<?php do_action( 'after_signup_form' ); ?>
