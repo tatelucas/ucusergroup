@@ -824,3 +824,50 @@ function replace_jquery() {
 	}
 }
 //add_action('init', 'replace_jquery');
+
+
+//add hook from EE to display total registrations
+
+add_action( 'AHEE__loop-espresso_event_attendees__before', 'my_event_registration_count', 5, 2 );
+//add_action( 'AHEE_event_details_after_the_content', 'my_event_registration_count' );
+function my_event_registration_count( $contacts, $post ) {
+  //print_R($post);
+  //$event_obj = $post->EE_Event;
+  $event_obj = $post;
+  $html = '';
+  if ( $event_obj instanceof EE_Event ){
+    $reg_count = EEM_Event::instance()->count_related(
+      $event_obj, 
+      'Registration',
+      array( 
+        array(
+          'STS_ID' => array(
+            'NOT_IN',
+            array(
+              EEM_Registration::status_id_cancelled,
+			  EEM_Registration::status_id_incomplete,
+			  EEM_Registration::status_id_declined
+            )
+          )
+        )
+      )
+    );	
+    $html .= '<p><span class="event_total_attendees"><strong>';
+    $html .= $reg_count;
+    //$html .= ' of ';
+    //$html .= $event_obj->total_available_spaces();
+    $html .= ' attendees total </strong></span>';
+	$html .= '&nbsp;&nbsp;<span class="toggle_gravitars"><sup>&#9776;</sup></span>';
+	$html .= '</p>';
+	
+	$html .= '
+	<script>
+	jQuery( ".toggle_gravitars" ).click(function() {
+    jQuery( ".ee_participant_widget .event-attendees-list img" ).toggle();
+	});
+	</script>
+	';
+  }
+   
+  echo $html;
+}
