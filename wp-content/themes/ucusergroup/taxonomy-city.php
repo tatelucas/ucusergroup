@@ -50,12 +50,33 @@
 				if ( have_posts() ): ?>
 				<h1>Upcoming Events:</h1>
 				<?php while ( have_posts() ) : the_post(); ?>
-					<li>
+					<li class="skypeevent-location-time">
 						<article>
 							<h2 class="event-h2"><a href="<?php esc_url( the_permalink() ); ?>" title="Permalink to <?php the_title(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 							<?php
 							if($post->post_type == 'espresso_events') {
 							?>
+							<div class="event-location" style="display: none;">
+								<?php
+									//Pull an array of venue objects for all venues assigned to the event
+									global $post;
+									if ( $post->EE_Event instanceof EE_Event ) {
+									    $venues = $post->EE_Event->venues();
+
+										//Shift the first element from the array and use as the venue object.
+										$venue = !empty( $venues ) ? array_shift( $venues ) : NULL;
+										
+										//print_R($venue);
+
+										//Echo venue name
+										if( $venue instanceof EE_Venue ) {
+										echo $venue->city() . ", ";
+										echo $venue->state() . " ";
+										echo $venue->zip();
+										}
+									}						
+								?>
+							</div>
 							<div class="event-time-cont">
 								<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <time class="time-hold" datetime="<?php espresso_event_date(); ?>"><span><?php espresso_event_date('l, F j, Y', NULL, $post->ID); ?></span></time>
 							</div>
@@ -127,12 +148,33 @@
 						$datemunch = $pieces[0];
 
 					if ($datemunch < date('U', time())) { ?>
-					<li>
+					<li class="skypeevent-location-time">
 						<article>
 							<h2 class="event-h2"><a href="<?php esc_url( the_permalink() ); ?>" title="Permalink to <?php the_title(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 							<?php
 							if($post->post_type == 'espresso_events') {
 							?>
+							<div class="event-location" style="display: none;">
+								<?php
+									//Pull an array of venue objects for all venues assigned to the event
+									global $post;
+									if ( $post->EE_Event instanceof EE_Event ) {
+									    $venues = $post->EE_Event->venues();
+
+										//Shift the first element from the array and use as the venue object.
+										$venue = !empty( $venues ) ? array_shift( $venues ) : NULL;
+										
+										//print_R($venue);
+
+										//Echo venue name
+										if( $venue instanceof EE_Venue ) {
+										echo $venue->city() . ", ";
+										echo $venue->state() . " ";
+										echo $venue->zip();
+										}
+									}						
+								?>
+							</div>							
 							<div class="event-time-cont">
 								<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <time class="time-hold" datetime="<?php espresso_event_date(); ?>"><span><?php espresso_event_date('l, F j, Y', NULL, $post->ID); ?></span></time>
 							</div>

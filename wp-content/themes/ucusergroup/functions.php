@@ -630,168 +630,29 @@ function ucusergroup_timezone_custom_scripts(){
     wp_enqueue_script( 'moment-timezone-with-data-2010-2020' );
 	wp_register_script( 'jstz', get_stylesheet_directory_uri() . '/js/jstz.min.js', array('jquery'));
     wp_enqueue_script( 'jstz' );
+	wp_register_script( 'skypeTimezoneSet', get_stylesheet_directory_uri() . '/js/skypetimezoneset.js', array('jquery'));
+    wp_enqueue_script( 'skypeTimezoneSet' );	
 }
 add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 
 
-
-  function sfbug_custom_local_timezone_display() {
-   ?>
-   <script type="text/javascript">
-	//customize time elements on the page to user's local time
-		jQuery( "time" ).each(function( index ) {
-			  var timex = jQuery( this ).text();
-
-				//moment interprets the time, guesses the user's timezone, and reformats the date using the new timezone
-				var format = 'dddd, MMMM D, YYYY h:mm a z'; //'YYYY/MM/DD HH:mm:ss ZZ';
-
-				var timey = new moment(timex, format).format(format);				
-				if (timey.indexOf('Invalid') <= -1) {		
-				//this check is to make sure the date coming in is a full-format date, moment is picky
-				  
-					var timez = moment(timex).tz(moment.tz.guess()).format(format);
-
-					if (timez.indexOf('Invalid') <= -1) {
-						jQuery( this ).text(timez);
-					}
-					//else, do nothing and leave the date as originally displayed - there was a problem parsing it				  
-				  
-				}
-		});
+   
+//add_filter( 'Skype_custom_FHEE__espresso_list_of_event_dates__datetimes' , 'phptimezonedatefilter', 99);
+function phptimezonedatefilter($data) {
+	foreach ($data as $datum) {
+		//datum should now be a EE datetime object
+		//print_R($datum->Venue);
+		//print_R($datum);
+		//var_dump($datum);
+		//[_model_relations:protected][Event][_model_relations:protected][Venue]
+		//print_R($datum->_model_relations);
+	}
+	//print_R($data);
+  return $data;
+}
 
 
-		jQuery( ".ee-event-datetimes-li" ).each(function( index ) {
-			//this one customizes date in ul li array -- that is, dateblock on individual event page, and dates in sidebar events
-			//each li date element has two child spans -- one with the date, and one with the time.  We need them both in order to change the timezones properly
-
-			//first, get the date, or date range
-			var dateblock = jQuery(this).find('.ee-event-datetimes-li-daterange').html();
-			//dateblock will either be one date or a range.  Test for a hyphen to see if it is a range.
-				if (dateblock.indexOf("-") > 0) {
-					//split it at the hyphen to get the dates
-					var oldStartDate = dateblock.split('-')[0].trim();
-					var oldEndDate = dateblock.split('-')[1].trim();
-				} else {
-					//the timeblock has no hyphen.  It's just a single day event.
-					var oldStartDate = dateblock.trim();
-					var oldEndDate = oldStartDate;
-				}
-
-			//grab timeblock from the page
-			var timeblock = jQuery(this).find('.ee-event-datetimes-li-timerange').html();
-			//timeblock will either be one date/time or a range.  Test for a hyphen to see if it is a range.
-			if (timeblock.indexOf("-") > 0) {
-				//split it at the hyphen to get the times
-				var oldStartTime = timeblock.split('-')[0].trim();
-				var oldEndTime = timeblock.split('-')[1].trim();
-				//var oldStartTime = oldStartTime.trim();
-
-			} else {
-				//the timeblock has no hyphen.  I really don't think this is supposed to happen with the timerange (it will with daterange)
-				var oldStartTime = timeblock;
-				var oldEndTime = oldStartTime;
-			}
-
-				var oldStartTime = oldStartDate.trim() + ' ' + oldStartTime.trim();
-				var oldEndTime = oldEndDate + ' ' + oldEndTime;
-
-				//for whatever reason, event espresso uses $nbsp; instead of space.  This messes up the date function, so they've got to be replaced.
-				var oldStartTime = oldStartTime.replace(/&nbsp;/g, ' ');
-				var oldEndTime = oldEndTime.replace(/&nbsp;/g, ' ');
-
-
-				var pagetimeformat = 'MMMM D, YYYY h:mm a z';
-				var timeformat = 'h:mm a z';
-				var dateformat = 'MMMM D, YYYY';
-
-				var startDateNew = moment(oldStartTime).tz(moment.tz.guess()).format(dateformat);
-				var endDateNew = moment(oldEndTime).tz(moment.tz.guess()).format(dateformat);
-				var startTimeNew = moment(oldStartTime).tz(moment.tz.guess()).format(timeformat);
-				var endTimeNew = moment(oldEndTime).tz(moment.tz.guess()).format(timeformat);
-				//alert(startTimeNew);
-
-
-				if (startTimeNew.indexOf('Invalid') <= -1 && endTimeNew.indexOf('Invalid') <= -1) {
-					jQuery(this).find('.ee-event-datetimes-li-timerange').text(startTimeNew + ' - ' + endTimeNew);
-				}
-				//else, do nothing and leave the date as originally displayed - there was a problem parsing it
-				if (startTimeNew.indexOf('Invalid') <= -1 && endTimeNew.indexOf('Invalid') <= -1) {
-					if (startDateNew != endDateNew) {
-						//if this is a date range, show date range
-						jQuery(this).find('.ee-event-datetimes-li-daterange').text(startDateNew + ' - ' + endDateNew);
-					} else {
-						//if single day, just show single day
-						jQuery(this).find('.ee-event-datetimes-li-daterange').text(startDateNew);
-					}
-				}
-				//else, do nothing and leave the date as originally displayed - there was a problem parsing it
-
-		});
-
-
-		jQuery(window).load(function ()
-		{
-			//if this is the calendar page, run the date fixes on the calendar
-			if ( jQuery( "#espresso_calendar" ).length ) {
-				//note: this code only partially works -- because the actual dates are not accessible in the calendar, moment guesses the timezones based on TODAY.
-				// this means that the results will be incorrect if the date of the event is across a timechange that has not yet occurred.
-
-				var i = setInterval(function ()
-				{
-					if (jQuery('.fc-event-inner').length)
-					{
-						clearInterval(i);
-						// safe to execute your code here
-
-						//time offset at server (Eastern Time)
-						var qsite = moment().tz("America/New_York").format('Z');
-						//timezone abbreviation of user
-						var quser = moment().tz(moment.tz.guess()).format('z');
-
-						jQuery( ".event-start-time" ).each(function( index ) {
-
-							  var timea = jQuery( this ).text();
-							  //add offset suffix so moment knows how to change it
-							  var timea = timea + ' ' + qsite;
-
-							  var enterformat = 'h:mm a ZZ';
-							  var timeb = moment(timea, enterformat).format('h:mm a z');
-
-							if (timeb.indexOf('Invalid') <= -1) {
-							  jQuery( this ).text(timeb);
-							}
-							//else, do nothing, it could not parse the date correctly
-						});
-
-						jQuery( ".event-end-time" ).each(function( index ) {
-
-							  var timea = jQuery( this ).text();
-							  var timea = timea + ' ' + qsite;
-
-							  var enterformat = 'h:mm a ZZ';
-
-							  //moment interprets the time, and reformats the date using the new timezone
-							  var timeb = moment(timea, enterformat).format('h:mm a z');
-
-							if (timeb.indexOf('Invalid') <= -1) {
-							  jQuery( this ).text(timeb + " " + quser);
-							}
-							//else, do nothing, it could not parse the date correctly
-						});
-
-					}
-				}, 100);
-
-
-			}
-
-		});
-
-   </script>
-   <?php
-   }
-  add_action( 'wp_footer', 'sfbug_custom_local_timezone_display' );
-
+   
   
   
 //change wordpress registration page  
