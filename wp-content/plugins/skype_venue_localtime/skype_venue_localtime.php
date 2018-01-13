@@ -33,8 +33,14 @@ function register_new_tony_shortcodes_parser( $parsed, $shortcode, $data, $extra
             //Do whatever you need to do here and return the value for that specific datetime.
             //return $data->get_i18n_datetime('DTT_EVT_start'); 
 			//$start_dte = $data->get_i18n_datetime('DTT_EVT_start');
-			$thepost = $wpdb->get_row("select VNU_address from {$wpdb->prefix}esp_venue_meta where VNU_ID = (select VNU_ID from {$wpdb->prefix}esp_event_venue where EVT_ID =".$data->get('EVT_ID').")");
-			$prepAddr = urlencode($thepost->VNU_address);
+			
+			$thepost = $wpdb->get_row("select VNU_address, VNU_address2, VNU_city, STA_ID, VNU_zip from {$wpdb->prefix}esp_venue_meta where VNU_ID = (select VNU_ID from {$wpdb->prefix}esp_event_venue where EVT_ID =".$data->get('EVT_ID').")");
+			$stateABBR = $wpdb->get_row("select STA_abbrev from {$wpdb->prefix}esp_state where STA_ID =". $thepost->STA_ID);
+			
+			$fullAddr = $thepost->VNU_address . " " . $thepost->VNU_address2 . " " . $thepost->VNU_city . ", " . $stateABBR->STA_abbrev . " " . $thepost->VNU_zip;
+			//print_R($fullAddr);
+			
+			$prepAddr = urlencode($fullAddr);
          	$geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&key=AIzaSyDk_5niAyDbIGm5Fo7wdnOxP3IVtyIl03k');
        		$output= json_decode($geocode);
           	$latitude = $output->results[0]->geometry->location->lat;
