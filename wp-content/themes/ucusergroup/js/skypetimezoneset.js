@@ -6,8 +6,8 @@
 
 	//customize time elements on the page to the event's local time
 	
-jQuery(document).ready(function(){
-//jQuery(window).load(function(){
+//jQuery(document).ready(function(){
+jQuery(window).load(function(){
 	
 	//For upcoming event date lists -- for each 
 	//jQuery(".skypeevent-location-time").each(function(){
@@ -24,7 +24,7 @@ jQuery(document).ready(function(){
 		//get lat lng from location
 
 			jQuery.ajax({
-			   url : "http://maps.googleapis.com/maps/api/geocode/json?address="+iugllocation+"&sensor=false",
+			   url : "https://maps.googleapis.com/maps/api/geocode/json?address="+iugllocation+"&key=AIzaSyBb7YTvbLi3Aj9QFXS2mr13YZE6Llmi1X8&sensor=false",
 			   method: "POST",
 			   success:function(data){
 				   latitude = data.results[0].geometry.location.lat;
@@ -38,7 +38,7 @@ jQuery(document).ready(function(){
 					   url : "https://maps.googleapis.com/maps/api/timezone/json?location="+ugllatlng+"&timestamp=1458000000&key=AIzaSyCWihtfp6mpMQ2TBu5O3qaI7_chR0Z3avE",
 					   method: "POST",
 					   success:function(data){
-						   console.log(data);
+						   //console.log(data);
 						   //alert(data);
 						   ugltimezone = data.timeZoneId;
 						   //alert(ugltimezone);
@@ -91,7 +91,7 @@ jQuery(document).ready(function(){
 	//get lat lng from zipcode
 
     jQuery.ajax({
-       url : "http://maps.googleapis.com/maps/api/geocode/json?address="+ugllocation+"&sensor=false",
+       url : "https://maps.googleapis.com/maps/api/geocode/json?address="+ugllocation+"&key=AIzaSyBb7YTvbLi3Aj9QFXS2mr13YZE6Llmi1X8&sensor=false",
        method: "POST",
        success:function(data){
            latitude = data.results[0].geometry.location.lat;
@@ -107,7 +107,7 @@ jQuery(document).ready(function(){
 			   url : "https://maps.googleapis.com/maps/api/timezone/json?location="+ugllatlng+"&timestamp=1458000000&key=AIzaSyCWihtfp6mpMQ2TBu5O3qaI7_chR0Z3avE",
 			   method: "POST",
 			   success:function(data){
-				   console.log(data);
+				   //console.log(data);
 				   //alert(data);
 				   ugltimezone = data.timeZoneId;
 				   //alert(ugltimezone);
@@ -244,6 +244,7 @@ function ugl_runlocationtimedisplayblock(ugltimezone) {
 
 				if (startTimeNew.indexOf('Invalid') <= -1 && endTimeNew.indexOf('Invalid') <= -1) {
 					jQuery(this).find('.ee-event-datetimes-li-timerange').text(startTimeNew + ' - ' + endTimeNew);
+					jQuery(this).find('.ee-event-datetimes-li-timerange').css('opacity', '1');
 				}
 				//else, do nothing and leave the date as originally displayed - there was a problem parsing it
 				if (startTimeNew.indexOf('Invalid') <= -1 && endTimeNew.indexOf('Invalid') <= -1) {
