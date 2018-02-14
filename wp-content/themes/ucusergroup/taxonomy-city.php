@@ -45,6 +45,10 @@
 				)
 				);
 				global $wp_query;
+				
+				//set timezone to blank here.  Fill in first query.  Then check to see if it's filled for future queries.  We're trying to avoid 20 or so hits to google from just 1 page.
+				$Loc_timezone = '';
+				
 				//$wp_query = new EE_Event_List_Query( $attsNextThreeEvents );
 				$wp_query = new EventEspresso\core\domain\services\wp_queries\EventListQuery( $attsNextThreeEvents );
 				if ( have_posts() ): ?>
@@ -74,11 +78,16 @@
 										echo $venue->state() . " ";
 										echo $venue->zip();
 										}
-									}						
+									}
+
+									//get timezone from this event.  Assume it is the same for all other events at this venue, because it will be.
+									if (empty($Loc_timezone)) {
+										$Loc_timezone = skype_get_timezone_from_id($post->ID);
+									}
 								?>
 							</div>
 							<div class="event-time-cont">
-								<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <time class="time-hold" datetime="<?php espresso_event_date(); ?>"><span><?php espresso_event_date('l, F j, Y', NULL, $post->ID); ?></span></time>
+								<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <time class="time-hold" datetime="<?php espresso_event_date(); ?>"><span><?php echo skype_timezone_format_timesingle($post->ID, $Loc_timezone); ?></span></time>
 							</div>
 							<?php
 							} else {
@@ -172,11 +181,16 @@
 										echo $venue->state() . " ";
 										echo $venue->zip();
 										}
-									}						
+									}
+
+									//get timezone from this event.  Assume it is the same for all other events at this venue, because it will be.
+									if (empty($Loc_timezone)) {
+										$Loc_timezone = skype_get_timezone_from_id($post->ID);
+									}									
 								?>
 							</div>							
 							<div class="event-time-cont">
-								<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <time class="time-hold" datetime="<?php espresso_event_date(); ?>"><span><?php espresso_event_date('l, F j, Y', NULL, $post->ID); ?></span></time>
+								<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <time class="time-hold" datetime="<?php espresso_event_date(); ?>"><span><?php echo skype_timezone_format_timesingle($post->ID, $Loc_timezone); ?></span></time>
 							</div>
 							<?php
 							} else {

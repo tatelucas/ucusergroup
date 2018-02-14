@@ -24,7 +24,10 @@
 									<?php
 									if($post->post_type == 'espresso_events') {
 									?>
-									<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <time class="time-hold" datetime="<?php espresso_event_date(); ?>"><span><?php espresso_event_date('l, F j, Y'); ?></span></time>
+									<? /*
+									<!-- <span class="glyphicon glyphicon-time" aria-hidden="true"></span> <time class="time-hold" datetime="<?php espresso_event_date(); ?>"><span><?php espresso_event_date('l, F j, Y'); ?></span></time> -->
+									*/ ?>
+									<span class="glyphicon glyphicon-time" aria-hidden="true"></span>  <time class="time-hold" datetime="<?php espresso_event_date(); ?>"><span><?php echo skype_timezone_format_timesingle($post->ID); ?></span></time>
 									<?php
 									} else if ($post->post_type == 'post') {
 									?>

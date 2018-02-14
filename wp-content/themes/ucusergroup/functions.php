@@ -790,8 +790,106 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
    </script>
    <?php
    }
-  add_action( 'wp_footer', 'sfbug_custom_local_timezone_display' );
+//  add_action( 'wp_footer', 'sfbug_custom_local_timezone_display' );
 
+
+
+/* PHP functions for formatting datetime for local event timezone */
+	function skype_timezone_format_timerange ($EVT_ID = 0, $datetime) {
+		global $wpdb;
+			$thepost = $wpdb->get_row("select VNU_address, VNU_address2, VNU_city, STA_ID, VNU_zip from {$wpdb->prefix}esp_venue_meta where VNU_ID = (select VNU_ID from {$wpdb->prefix}esp_event_venue where EVT_ID =".$EVT_ID.")");
+			$stateABBR = $wpdb->get_row("select STA_abbrev from {$wpdb->prefix}esp_state where STA_ID =". $thepost->STA_ID);
+			
+			$fullAddr = $thepost->VNU_address . " " . $thepost->VNU_address2 . " " . $thepost->VNU_city . ", " . $stateABBR->STA_abbrev . " " . $thepost->VNU_zip;
+			
+			$prepAddr = urlencode($fullAddr);
+         	$geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&key=AIzaSyBb7YTvbLi3Aj9QFXS2mr13YZE6Llmi1X8&sensor=false');
+       		$output= json_decode($geocode);
+          	$latitude = $output->results[0]->geometry->location->lat;
+        	$longitude = $output->results[0]->geometry->location->lng;
+			$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&key=AIzaSyCWihtfp6mpMQ2TBu5O3qaI7_chR0Z3avE&sensor=false";
+			$json_timezone = file_get_contents($url);
+			$output2= json_decode($json_timezone);
+			
+			$start_time = $datetime->start_time('H:i:s T');
+			$start_date = $datetime->start_date('Y-m-d');
+			
+			$end_time = $datetime->end_time('H:i:s T');
+			$end_date = $datetime->end_date('Y-m-d');				
+
+			$rawstarttime = $start_date . " " . $start_time;
+			$rawendtime = $end_date . " " . $end_time;
+			
+			$local_timezone_from = gmdate('Y-m-d H:i:s T', strtotime($rawstarttime));
+			
+			$from = new DateTime($local_timezone_from, new DateTimeZone($output2->timeZoneId));
+			$from->setTimeZone(new DateTimeZone($output2->timeZoneId));
+
+			$local_timezone_to = gmdate('Y-m-d H:i:s T', strtotime($rawendtime));
+			$to = new DateTime($local_timezone_to, new DateTimeZone($output2->timeZoneId));
+			$to->setTimeZone(new DateTimeZone($output2->timeZoneId));
+
+		return $from->format('g:i a').' - '.$to->format('g:i a').' '.$from->format('T');		
+	}
+	
+	function skype_get_timezone_from_id ($EVT_ID = 0) {
+		global $wpdb;
+			$thepost = $wpdb->get_row("select VNU_address, VNU_address2, VNU_city, STA_ID, VNU_zip from {$wpdb->prefix}esp_venue_meta where VNU_ID = (select VNU_ID from {$wpdb->prefix}esp_event_venue where EVT_ID =".$EVT_ID.")");
+			$stateABBR = $wpdb->get_row("select STA_abbrev from {$wpdb->prefix}esp_state where STA_ID =". $thepost->STA_ID);
+			
+			$fullAddr = $thepost->VNU_address . " " . $thepost->VNU_address2 . " " . $thepost->VNU_city . ", " . $stateABBR->STA_abbrev . " " . $thepost->VNU_zip;
+			
+			$prepAddr = urlencode($fullAddr);
+         	$geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&key=AIzaSyBb7YTvbLi3Aj9QFXS2mr13YZE6Llmi1X8&sensor=false');
+       		$output= json_decode($geocode);
+          	$latitude = $output->results[0]->geometry->location->lat;
+        	$longitude = $output->results[0]->geometry->location->lng;
+			$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&key=AIzaSyCWihtfp6mpMQ2TBu5O3qaI7_chR0Z3avE&sensor=false";
+			$json_timezone = file_get_contents($url);
+			$output2= json_decode($json_timezone);
+			
+			return $output2->timeZoneId;
+	}		
+	
+	function skype_timezone_format_timesingle ($EVT_ID = 0, $Loc_timezone = '') {
+		global $wpdb;
+		
+			//if the timezone id is passed in, use it instead of running all the google queries again.
+			if (!empty($Loc_timezone)) {
+				$output2 = new stdClass();
+				$output2->timeZoneId = $Loc_timezone;
+			} else {		
+				$thepost = $wpdb->get_row("select VNU_address, VNU_address2, VNU_city, STA_ID, VNU_zip from {$wpdb->prefix}esp_venue_meta where VNU_ID = (select VNU_ID from {$wpdb->prefix}esp_event_venue where EVT_ID =".$EVT_ID.")");
+				$stateABBR = $wpdb->get_row("select STA_abbrev from {$wpdb->prefix}esp_state where STA_ID =". $thepost->STA_ID);
+				
+				$fullAddr = $thepost->VNU_address . " " . $thepost->VNU_address2 . " " . $thepost->VNU_city . ", " . $stateABBR->STA_abbrev . " " . $thepost->VNU_zip;
+				
+				$prepAddr = urlencode($fullAddr);
+				$geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&key=AIzaSyBb7YTvbLi3Aj9QFXS2mr13YZE6Llmi1X8&sensor=false');
+				$output= json_decode($geocode);
+				$latitude = $output->results[0]->geometry->location->lat;
+				$longitude = $output->results[0]->geometry->location->lng;
+				$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&key=AIzaSyCWihtfp6mpMQ2TBu5O3qaI7_chR0Z3avE&sensor=false";
+				$json_timezone = file_get_contents($url);
+				$output2= json_decode($json_timezone);
+			}
+			
+			$datetime = espresso_event_date_obj($EVT_ID);	
+			
+			$start_time = $datetime->start_time('H:i:s T');
+			$start_date = $datetime->start_date('Y-m-d');			
+
+			$rawstarttime = $start_date . " " . $start_time;	
+			
+			$local_timezone_from = gmdate('Y-m-d H:i:s T', strtotime($rawstarttime));
+			
+			$from = new DateTime($local_timezone_from, new DateTimeZone($output2->timeZoneId));
+			$from->setTimeZone(new DateTimeZone($output2->timeZoneId));			
+
+		return $from->format('l, F j, Y g:i a T');
+	}	
+	
+/* end PHP functions for local event timezone */
   
   
 //change wordpress registration page  
