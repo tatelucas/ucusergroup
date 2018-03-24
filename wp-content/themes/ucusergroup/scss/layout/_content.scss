@@ -1,5 +1,7 @@
 .banner {
-	background: $navy-blue;
+	//background: $navy-blue;
+	//background: #5357b0;
+	background: #f7fafb;
 	position: relative;
 	z-index: 1;
 	// padding: 122px 0 143px;
@@ -15,7 +17,7 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		height: 34px;
+		height: 54px;
 		background: $white;
 		z-index: -2;
 
@@ -328,7 +330,8 @@
 	padding: 71px 0 83px;
 	color: $white;
 	text-align: center;
-	background: #3b6db2;
+	//background: #3b6db2;
+	background: #5357b0;
 
 	@include media('<phone') {
 		padding: 50px 0;
@@ -400,6 +403,7 @@
 	.btn-success {
 		float: left;
 		clear: both;
+		background-color: #393c7d;
 	}
 }
 
@@ -599,11 +603,11 @@
 }
 
 .page-title {
-	background: #149EEB;
+	background: #5357b0;
 	color: #fff;
 	padding: $line-height-computed 0;
 	margin-bottom: $line-height-computed;
-	border-bottom: 10px solid #21468B;
+	border-bottom: 10px solid #343B93;
 
 	h2 {
 		margin: 0 0 $line-height-computed/3;
@@ -1031,4 +1035,12 @@ body.home {
 /* calendar tweaks */
 .time_cal_qtip {
 	display: none;
+}
+
+#espresso_calendar .time-display-block {
+	display: none !important;
+}
+
+.event-datetimes .ee-event-datetimes-li-timerange {
+	/*opacity: 0;*/
 }

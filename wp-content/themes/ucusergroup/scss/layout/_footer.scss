@@ -1,7 +1,9 @@
 #footer {
 	padding: 45px 0;
-	color: #a0daf5;
-	background-color: #3b6db2;
+	//color: #a0daf5;
+	color: #fff;
+	//background-color: #3b6db2;
+	background-color: #5357b0;
 	font-size: 13px;
 	line-height: 16px;
 
@@ -14,7 +16,8 @@
 	}
 
 	a {
-		color: #a0daf5;
+		//color: #a0daf5;
+		color: #fff;
 
 		&:hover {
 			color: $white;
