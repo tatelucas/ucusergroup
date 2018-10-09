@@ -45,7 +45,7 @@ function register_new_tony_shortcodes_parser( $parsed, $shortcode, $data, $extra
        		$output= json_decode($geocode);
           	$latitude = $output->results[0]->geometry->location->lat;
         	$longitude = $output->results[0]->geometry->location->lng;
-			$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&sensor=false";
+			$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&key=AIzaSyCWihtfp6mpMQ2TBu5O3qaI7_chR0Z3avE&sensor=false";
 			$json_timezone = file_get_contents($url);
 			$output2= json_decode($json_timezone);
 			//$date = new DateTime($data->get_i18n_datetime('DTT_EVT_start'));
