@@ -20,7 +20,18 @@
 				$bootstrap_css_file = 'bootstrap/bootstrap.min.css';
 			}
 		?>
-			<link href="<? echo MDOC_URL . $bootstrap_css_file; ?>" rel="stylesheet" media="all" />
+		<?php 
+			if (1 == 2) {
+			//if (MDOC_URL) {
+				?>
+				<link href="<? echo MDOC_URL . "/" . $bootstrap_css_file; ?>" rel="stylesheet" media="all" />
+				<?php
+			} else {
+				?>
+				<link href="<? echo plugins_url() . "/memphis-documents-library/" . $bootstrap_css_file; ?>" rel="stylesheet" media="all" />
+				<?php
+			}
+		?>
 		<?php endif; ?>
 		<link href="<? echo get_template_directory_uri() ?>/css/bootstrap.css" rel="stylesheet" media="all" />
 		<link href="<? echo get_template_directory_uri() ?>/css/all.css" rel="stylesheet" media="all" />
