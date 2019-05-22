@@ -226,7 +226,8 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
   	wp_enqueue_script('bootstrap');
 
 	//wp_register_script('googlemaps', '//maps.googleapis.com/maps/api/js?' . $locale . '&key=' . GOOGLE_MAPS_V3_API_KEY . '&sensor=false', false, '3');
-	wp_register_script('googlemaps', '//maps.googleapis.com/maps/api/js?sensor=false', false, '3');
+	//wp_register_script('googlemaps', '//maps.googleapis.com/maps/api/js?sensor=false', false, '3');
+	wp_register_script('googlemaps', '//maps.googleapis.com/maps/api/js?' . '&key=' . 'AIzaSyB1_6jM5ZwGw1Dv9WrMuPcZJ_3WD_JIqKU' . '&sensor=false', false, '3');
 	wp_register_script( 'ug_do_geolocate', get_template_directory_uri() . '/js/ug_geolocate.js' );
 	wp_enqueue_script('googlemaps');
 	wp_enqueue_script('ug_do_geolocate');
@@ -630,266 +631,29 @@ function ucusergroup_timezone_custom_scripts(){
     wp_enqueue_script( 'moment-timezone-with-data-2010-2020' );
 	wp_register_script( 'jstz', get_stylesheet_directory_uri() . '/js/jstz.min.js', array('jquery'));
     wp_enqueue_script( 'jstz' );
+	wp_register_script( 'skypeTimezoneSet', get_stylesheet_directory_uri() . '/js/skypetimezoneset.js', array('jquery'));
+    wp_enqueue_script( 'skypeTimezoneSet' );	
 }
 add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 
 
-
-  function sfbug_custom_local_timezone_display() {
-   ?>
-   <script type="text/javascript">
-	//customize time elements on the page to user's local time
-		jQuery( "time" ).each(function( index ) {
-			  var timex = jQuery( this ).text();
-
-				//moment interprets the time, guesses the user's timezone, and reformats the date using the new timezone
-				var format = 'dddd, MMMM D, YYYY h:mm a z'; //'YYYY/MM/DD HH:mm:ss ZZ';
-
-				var timey = new moment(timex, format).format(format);				
-				if (timey.indexOf('Invalid') <= -1) {		
-				//this check is to make sure the date coming in is a full-format date, moment is picky
-				  
-					var timez = moment(timex).tz(moment.tz.guess()).format(format);
-
-					if (timez.indexOf('Invalid') <= -1) {
-						jQuery( this ).text(timez);
-					}
-					//else, do nothing and leave the date as originally displayed - there was a problem parsing it				  
-				  
-				}
-		});
-
-
-		jQuery( ".ee-event-datetimes-li" ).each(function( index ) {
-			//this one customizes date in ul li array -- that is, dateblock on individual event page, and dates in sidebar events
-			//each li date element has two child spans -- one with the date, and one with the time.  We need them both in order to change the timezones properly
-
-			//first, get the date, or date range
-			var dateblock = jQuery(this).find('.ee-event-datetimes-li-daterange').html();
-			//dateblock will either be one date or a range.  Test for a hyphen to see if it is a range.
-				if (dateblock.indexOf("-") > 0) {
-					//split it at the hyphen to get the dates
-					var oldStartDate = dateblock.split('-')[0].trim();
-					var oldEndDate = dateblock.split('-')[1].trim();
-				} else {
-					//the timeblock has no hyphen.  It's just a single day event.
-					var oldStartDate = dateblock.trim();
-					var oldEndDate = oldStartDate;
-				}
-
-			//grab timeblock from the page
-			var timeblock = jQuery(this).find('.ee-event-datetimes-li-timerange').html();
-			//timeblock will either be one date/time or a range.  Test for a hyphen to see if it is a range.
-			if (timeblock.indexOf("-") > 0) {
-				//split it at the hyphen to get the times
-				var oldStartTime = timeblock.split('-')[0].trim();
-				var oldEndTime = timeblock.split('-')[1].trim();
-				//var oldStartTime = oldStartTime.trim();
-
-			} else {
-				//the timeblock has no hyphen.  I really don't think this is supposed to happen with the timerange (it will with daterange)
-				var oldStartTime = timeblock;
-				var oldEndTime = oldStartTime;
-			}
-
-				var oldStartTime = oldStartDate.trim() + ' ' + oldStartTime.trim();
-				var oldEndTime = oldEndDate + ' ' + oldEndTime;
-
-				//for whatever reason, event espresso uses $nbsp; instead of space.  This messes up the date function, so they've got to be replaced.
-				var oldStartTime = oldStartTime.replace(/&nbsp;/g, ' ');
-				var oldEndTime = oldEndTime.replace(/&nbsp;/g, ' ');
-
-
-				var pagetimeformat = 'MMMM D, YYYY h:mm a z';
-				var timeformat = 'h:mm a z';
-				var dateformat = 'MMMM D, YYYY';
-
-				var startDateNew = moment(oldStartTime).tz(moment.tz.guess()).format(dateformat);
-				var endDateNew = moment(oldEndTime).tz(moment.tz.guess()).format(dateformat);
-				var startTimeNew = moment(oldStartTime).tz(moment.tz.guess()).format(timeformat);
-				var endTimeNew = moment(oldEndTime).tz(moment.tz.guess()).format(timeformat);
-				//alert(startTimeNew);
-
-
-				if (startTimeNew.indexOf('Invalid') <= -1 && endTimeNew.indexOf('Invalid') <= -1) {
-					jQuery(this).find('.ee-event-datetimes-li-timerange').text(startTimeNew + ' - ' + endTimeNew);
-				}
-				//else, do nothing and leave the date as originally displayed - there was a problem parsing it
-				if (startTimeNew.indexOf('Invalid') <= -1 && endTimeNew.indexOf('Invalid') <= -1) {
-					if (startDateNew != endDateNew) {
-						//if this is a date range, show date range
-						jQuery(this).find('.ee-event-datetimes-li-daterange').text(startDateNew + ' - ' + endDateNew);
-					} else {
-						//if single day, just show single day
-						jQuery(this).find('.ee-event-datetimes-li-daterange').text(startDateNew);
-					}
-				}
-				//else, do nothing and leave the date as originally displayed - there was a problem parsing it
-
-		});
-
-
-		jQuery(window).load(function ()
-		{
-			//if this is the calendar page, run the date fixes on the calendar
-			if ( jQuery( "#espresso_calendar" ).length ) {
-				//note: this code only partially works -- because the actual dates are not accessible in the calendar, moment guesses the timezones based on TODAY.
-				// this means that the results will be incorrect if the date of the event is across a timechange that has not yet occurred.
-
-				var i = setInterval(function ()
-				{
-					if (jQuery('.fc-event-inner').length)
-					{
-						clearInterval(i);
-						// safe to execute your code here
-
-						//time offset at server (Eastern Time)
-						var qsite = moment().tz("America/New_York").format('Z');
-						//timezone abbreviation of user
-						var quser = moment().tz(moment.tz.guess()).format('z');
-
-						jQuery( ".event-start-time" ).each(function( index ) {
-
-							  var timea = jQuery( this ).text();
-							  //add offset suffix so moment knows how to change it
-							  var timea = timea + ' ' + qsite;
-
-							  var enterformat = 'h:mm a ZZ';
-							  var timeb = moment(timea, enterformat).format('h:mm a z');
-
-							if (timeb.indexOf('Invalid') <= -1) {
-							  jQuery( this ).text(timeb);
-							}
-							//else, do nothing, it could not parse the date correctly
-						});
-
-						jQuery( ".event-end-time" ).each(function( index ) {
-
-							  var timea = jQuery( this ).text();
-							  var timea = timea + ' ' + qsite;
-
-							  var enterformat = 'h:mm a ZZ';
-
-							  //moment interprets the time, and reformats the date using the new timezone
-							  var timeb = moment(timea, enterformat).format('h:mm a z');
-
-							if (timeb.indexOf('Invalid') <= -1) {
-							  jQuery( this ).text(timeb + " " + quser);
-							}
-							//else, do nothing, it could not parse the date correctly
-						});
-
-					}
-				}, 100);
-
-
-			}
-
-		});
-
-   </script>
-   <?php
-   }
-//  add_action( 'wp_footer', 'sfbug_custom_local_timezone_display' );
-
-
-
-/* PHP functions for formatting datetime for local event timezone */
-	function skype_timezone_format_timerange ($EVT_ID = 0, $datetime) {
-		global $wpdb;
-			$thepost = $wpdb->get_row("select VNU_address, VNU_address2, VNU_city, STA_ID, VNU_zip from {$wpdb->prefix}esp_venue_meta where VNU_ID = (select VNU_ID from {$wpdb->prefix}esp_event_venue where EVT_ID =".$EVT_ID.")");
-			$stateABBR = $wpdb->get_row("select STA_abbrev from {$wpdb->prefix}esp_state where STA_ID =". $thepost->STA_ID);
-			
-			$fullAddr = $thepost->VNU_address . " " . $thepost->VNU_address2 . " " . $thepost->VNU_city . ", " . $stateABBR->STA_abbrev . " " . $thepost->VNU_zip;
-			
-			$prepAddr = urlencode($fullAddr);
-         	$geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&key=AIzaSyBb7YTvbLi3Aj9QFXS2mr13YZE6Llmi1X8&sensor=false');
-       		$output= json_decode($geocode);
-          	$latitude = $output->results[0]->geometry->location->lat;
-        	$longitude = $output->results[0]->geometry->location->lng;
-			$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&key=AIzaSyCWihtfp6mpMQ2TBu5O3qaI7_chR0Z3avE&sensor=false";
-			$json_timezone = file_get_contents($url);
-			$output2= json_decode($json_timezone);
-			
-			$start_time = $datetime->start_time('H:i:s T');
-			$start_date = $datetime->start_date('Y-m-d');
-			
-			$end_time = $datetime->end_time('H:i:s T');
-			$end_date = $datetime->end_date('Y-m-d');				
-
-			$rawstarttime = $start_date . " " . $start_time;
-			$rawendtime = $end_date . " " . $end_time;
-			
-			$local_timezone_from = gmdate('Y-m-d H:i:s T', strtotime($rawstarttime));
-			
-			$from = new DateTime($local_timezone_from, new DateTimeZone($output2->timeZoneId));
-			$from->setTimeZone(new DateTimeZone($output2->timeZoneId));
-
-			$local_timezone_to = gmdate('Y-m-d H:i:s T', strtotime($rawendtime));
-			$to = new DateTime($local_timezone_to, new DateTimeZone($output2->timeZoneId));
-			$to->setTimeZone(new DateTimeZone($output2->timeZoneId));
-
-		return $from->format('g:i a').' - '.$to->format('g:i a').' '.$from->format('T');		
+   
+//add_filter( 'Skype_custom_FHEE__espresso_list_of_event_dates__datetimes' , 'phptimezonedatefilter', 99);
+function phptimezonedatefilter($data) {
+	foreach ($data as $datum) {
+		//datum should now be a EE datetime object
+		//print_R($datum->Venue);
+		//print_R($datum);
+		//var_dump($datum);
+		//[_model_relations:protected][Event][_model_relations:protected][Venue]
+		//print_R($datum->_model_relations);
 	}
-	
-	function skype_get_timezone_from_id ($EVT_ID = 0) {
-		global $wpdb;
-			$thepost = $wpdb->get_row("select VNU_address, VNU_address2, VNU_city, STA_ID, VNU_zip from {$wpdb->prefix}esp_venue_meta where VNU_ID = (select VNU_ID from {$wpdb->prefix}esp_event_venue where EVT_ID =".$EVT_ID.")");
-			$stateABBR = $wpdb->get_row("select STA_abbrev from {$wpdb->prefix}esp_state where STA_ID =". $thepost->STA_ID);
-			
-			$fullAddr = $thepost->VNU_address . " " . $thepost->VNU_address2 . " " . $thepost->VNU_city . ", " . $stateABBR->STA_abbrev . " " . $thepost->VNU_zip;
-			
-			$prepAddr = urlencode($fullAddr);
-         	$geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&key=AIzaSyBb7YTvbLi3Aj9QFXS2mr13YZE6Llmi1X8&sensor=false');
-       		$output= json_decode($geocode);
-          	$latitude = $output->results[0]->geometry->location->lat;
-        	$longitude = $output->results[0]->geometry->location->lng;
-			$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&key=AIzaSyCWihtfp6mpMQ2TBu5O3qaI7_chR0Z3avE&sensor=false";
-			$json_timezone = file_get_contents($url);
-			$output2= json_decode($json_timezone);
-			
-			return $output2->timeZoneId;
-	}		
-	
-	function skype_timezone_format_timesingle ($EVT_ID = 0, $Loc_timezone = '') {
-		global $wpdb;
-		
-			//if the timezone id is passed in, use it instead of running all the google queries again.
-			if (!empty($Loc_timezone)) {
-				$output2 = new stdClass();
-				$output2->timeZoneId = $Loc_timezone;
-			} else {		
-				$thepost = $wpdb->get_row("select VNU_address, VNU_address2, VNU_city, STA_ID, VNU_zip from {$wpdb->prefix}esp_venue_meta where VNU_ID = (select VNU_ID from {$wpdb->prefix}esp_event_venue where EVT_ID =".$EVT_ID.")");
-				$stateABBR = $wpdb->get_row("select STA_abbrev from {$wpdb->prefix}esp_state where STA_ID =". $thepost->STA_ID);
-				
-				$fullAddr = $thepost->VNU_address . " " . $thepost->VNU_address2 . " " . $thepost->VNU_city . ", " . $stateABBR->STA_abbrev . " " . $thepost->VNU_zip;
-				
-				$prepAddr = urlencode($fullAddr);
-				$geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&key=AIzaSyBb7YTvbLi3Aj9QFXS2mr13YZE6Llmi1X8&sensor=false');
-				$output= json_decode($geocode);
-				$latitude = $output->results[0]->geometry->location->lat;
-				$longitude = $output->results[0]->geometry->location->lng;
-				$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&key=AIzaSyCWihtfp6mpMQ2TBu5O3qaI7_chR0Z3avE&sensor=false";
-				$json_timezone = file_get_contents($url);
-				$output2= json_decode($json_timezone);
-			}
-			
-			$datetime = espresso_event_date_obj($EVT_ID);	
-			
-			$start_time = $datetime->start_time('H:i:s T');
-			$start_date = $datetime->start_date('Y-m-d');			
+	//print_R($data);
+  return $data;
+}
 
-			$rawstarttime = $start_date . " " . $start_time;	
-			
-			$local_timezone_from = gmdate('Y-m-d H:i:s T', strtotime($rawstarttime));
-			
-			$from = new DateTime($local_timezone_from, new DateTimeZone($output2->timeZoneId));
-			$from->setTimeZone(new DateTimeZone($output2->timeZoneId));			
 
-		return $from->format('l, F j, Y g:i a T');
-	}	
-	
-/* end PHP functions for local event timezone */
+   
   
   
 //change wordpress registration page  
@@ -964,7 +728,7 @@ function custom_register_url( $register_url )
 
 /* Add fields to account page */
 
-if( is_plugin_active( 'ultimate-member/ultimate-member.php' ) ) {
+if( is_plugin_active( 'ultimate-member/index.php' ) ) {
 	add_action('um_after_account_general', 'showExtraFields', 100);
 }
 
@@ -1019,12 +783,6 @@ function showExtraFields()
 
 		echo $html;
 	}
-}
-
-
-if( is_plugin_active( 'ultimate-member/ultimate-member.php' ) ) {
-	// Disable UM registration protection, allow default registration functionality
-	remove_action( 'login_form_register', 'um_form_register_redirect', 10 );
 }
 
 

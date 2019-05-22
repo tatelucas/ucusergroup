@@ -7,7 +7,7 @@
       <span class="copy">Copyright &copy; 2012&ndash;<?php echo date('Y'); ?> <a href="#">UC User Group</a>. All Rights Reserved. </span>
     </div>
     <ul class="social-list pull-right">
-      <li><a href="https://twitter.com/lyncusersgroup" target="_blank" class="icon-twitter"></a></li>
+      <li><a href="https://twitter.com/skypeug" target="_blank" class="icon-twitter"></a></li>
     </ul>
   </div>
 </footer>

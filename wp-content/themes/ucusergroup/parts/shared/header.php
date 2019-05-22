@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="navbar-brand">
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<? echo get_template_directory_uri() ?>/images/logobig.jpg" width="248" height="51" alt="Skype for Business Users Group"></a>
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<? echo get_template_directory_uri() ?>/images/logo-simple.png" width="60" alt="Skype for Business Users Group"></a>
       </div>
       <div class="visible-xs phone-hold">
         <div class="pull-left img-hold">
@@ -15,24 +15,16 @@
           <span class="icon-bar"></span>
         </button>
       </div>
-	  
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-<?php
-            wp_nav_menu( array(
-                'menu'              => 'primary',
-                'theme_location'    => 'primary',
-                'depth'             => 2,
-                'container'         => 'nav',
-                'container_class'   => 'nav-bar',
-                //'container_id'      => 'bs-example-navbar-collapse-1',
-                'menu_class'        => '',  //nav navbar-nav
-				'menu_id'			=> 'nav',
-                'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-                'walker'            => new WP_Bootstrap_Navwalker())
-            );
-        ?>	  	  
-
+        <?php $mainNavItems = wp_get_nav_menu_items('Main Nav'); ?>
+        <nav class="nav-bar">
+          <ul id="nav">
+            <?php foreach($mainNavItems as $mainNavItem): ?>
+            <li><a href="<?php echo $mainNavItem->url; ?>"><span class="style-color"><?php echo $mainNavItem->title; ?></span><?php echo $mainNavItem->description; ?></a></li>
+            <?php endforeach; ?>
+          </ul>
+        </nav>
         <form action="<?php echo home_url( '/' ); ?>" class="search-form" role="search" method="get">
           <fieldset>
             <button type="submit" class="btn icon-search"></button>

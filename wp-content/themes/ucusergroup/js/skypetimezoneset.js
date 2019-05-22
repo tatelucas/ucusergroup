@@ -244,7 +244,6 @@ function ugl_runlocationtimedisplayblock(ugltimezone) {
 
 				if (startTimeNew.indexOf('Invalid') <= -1 && endTimeNew.indexOf('Invalid') <= -1) {
 					jQuery(this).find('.ee-event-datetimes-li-timerange').text(startTimeNew + ' - ' + endTimeNew);
-					jQuery(this).find('.ee-event-datetimes-li-timerange').css('opacity', '1');
 				}
 				//else, do nothing and leave the date as originally displayed - there was a problem parsing it
 				if (startTimeNew.indexOf('Invalid') <= -1 && endTimeNew.indexOf('Invalid') <= -1) {
