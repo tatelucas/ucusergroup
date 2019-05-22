@@ -226,7 +226,7 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
   	wp_enqueue_script('bootstrap');
 
 	//wp_register_script('googlemaps', '//maps.googleapis.com/maps/api/js?' . $locale . '&key=' . GOOGLE_MAPS_V3_API_KEY . '&sensor=false', false, '3');
-	wp_register_script('googlemaps', '//maps.googleapis.com/maps/api/js?sensor=false', false, '3');
+	wp_register_script('googlemaps', '//maps.googleapis.com/maps/api/js?key=AIzaSyBb7YTvbLi3Aj9QFXS2mr13YZE6Llmi1X8', false, '3');
 	wp_register_script( 'ug_do_geolocate', get_template_directory_uri() . '/js/ug_geolocate.js' );
 	wp_enqueue_script('googlemaps');
 	wp_enqueue_script('ug_do_geolocate');
@@ -1027,7 +1027,7 @@ if( is_plugin_active( 'ultimate-member/ultimate-member.php' ) ) {
 	remove_action( 'login_form_register', 'um_form_register_redirect', 10 );
 }
 
-
+													 
 //for social login -- upon user login, check to see if they have a usergroup set.  If not, redirect to account page, and show notice
 function skype_location_login_check( $user_login, $user ) {
 	$usergroup = get_user_meta($user->ID, 'user_group', true) ? : '';
