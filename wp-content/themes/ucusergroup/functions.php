@@ -226,7 +226,7 @@ if(!is_admin()){ // make sure the filters are only called in the frontend
   	wp_enqueue_script('bootstrap');
 
 	//wp_register_script('googlemaps', '//maps.googleapis.com/maps/api/js?' . $locale . '&key=' . GOOGLE_MAPS_V3_API_KEY . '&sensor=false', false, '3');
-	wp_register_script('googlemaps', '//maps.googleapis.com/maps/api/js?key=AIzaSyBb7YTvbLi3Aj9QFXS2mr13YZE6Llmi1X8', false, '3');
+	wp_register_script('googlemaps', '//maps.googleapis.com/maps/api/js', false, '3');
 	wp_register_script( 'ug_do_geolocate', get_template_directory_uri() . '/js/ug_geolocate.js' );
 	wp_enqueue_script('googlemaps');
 	wp_enqueue_script('ug_do_geolocate');
@@ -803,11 +803,11 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 			$fullAddr = $thepost->VNU_address . " " . $thepost->VNU_address2 . " " . $thepost->VNU_city . ", " . $stateABBR->STA_abbrev . " " . $thepost->VNU_zip;
 			
 			$prepAddr = urlencode($fullAddr);
-         	$geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&key=AIzaSyBb7YTvbLi3Aj9QFXS2mr13YZE6Llmi1X8&sensor=false');
+         	$geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
        		$output= json_decode($geocode);
           	$latitude = $output->results[0]->geometry->location->lat;
         	$longitude = $output->results[0]->geometry->location->lng;
-			$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&key=AIzaSyCWihtfp6mpMQ2TBu5O3qaI7_chR0Z3avE&sensor=false";
+			$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&sensor=false";
 			$json_timezone = file_get_contents($url);
 			$output2= json_decode($json_timezone);
 			
@@ -840,11 +840,11 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 			$fullAddr = $thepost->VNU_address . " " . $thepost->VNU_address2 . " " . $thepost->VNU_city . ", " . $stateABBR->STA_abbrev . " " . $thepost->VNU_zip;
 			
 			$prepAddr = urlencode($fullAddr);
-         	$geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&key=AIzaSyBb7YTvbLi3Aj9QFXS2mr13YZE6Llmi1X8&sensor=false');
+         	$geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
        		$output= json_decode($geocode);
           	$latitude = $output->results[0]->geometry->location->lat;
         	$longitude = $output->results[0]->geometry->location->lng;
-			$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&key=AIzaSyCWihtfp6mpMQ2TBu5O3qaI7_chR0Z3avE&sensor=false";
+			$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&sensor=false";
 			$json_timezone = file_get_contents($url);
 			$output2= json_decode($json_timezone);
 			
@@ -865,11 +865,11 @@ add_action('wp_enqueue_scripts', 'ucusergroup_timezone_custom_scripts');
 				$fullAddr = $thepost->VNU_address . " " . $thepost->VNU_address2 . " " . $thepost->VNU_city . ", " . $stateABBR->STA_abbrev . " " . $thepost->VNU_zip;
 				
 				$prepAddr = urlencode($fullAddr);
-				$geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&key=AIzaSyBb7YTvbLi3Aj9QFXS2mr13YZE6Llmi1X8&sensor=false');
+				$geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
 				$output= json_decode($geocode);
 				$latitude = $output->results[0]->geometry->location->lat;
 				$longitude = $output->results[0]->geometry->location->lng;
-				$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&key=AIzaSyCWihtfp6mpMQ2TBu5O3qaI7_chR0Z3avE&sensor=false";
+				$url = "https://maps.googleapis.com/maps/api/timezone/json?timestamp=1331161200&location=".$latitude .",".$longitude."&sensor=false";
 				$json_timezone = file_get_contents($url);
 				$output2= json_decode($json_timezone);
 			}
