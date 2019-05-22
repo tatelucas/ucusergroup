@@ -5,7 +5,7 @@
  * Plugin URI: 
  * Author: David Lorimer, Memona Usama
  * Author URI:
- * Version: 1.0
+ * Version: 1.0.2
  * License: GPL2
  */
  
@@ -28,7 +28,7 @@ function cancel_registration(){
 		  global $wpdb;
 		  $message = '';
 		  $set = 0;
-	$thepost = $wpdb->get_row( $wpdb->prepare( 'SELECT option_value from '.$wpdb->prefix . 'options where option_name="ee_config_log"' ), ARRAY_A );
+	$thepost = $wpdb->get_row( 'SELECT option_value from '.$wpdb->prefix . 'options where option_name="ee_config_log"' , ARRAY_A );
 	foreach(unserialize($thepost['option_value']) as $org)
 	{	
 		if(isset($org['request']['organization_name']) && $set!=1){
@@ -63,7 +63,7 @@ function cancel_registration(){
 		<tr>
 			<td></td>
 			<td class="container" bgcolor="#FFFFFF">';
-			$attende = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM '.$wpdb->prefix . 'esp_attendee_meta where ATT_ID =( SELECT ATT_ID FROM '.$wpdb->prefix . 'esp_registration where REG_ID='.$_REQUEST['id'].')' ), ARRAY_A );
+			$attende = $wpdb->get_row( 'SELECT * FROM '.$wpdb->prefix . 'esp_attendee_meta where ATT_ID =( SELECT ATT_ID FROM '.$wpdb->prefix . 'esp_registration where REG_ID='.$_REQUEST['id'].')' , ARRAY_A );
 			 $registrant ='<div class="content">
 					<table>
 						<tbody>
@@ -78,8 +78,8 @@ function cancel_registration(){
 					</table>
 				</div>';
 		
-			$event = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM '.$wpdb->prefix . 'posts where ID=( SELECT EVT_ID FROM '.$wpdb->prefix . 'esp_registration where REG_ID='.$_REQUEST['id'].')' ), ARRAY_A );
-			$reg = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM '.$wpdb->prefix . 'esp_registration where REG_ID='.$_REQUEST['id'] ), ARRAY_A );
+			$event = $wpdb->get_row( 'SELECT * FROM '.$wpdb->prefix . 'posts where ID=( SELECT EVT_ID FROM '.$wpdb->prefix . 'esp_registration where REG_ID='.$_REQUEST['id'].')' , ARRAY_A );
+			$reg = $wpdb->get_row( 'SELECT * FROM '.$wpdb->prefix . 'esp_registration where REG_ID='.$_REQUEST['id'] , ARRAY_A );
 			$message .='<div class="content">
 					<ul style="background-color:#ecf8ff;height: 60px; padding-top: 11px"><strong>Event Name :</strong></br><a href="'.$event["guid"].'">'.$event["post_title"].'</a></ul>
 					<h2>Registrant(s):</h2>
@@ -91,7 +91,7 @@ function cancel_registration(){
 		</tr>
 	</tbody>
 </table>';
-$sub = $wpdb->get_row( $wpdb->prepare( 'SELECT MTP_content as subject FROM '.$wpdb->prefix . 'esp_message_template where GRP_ID=10 AND MTP_context="attendee" AND MTP_template_field="subject"' ), ARRAY_A );
+$sub = $wpdb->get_row( 'SELECT MTP_content as subject FROM '.$wpdb->prefix . 'esp_message_template where GRP_ID=10 AND MTP_context="attendee" AND MTP_template_field="subject"' , ARRAY_A );
 		$headers = array(
 			'MIME-Version: 1.0',
 			'From:' . $from,
@@ -99,7 +99,7 @@ $sub = $wpdb->get_row( $wpdb->prepare( 'SELECT MTP_content as subject FROM '.$wp
 			'Content-Type:text/html; charset=utf-8'
 			);
 		  wp_mail( $attende["ATT_email"], 'Your registration has been cancelled', $head.$registrant.$message, $headers);
-		  $author = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM '.$wpdb->prefix . 'users where ID ='.$event["post_author"] ), ARRAY_A );	
+		  $author = $wpdb->get_row( 'SELECT * FROM '.$wpdb->prefix . 'users where ID ='.$event["post_author"] , ARRAY_A );	
 				 $owner ='<div class="content">
 					<table>
 						<tbody>
@@ -125,10 +125,10 @@ add_action( 'init', 'cancel_registration' );
 function register_new_tony_shortcodes123(){
 	if($_REQUEST['action']=='process_reg_step'){
 	global $wpdb;
-	$thepost = $wpdb->get_row( $wpdb->prepare( 'SELECT MAX(REG_ID) AS reg_id,REG_code from '.$wpdb->prefix . 'esp_registration' ), ARRAY_A );
-	$id = $thepost['reg_id'];
+	$thepost = $wpdb->get_row( "SELECT MAX(REG_ID) AS qreg_id, REG_code from {$wpdb->prefix}esp_registration", ARRAY_A );
+	$id = $thepost['qreg_id'];
 	$code = $thepost['REG_code'];
-		$pages = $wpdb->get_row( $wpdb->prepare( 'SELECT option_value from '.$wpdb->prefix . 'options where option_name="ee_config"' ), ARRAY_A );
+		$pages = $wpdb->get_row( 'SELECT option_value from '.$wpdb->prefix . 'options where option_name="ee_config"', ARRAY_A );
 	foreach(unserialize($pages['option_value']) as $org)
 	{
 		if(isset($org->cancel_page_id)){
