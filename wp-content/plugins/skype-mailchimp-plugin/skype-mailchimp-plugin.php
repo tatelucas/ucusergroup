@@ -4,7 +4,7 @@ Plugin Name: Skype Mailchimp Plugin
 Plugin URI:
 Description: Custom Plugin to update Skype Mailchimp Mailing Lists when users change profile information.  Requires Advanced Custom Fields.
 Author: David Lorimer
-Version: 3.0
+Version: 3.1
 Author URI:
 */
 
@@ -70,7 +70,7 @@ function get_log_file_location () {
 
 function get_mc_mailing_list () {
 		//only update MailChimp from the Prod site
-		if (strpos($_SERVER['HTTP_HOST'], 'skypeug') && !strpos($_SERVER['HTTP_HOST'], 'test') && !strpos($_SERVER['HTTP_HOST'], 'dev') ) {
+		if (strpos($_SERVER['HTTP_HOST'], 'teamsug') && !strpos($_SERVER['HTTP_HOST'], 'test') && !strpos($_SERVER['HTTP_HOST'], 'dev') ) {
 			//prod list w/ groups
 			$mcListID = 'ce15ad4644';
 			return $mcListID;
@@ -87,7 +87,7 @@ function get_mc_mailing_list () {
 function get_mc_group_list ($usergroupID) {
 	
 		//only update MailChimp from the Prod site
-		if (strpos($_SERVER['HTTP_HOST'], 'skypeug') && !strpos($_SERVER['HTTP_HOST'], 'test') && !strpos($_SERVER['HTTP_HOST'], 'dev') ) {
+		if (strpos($_SERVER['HTTP_HOST'], 'teamsug') && !strpos($_SERVER['HTTP_HOST'], 'test') && !strpos($_SERVER['HTTP_HOST'], 'dev') ) {
 			//prod mailing list with groups		
 	
 		  //get the correct MC mailing list for their selection
@@ -360,12 +360,12 @@ function get_city_interest_ID_from_usergroupID ($usergroupID) {
 								//return $cityID;
 								return $interestsArray;
 							} else {
-								if (strpos($_SERVER['HTTP_HOST'], 'skypeug') && !strpos($_SERVER['HTTP_HOST'], 'test') && !strpos($_SERVER['HTTP_HOST'], 'dev') ) {
+								if (strpos($_SERVER['HTTP_HOST'], 'teamsug') && !strpos($_SERVER['HTTP_HOST'], 'test') && !strpos($_SERVER['HTTP_HOST'], 'dev') ) {
 									//don't sent emails from dev site
 									//error!
-									$err_msg = 'On SkypeUG, a Wordpress user has selected a UserGroup whose name does NOT match a list in Mailchimp.  Please investigate and correct as soon as possible.  The Wordpress UserGroup ID submitted is ' . $usergroupID . '. The User ID is ' .$userdata->ID;
-									wp_mail( 'dwlorimer@gmail.com', 'Problem with SkypeUG MailChimp Lists', $err_msg);
-									wp_mail( 'tate.lucas@gmail.com', 'Problem with SkypeUG MailChimp Lists', $err_msg);
+									$err_msg = 'On TeamsUG, a Wordpress user has selected a UserGroup whose name does NOT match a list in Mailchimp.  Please investigate and correct as soon as possible.  The Wordpress UserGroup ID submitted is ' . $usergroupID . '. The User ID is ' .$userdata->ID;
+									wp_mail( 'dwlorimer@gmail.com', 'Problem with TeamsUG MailChimp Lists', $err_msg);
+									wp_mail( 'tate.lucas@gmail.com', 'Problem with TeamsUG MailChimp Lists', $err_msg);
 								}
 									echo 'error';										
 									return 'ERROR';
@@ -373,11 +373,11 @@ function get_city_interest_ID_from_usergroupID ($usergroupID) {
 						
 					  } else {
 						  //error!
-								if (strpos($_SERVER['HTTP_HOST'], 'skypeug') && !strpos($_SERVER['HTTP_HOST'], 'test') && !strpos($_SERVER['HTTP_HOST'], 'dev') ) {
+								if (strpos($_SERVER['HTTP_HOST'], 'teamsug') && !strpos($_SERVER['HTTP_HOST'], 'test') && !strpos($_SERVER['HTTP_HOST'], 'dev') ) {
 									//don't sent emails from dev site						  
-									$err_msg = 'On SkypeUG, an interest category, like city, could not be determined on Mailchimp.  Please investigate and correct as soon as possible.  The Wordpress UserGroup ID submitted is ' . $usergroupID . '. The User ID is ' .$userdata->ID;
-									wp_mail( 'dwlorimer@gmail.com', 'Problem with SkypeUG MailChimp Lists', $err_msg);
-									wp_mail( 'tate.lucas@gmail.com', 'Problem with SkypeUG MailChimp Lists', $err_msg);	
+									$err_msg = 'On TeamsUG, an interest category, like city, could not be determined on Mailchimp.  Please investigate and correct as soon as possible.  The Wordpress UserGroup ID submitted is ' . $usergroupID . '. The User ID is ' .$userdata->ID;
+									wp_mail( 'dwlorimer@gmail.com', 'Problem with TeamsUG MailChimp Lists', $err_msg);
+									wp_mail( 'tate.lucas@gmail.com', 'Problem with TeamsUG MailChimp Lists', $err_msg);	
 								}							
 							echo 'error';
 							return 'ERROR';							
